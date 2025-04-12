@@ -79,7 +79,7 @@ export default function useForm() {
 			if (response.user.two_factor) {
 				return navigate("2fa-verify");
 			}
-			return navigate("/home");
+			return navigate("/dashboard");
 		} catch (error) {
 			const errMsg = ensureError(error);
 			setErrorMsg(errMsg.message);

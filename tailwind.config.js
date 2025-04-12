@@ -11,7 +11,6 @@ export default {
 			},
 			colors: {
 				primary: {
-					DEFAULT: "#E4932B",
 					100: "#FBEDDC",
 					200: "#F6DBB8",
 					300: "#F2C995",
@@ -22,9 +21,9 @@ export default {
 					800: "#935B13",
 					900: "#74480F",
 					1000: "#55340B",
+					DEFAULT: "#E4932B",
 				},
 				secondary: {
-					DEFAULT: "#11D2F8",
 					100: "#D7F8FE",
 					200: "#B0F0FD",
 					300: "#88E9FC",
@@ -35,9 +34,9 @@ export default {
 					800: "#05859E",
 					900: "#04697C",
 					1000: "#034D5B",
+					DEFAULT: "#11D2F8",
 				},
 				neutral: {
-					base_white: "#FAFAFA",
 					100: "#E4E4E4",
 					200: "#CFCECE",
 					300: "#BAB8B8",
@@ -48,25 +47,36 @@ export default {
 					800: "#4E4949",
 					900: "#383434",
 					1000: "#221F1F",
+					base_white: "#FAFAFA",
 					base_black: "#0B0A0A",
 				},
 				success: {
-					DEFAULT: "#A4F4E7",
 					100: "#A4F4E7",
 					200: "#15B097",
 					300: "#0B7B69",
+					DEFAULT: "#A4F4E7",
 				},
 				warning: {
-					DEFAULT: "#F4C790",
 					100: "#F4C790",
 					200: "#EDA145",
 					300: "#CC7914",
+					DEFAULT: "#F4C790",
 				},
 				error: {
-					DEFAULT: "#E4626F",
 					100: "#E4626F",
 					200: "#C03744",
 					300: "#8C1823",
+					DEFAULT: "#E4626F",
+				},
+				sidebar: {
+					DEFAULT: "hsl(var(--sidebar-background))",
+					foreground: "hsl(var(--sidebar-foreground))",
+					primary: "hsl(var(--sidebar-primary))",
+					"primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+					accent: "hsl(var(--sidebar-accent))",
+					"accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+					border: "hsl(var(--sidebar-border))",
+					ring: "hsl(var(--sidebar-ring))",
 				},
 			},
 			fontFamily: {
@@ -92,6 +102,7 @@ export default {
 				"mobile-heading-2": "24px",
 				"mobile-heading-3": "20px",
 				"mobile-heading-4": "18px",
+				"mobile-body-hero": "24px",
 				"mobile-body-feature": "18px",
 				"mobile-body-highlight": "16px",
 				"mobile-body-content": "14px",
@@ -118,23 +129,35 @@ export default {
 				"mobile-heading-2": "28.8px",
 				"mobile-heading-3": "24px",
 				"mobile-heading-4": "21.6px",
+				"mobile-body-hero": "21.6px",
 				"mobile-body-feature": "21.6px",
 				"mobile-body-highlight": "19.2px",
 				"mobile-body-content": "16.8px",
 				"mobile-body-caption": "14.4px",
 				"mobile-body-footnote": "12px",
 			},
-			// spacing: {
-			// 	xxs: "0.25rem", //4px
-			// 	xs: "0.375rem", //6px
-			// 	s: "0.5rem", //8px
-			// 	sm: "0.75rem", //12px
-			// 	base: "1rem", //16px
-			// 	m: "1rem", //16px
-			// 	ml: "1.5rem", //24px
-			// 	l: "2rem", //32px
-			// 	xl: "3rem", //48px
-			// },
+			keyframes: {
+				"accordion-down": {
+					from: {
+						height: "0",
+					},
+					to: {
+						height: "var(--radix-accordion-content-height)",
+					},
+				},
+				"accordion-up": {
+					from: {
+						height: "var(--radix-accordion-content-height)",
+					},
+					to: {
+						height: "0",
+					},
+				},
+			},
+			animation: {
+				"accordion-down": "accordion-down 0.2s ease-out",
+				"accordion-up": "accordion-up 0.2s ease-out",
+			},
 		},
 	},
 	plugins: [require("tailwindcss-animate")],

@@ -10,6 +10,15 @@ import {
 	DialogPayload,
 	resetDialog,
 } from "./ui-slice";
+import {
+	addNotification,
+	ChangeNotificationDialog,
+	changeNotificationDialog,
+	MarkIsRead,
+	markIsRead,
+	resetNotificationDialog,
+} from "./notification-slice";
+import { Notification } from "@/types/notification.types";
 
 export default function useActions() {
 	const dispatch = useAppDispatch();
@@ -27,8 +36,16 @@ export default function useActions() {
 		changeCurrency: (payload: Currency) => dispatch(changeCurrency(payload)),
 	};
 
+	const notification = {
+		addNotification: (payload: Notification[]) => dispatch(addNotification(payload)),
+		markIsRead: (payload: MarkIsRead) => dispatch(markIsRead(payload)),
+		changeNotificationDialog: (payload: ChangeNotificationDialog) =>
+			dispatch(changeNotificationDialog(payload)),
+		resetNotificationDialog: () => dispatch(resetNotificationDialog()),
+	};
 	return {
 		ui,
 		account,
+		notification,
 	};
 }

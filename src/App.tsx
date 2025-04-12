@@ -3,6 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import { appRoutes } from "./routes";
 import { useIsMobile } from "./hooks/use-mobile";
 import MobileRestriction from "./components/prompts/mobile-restriction";
+import DashboardLayout from "./layouts/dashboard.layout";
+import NotFound from "./components/prompts/not-found";
+import Dialogs from "./dialogs";
 
 export default function App() {
 	const isMobile = useIsMobile();
@@ -11,12 +14,23 @@ export default function App() {
 
 	return (
 		<React.Fragment>
-			{/* auth routes */}
 			<Routes>
-				{appRoutes.authRoutes.map((item, idx) => (
-					<Route key={idx} {...item} />
-				))}
+				{/* auth routes */}
+				<Route>
+					{appRoutes.authRoutes.map((item, idx) => (
+						<Route key={idx} {...item} />
+					))}
+				</Route>
+
+				{/* Dashboard Routes */}
+				<Route element={<DashboardLayout />}>
+					{appRoutes.dashboardRoutes.map((item, idx) => (
+						<Route key={idx} {...item} />
+					))}
+				</Route>
+				<Route path="*" element={<NotFound />} />
 			</Routes>
+			<Dialogs />
 		</React.Fragment>
 	);
 }

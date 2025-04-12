@@ -1,0 +1,23 @@
+import NotFound from "@/components/prompts/not-found";
+import UnderConstruction from "@/components/prompts/under-construction";
+import DashboardPage from "@/pages/dashboard";
+
+import { RouteProps } from "react-router-dom";
+
+type CustomRouteProps = RouteProps & {};
+
+const dashboardRoutes: CustomRouteProps[] = [
+	{ path: "/dashboard", Component: DashboardPage },
+	{ path: "/listings", Component: UnderConstruction },
+	{ path: "/transactions", Component: UnderConstruction },
+	{ path: "/users", Component: UnderConstruction },
+	{ path: "/investments", Component: UnderConstruction },
+	{ path: "/savings", Component: UnderConstruction },
+	{ path: "/notifications", Component: UnderConstruction },
+	{ path: "/reports", Component: UnderConstruction },
+	{ path: "/support", Component: UnderConstruction },
+	{ path: "/settings", Component: UnderConstruction },
+	{ path: "*", Component: NotFound },
+];
+
+export default dashboardRoutes;

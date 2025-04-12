@@ -34,7 +34,7 @@ export default function AppSidebar() {
 			</SidebarHeader>
 			<SidebarContent className="px-3 group-data-[collapsible=icon]:px-0">
 				<SidebarGroup>
-					<SidebarGroupContent className="space-y-3">
+					<SidebarGroupContent className="space-y-1">
 						{sidebarLinks.map((item) => (
 							<SidebarLink key={item.name} {...item} {...props} />
 						))}

@@ -36,7 +36,7 @@ export default function useForm() {
 
       const response = await verify2fa(formValues);
 
-      if (response) return navigate("/home", { replace: true });
+      if (response) return navigate("/dashboard", { replace: true });
       throw new Error("error verifying code");
     } catch (error) {
       const errMsg = ensureError(error);

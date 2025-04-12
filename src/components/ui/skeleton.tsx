@@ -12,4 +12,8 @@ function Skeleton({
   )
 }
 
-export { Skeleton }
+function SkeletonList({ count, className }: { count: number; className?: string }) {
+	return Array.from({ length: count }, (_, idx) => <Skeleton key={idx} className={className} />);
+}
+
+export { Skeleton, SkeletonList };
