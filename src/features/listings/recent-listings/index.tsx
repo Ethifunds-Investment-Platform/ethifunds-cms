@@ -23,11 +23,11 @@ export default function RecentListing() {
 					)}
 				</div>
 
-				<Render isLoading={isFetching} isError={isError} error={error}>
-					<div className="h-full max-h-96 min-h-60 overflow-auto">
+				<div className="h-full max-h-96 min-h-60 overflow-auto">
+					<Render isLoading={isFetching} isError={isError} error={error}>
 						<ListingTable data={data ?? []} isEmpty={!data?.length} sign={sign} />
-					</div>
-				</Render>
+					</Render>
+				</div>
 			</ErrorBoundary>
 		</div>
 	);

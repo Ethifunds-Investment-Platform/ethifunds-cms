@@ -33,8 +33,8 @@ export default function AllListings() {
 
 			<TableFilters disabled={isFetching} />
 
-			<div className="flex h-screen flex-col">
-				<Render isLoading={isFetching} isError={isError} error={error}>
+			<Render isLoading={isFetching} isError={isError} error={error}>
+				<div className="flex h-screen flex-col">
 					<div className="grow overflow-auto">
 						<ListingTable
 							data={data?.docs?.slice(0) ?? []}
@@ -43,8 +43,8 @@ export default function AllListings() {
 						/>
 					</div>
 					{data && <TablePagination {...data} />}
-				</Render>
-			</div>
+				</div>
+			</Render>
 		</AppContainer>
 	);
 }

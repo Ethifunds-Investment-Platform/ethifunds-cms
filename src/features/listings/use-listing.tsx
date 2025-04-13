@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 export default function useListing() {
 	const { currency } = useAppSelector((state) => state.account);
 	const { location } = useCustomNavigation();
+	
 
 	const query_string = React.useMemo(
 		() =>
@@ -18,6 +19,7 @@ export default function useListing() {
 		[currency.code, location.search]
 	);
 
+	
 	const query = useQuery(["listings", query_string], () => getListing({ query_string }));
 	return {
 		...query,

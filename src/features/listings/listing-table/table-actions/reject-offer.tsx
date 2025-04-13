@@ -1,18 +1,17 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-
 import useActions from "@/store/actions";
-import { EyeIcon } from "lucide-react";
+import { XCircle } from "lucide-react";
 
 type ViewDetailsProps = {
 	id: string;
 };
-export default function ViewDetails(props: ViewDetailsProps) {
+export default function RejectOffer(props: ViewDetailsProps) {
 	const { ui } = useActions();
 
 	const toggleShow = () => {
 		ui.changeDialog({
 			show: true,
-			type: "listing_details",
+			type: "reject_offer",
 			id: props.id,
 		});
 	};
@@ -20,7 +19,8 @@ export default function ViewDetails(props: ViewDetailsProps) {
 	return (
 		<DropdownMenuItem>
 			<button onClick={toggleShow} className="flex items-center gap-2">
-				<EyeIcon /> View Details
+				<XCircle className="text-error-200" />
+				Reject Offer
 			</button>
 		</DropdownMenuItem>
 	);

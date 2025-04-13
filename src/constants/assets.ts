@@ -73,6 +73,7 @@ import upload_icon_01 from "@/assets/icons/upload-icon-01.svg"
 import germ_icon_01 from "@/assets/icons/germ-icon-01.svg"
 import piggyBank_01 from "@/assets/icons/piggy-bank-01.svg"
 import research_icon_01 from "@/assets/icons/research.png"
+import counter_offer_icon from "@/assets/icons/counter-offer-icon.svg"
 
 
 export {
@@ -140,4 +141,5 @@ export {
     germ_icon_01,
     piggyBank_01,
     research_icon_01,
+    counter_offer_icon,
 }

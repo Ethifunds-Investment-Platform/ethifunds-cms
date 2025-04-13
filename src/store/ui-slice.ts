@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type DialogType = "" | "success_dialog" | "logout";
+type DialogType =
+	| ""
+	| "approve_offer"
+	| "counter_offer"
+	| "reject_offer"
+	| "listing_details"
+	| "success_dialog"
+	| "logout";
 
 export type DialogPayload = {
 	id: string;
