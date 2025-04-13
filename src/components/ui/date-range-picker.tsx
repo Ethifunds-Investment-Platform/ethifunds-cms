@@ -9,6 +9,7 @@ import { assets } from "@/constants";
 
 export function DatePickerWithRange({
   className,
+  handleChange,
   ...rest
 }: React.HTMLAttributes<HTMLDivElement> &
   Partial<{
@@ -21,8 +22,8 @@ export function DatePickerWithRange({
     setDate(range);
     if (range?.from && range?.to) {
       const rangeString = `${range?.from?.toISOString()}-${range?.to?.toISOString()}`;
-      if (rest.handleChange) {
-        rest.handleChange(rangeString);
+      if (handleChange) {
+        handleChange(rangeString);
       }
     }
   };

@@ -10,7 +10,7 @@ type Parameters = {
 type Response = Transaction[];
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/transactions?category=${data.category}`);
+	const response = await axios.post(`/transactions/recent-transactions?category=${data.category}`);
 
 	return response.data.data;
 }

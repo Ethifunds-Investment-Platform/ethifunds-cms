@@ -8,10 +8,10 @@ export default function Metrics() {
 		<div className="space-y-5">
 			<Counters />
 			<div className="flex justify-between gap-5 flex-wrap lg:flex-nowrap">
-				<div className="lg:w-3/5">
+				<div className="lg:w-3/5  w-full">
 					<InvestmentAllocation />
 				</div>
-				<div className="lg:w-2/5">
+				<div className="lg:w-2/5 w-full">
 					<TopInvestments />
 				</div>
 			</div>
