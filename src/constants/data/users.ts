@@ -36,15 +36,7 @@ export const users: User[] = [
 			created_at: "2025-01-23T23:32:15.000000Z",
 			updated_at: "2025-01-23T23:34:47.000000Z",
 		},
-		two_factor: {
-			id: 1,
-			user_id: 1,
-			"2fa_type": "google",
-			is_active: 1,
-			qrcode: null,
-			created_at: "2025-01-23T23:58:32.000000Z",
-			updated_at: "2025-01-23T23:58:32.000000Z",
-		},
+		two_factor:null,
 		user_profile: {
 			id: 1,
 			user_id: 1,
