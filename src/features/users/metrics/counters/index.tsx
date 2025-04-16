@@ -14,22 +14,29 @@ export default function Counters() {
 
 	const dataList: Counter[] = [
 		{
-			title: "Listed Investments",
-			count: data?.listed_investments ?? 0,
+			title: "Total Users",
+			count: data?.total_users ?? 0,
 		},
 		{
-			title: "approved Listing",
-			count: data?.approved_listing ?? 0,
+			title: "Active Users",
+			count: data?.active_users ?? 0,
 		},
 		{
-			title: "rejected listing",
-			count: data?.rejected_listing ?? 0,
+			title: "Inactive Users",
+			count: data?.inactive_users ?? 0,
+		},
+		{
+			title: "Suspended Users",
+			count: data?.suspended_users ?? 0,
+		},
+		{
+			title: "Investors",
+			count: data?.investors ?? 0,
 		},
 	];
 
 	return (
-		<div className="grid grid-cols-3 gap-3">
-			<h1 className="feature-bold">hello</h1>
+		<div className="grid grid-cols-3 lg:grid-cols-5 gap-3">
 			<ErrorBoundary>
 				<Render
 					isLoading={isFetching}
