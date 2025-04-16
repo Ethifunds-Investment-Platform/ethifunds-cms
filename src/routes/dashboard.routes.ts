@@ -6,9 +6,9 @@ import AllListingPage from "@/pages/listings/all-listings";
 import TransactionsPage from "@/pages/transactions";
 import AllTransactionsPage from "@/pages/transactions/all-transactions";
 import TransactionDetailsPage from "@/pages/transactions/transactions-details";
-import UsersPage from "@/pages/users";
-import AllUsersPage from "@/pages/users/all-users";
-import UserDetailsPage from "@/pages/users/user-details";
+import UsersManagementPage from "@/pages/user-management";
+import AllUsersPage from "@/pages/user-management/all-users";
+import UserAccountDetailsPage from "@/pages/user-management/user-account-details";
 
 import { RouteProps } from "react-router-dom";
 
@@ -21,8 +21,8 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/transactions", Component: TransactionsPage },
 	{ path: "/transactions/all-transactions", Component: AllTransactionsPage },
 	{ path: "/transactions/:transaction_id", Component: TransactionDetailsPage },
-	{ path: "/users", Component: UsersPage },
-	{ path: "/users/:user_id", Component: UserDetailsPage },
+	{ path: "/users", Component: UsersManagementPage },
+	{ path: "/users/:user_id", Component: UserAccountDetailsPage },
 	{ path: "users/all-users", Component: AllUsersPage },
 	{ path: "/investments", Component: UnderConstruction },
 	{ path: "/savings", Component: UnderConstruction },

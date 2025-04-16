@@ -1,4 +1,4 @@
-import AllUsers from "@/features/users/all-users";
+import AllUsers from "@/features/user-management/users/all-users";
 import useSeo from "@/hooks/use-seo";
 
 export default function AllUsersPage() {

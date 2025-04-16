@@ -7,6 +7,7 @@ type DialogType =
 	| "reject_offer"
 	| "listing_details"
 	| "success_dialog"
+	| "new_admin"
 	| "logout";
 
 export type DialogPayload = {

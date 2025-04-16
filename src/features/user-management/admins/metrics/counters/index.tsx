@@ -14,21 +14,25 @@ export default function Counters() {
 
 	const dataList: Counter[] = [
 		{
-			title: "Listed Investments",
-			count: data?.listed_investments ?? 0,
+			title: "Total Admins",
+			count: data?.total_admins ?? 0,
 		},
 		{
-			title: "approved Listing",
-			count: data?.approved_listing ?? 0,
+			title: "Active Admins",
+			count: data?.active_admins ?? 0,
 		},
 		{
-			title: "rejected listing",
-			count: data?.rejected_listing ?? 0,
+			title: "Inactive Admins",
+			count: data?.inactive_admins ?? 0,
+		},
+		{
+			title: "Suspended Admins",
+			count: data?.suspended_admins ?? 0,
 		},
 	];
 
 	return (
-		<div className="grid grid-cols-3 gap-3">
+		<div className="grid grid-cols-3 lg:grid-cols-5 gap-3">
 			<ErrorBoundary>
 				<Render
 					isLoading={isFetching}

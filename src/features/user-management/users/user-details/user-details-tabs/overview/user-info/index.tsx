@@ -40,7 +40,7 @@ export default function UserInfo(props: UserInfoProps) {
 				signedUpAt={props.created_at}
 				userName={userName}
 				isVerified={isVerified}
-				id={0}
+				id={props.id}
 				accountStatus={props.status}
 				profile={props.profile_picture}
 			/>
