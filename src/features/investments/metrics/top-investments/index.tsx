@@ -6,11 +6,15 @@ import { useQuery } from "react-query";
 import TopInvestmentCard from "./top-investment-card";
 import useAppSelectors from "@/store/use-app-selectors";
 import { Skeleton } from "@/components/ui/skeleton";
+import useCustomNavigation from "@/hooks/use-navigation";
 
 export default function TopInvestments() {
 	const { currency } = useAppSelectors("account");
-	const { isFetching, isError, error, data } = useQuery(["top-investments"], () =>
-		getTopInvestments()
+	const { queryParams } = useCustomNavigation();
+
+	const category_id = queryParams.get("category_id") ?? "";
+	const { isFetching, isError, error, data } = useQuery(["top-investments", category_id], () =>
+		getTopInvestments({ category_id })
 	);
 
 	return (

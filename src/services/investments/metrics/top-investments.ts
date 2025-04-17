@@ -3,10 +3,17 @@ import axios from "@/lib/axios";
 import { generateDigits } from "@/lib/generate-digits";
 import { TopInvestment } from "@/types/investment.types";
 
+type Parameters = {
+	category_id?: string;
+};
+
 type Response = TopInvestment[];
 
-export async function production(): Promise<Response> {
-	const response = await axios.post(` /investments/top-investments`);
+export async function production(data: Parameters): Promise<Response> {
+	const query = `category_id=${data.category_id}`;
+	const response = await axios.post(
+		`/investments/top-investments?${data.category_id ? query : ""}`
+	);
 
 	return response.data.data;
 }
@@ -82,8 +89,8 @@ export async function development(): Promise<Response> {
 	});
 }
 
-export default async function getTopInvestments(): Promise<Response> {
+export default async function getTopInvestments(data:Parameters): Promise<Response> {
 	if (variables.NODE_ENV === "development") return development();
 
-	return production();
+	return production(data);
 }

@@ -7,32 +7,39 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui/chart";
 import { useQuery } from "react-query";
-import getInvestmentAllocation from "@/services/investments/metrics/investment-allocation";
 import * as React from "react";
 import ErrorBoundary from "@/components/error-boundary";
 import Render from "@/components/render";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ValueType } from "recharts/types/component/DefaultTooltipContent";
-import useAppSelectors from "@/store/use-app-selectors";
 import capitalize from "@/lib/capitalize";
+import getInvestmentByUnits from "@/services/investments/metrics/investment-by-units";
+import useCustomNavigation from "@/hooks/use-navigation";
 
-export function InvestmentAllocation() {
-	const { currency } = useAppSelectors("account");
-	const [allocations, setAllocations] = React.useState<Record<string, number>>({});
+export function InvestmentByUnits() {
+	const [listings, setListings] = React.useState<Record<string, number>>({});
 
-	const { isFetching, isError, error } = useQuery(["investment"], () => getInvestmentAllocation(), {
-		onSuccess(data) {
-			setAllocations(data);
-		},
-	});
+	const { queryParams } = useCustomNavigation();
 
-	const chartData = Object.entries(allocations).map(([Key, value]) => ({
-		category: capitalize(Key),
-		amount: value,
+	const category_id = queryParams.get("category_id") ?? "";
+
+	const { isFetching, isError, error } = useQuery(
+		["investments-by-units", category_id],
+		() => getInvestmentByUnits({ category_id }),
+		{
+			onSuccess(data) {
+				setListings(data);
+			},
+		}
+	);
+
+	const chartData = Object.entries(listings).map(([Key, value]) => ({
+		units: capitalize(Key),
+		count: value,
 	}));
 
 	const chartConfig = {
-		amount: {
+		count: {
 			label: "Amount",
 			color: "#D1811B",
 		},
@@ -48,19 +55,17 @@ export function InvestmentAllocation() {
 			>
 				<Card className="">
 					<CardHeader>
-						<CardTitle>Investment Allocation</CardTitle>
-						<CardDescription>
-							Overview of investment allocation performance over time.
-						</CardDescription>
-						<small className="caption-accent text-neutral-700">Amount({currency.sign})</small>
+						<CardTitle>Investment By Units</CardTitle>
+						<CardDescription>A graphical representation of listings by Units</CardDescription>
+						<small className="caption-accent text-neutral-700">Count</small>
 					</CardHeader>
 					<CardContent>
 						<ChartContainer config={chartConfig}>
 							<BarChart accessibilityLayer data={chartData}>
 								<CartesianGrid vertical={false} />
-								<YAxis dataKey={"amount"} tickLine={true} tickMargin={10} axisLine={false} />
+								<YAxis dataKey={"count"} tickLine={true} tickMargin={10} axisLine={false} />
 								<XAxis
-									dataKey="category"
+									dataKey="units"
 									tickLine={false}
 									tickMargin={10}
 									axisLine={false}
@@ -71,15 +76,13 @@ export function InvestmentAllocation() {
 									content={
 										<ChartTooltipContent
 											formatter={(value: ValueType) =>
-												typeof value === "number"
-													? ` ${currency.sign}${value.toLocaleString()}`
-													: ""
+												typeof value === "number" ? ` ${value.toLocaleString()}` : ""
 											}
 										/>
 									}
 								/>
 
-								<Bar dataKey="amount" fill="#D1811B" radius={8} barSize={60} />
+								<Bar dataKey="count" fill="#D1811B" radius={8} />
 							</BarChart>
 						</ChartContainer>
 					</CardContent>

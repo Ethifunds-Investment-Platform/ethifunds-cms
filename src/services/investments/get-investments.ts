@@ -1,35 +1,46 @@
 import { variables } from "@/constants";
+import { PaginatedResponse, PaginationQuery } from "@/types/global.types";
 import axios from "@/lib/axios";
-import { generateDigits } from "@/lib/generate-digits";
+import paginate from "@/lib/paginate";
+import { InvestmentProduct } from "@/types/investment.types";
+import { investmentProducts } from "@/constants/data/investments/investment-category-products";
 
-type Response = {
-	reits: number;
-	ethivest: number;
-	ethicoop: number;
-};
+type Parameters = Partial<PaginationQuery> & {};
 
-export async function production(): Promise<Response> {
-	const response = await axios.post(`/investments/allocation-metrics`);
+type Response = PaginatedResponse<InvestmentProduct>;
 
-	return response.data.data;
+export async function production(data: Parameters): Promise<Response> {
+	const response = await axios.get(`/Investments${data.query_string}`);
+	return paginate(response.data.data);
 }
 
 export async function development(): Promise<Response> {
 	return new Promise((resolve) => {
 		setTimeout(
 			() =>
-				resolve({
-					reits: generateDigits(99999),
-					ethivest: generateDigits(9999),
-					ethicoop: generateDigits(9999),
-				}),
+				resolve(
+					paginate({
+						current_page: 1,
+						data: investmentProducts,
+						first_page_url: "http://127.0.0.1:8000/api/account/transactions?page=1",
+						from: 1,
+						last_page: 1,
+						last_page_url: "http://127.0.0.1:8000/api/account/transactions?page=1",
+						next_page_url: null,
+						path: "http://127.0.0.1:8000/api/account/transactions",
+						per_page: 20,
+						prev_page_url: null,
+						to: 2,
+						total: 2,
+					})
+				),
 			2000
 		);
 	});
 }
 
-export default async function getInvestments(): Promise<Response> {
+export default async function getInvestments(data: Parameters): Promise<Response> {
 	if (variables.NODE_ENV === "development") return development();
 
-	return production();
+	return production(data);
 }

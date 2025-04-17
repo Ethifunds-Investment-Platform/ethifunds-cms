@@ -3,10 +3,17 @@ import axios from "@/lib/axios";
 import { generateDigits } from "@/lib/generate-digits";
 import { ListingByUnits } from "@/types/listing.types";
 
+type Parameters = {
+	category_id?: string;
+};
+
 type Response = ListingByUnits;
 
-export async function production(): Promise<Response> {
-	const response = await axios.post(`  /listing/listing-by-units`);
+export async function production(data: Parameters): Promise<Response> {
+	const query = `category_id=${data.category_id}`;
+	const response = await axios.post(
+		`/investments/investments-by-units?${data.category_id ? query : ""}`
+	);
 
 	return response.data.data;
 }
@@ -28,8 +35,8 @@ export async function development(): Promise<Response> {
 	});
 }
 
-export default async function getListingByUnits(): Promise<Response> {
+export default async function getInvestmentByUnits(data: Parameters): Promise<Response> {
 	if (variables.NODE_ENV === "development") return development();
 
-	return production();
+	return production(data);
 }

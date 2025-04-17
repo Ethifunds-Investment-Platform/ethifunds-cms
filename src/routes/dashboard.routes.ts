@@ -1,6 +1,8 @@
 import NotFound from "@/components/prompts/not-found";
 import UnderConstruction from "@/components/prompts/under-construction";
 import DashboardPage from "@/pages/dashboard";
+import InvestmentsPage from "@/pages/investments";
+import AllInvestmentsPage from "@/pages/investments/all-investments";
 import ListingPage from "@/pages/listings";
 import AllListingPage from "@/pages/listings/all-listings";
 import TransactionsPage from "@/pages/transactions";
@@ -24,7 +26,8 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/users", Component: UsersManagementPage },
 	{ path: "/users/:user_id", Component: UserAccountDetailsPage },
 	{ path: "users/all-users", Component: AllUsersPage },
-	{ path: "/investments", Component: UnderConstruction },
+	{ path: "/investments", Component: InvestmentsPage },
+	{ path: "/investments/all-investments", Component: AllInvestmentsPage },
 	{ path: "/savings", Component: UnderConstruction },
 	{ path: "/notifications", Component: UnderConstruction },
 	{ path: "/reports", Component: UnderConstruction },

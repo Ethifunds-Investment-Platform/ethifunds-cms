@@ -6,7 +6,7 @@ import { ListingTrends } from "@/types/listing.types";
 type Response = ListingTrends[];
 
 export async function production(): Promise<Response> {
-	const response = await axios.post(` /investments/top-investments`);
+	const response = await axios.post(`/listing/trends`);
 
 	return response.data.data;
 }
