@@ -14,7 +14,9 @@ export type InvestmentByUnits = {
 	">1000": number;
 };
 
-export type InvestmentStatus = "active" | "inactive" | "draft";
+export const InvestmentsStatus = ["active", "inactive", "draft"] as const;
+
+export type InvestmentStatus = (typeof InvestmentsStatus)[number];
 
 export type InvestmentProduct = {
 	id: number;
@@ -43,7 +45,7 @@ export type InvestmentProduct = {
 	bond_issuer: null;
 	bond_interest_rate: null;
 	hybrid_components: [];
-	status: string;
+	status: InvestmentStatus;
 	created_at: string;
 	updated_at: string;
 	custodian: InvestmentProductCustodian;
@@ -87,8 +89,6 @@ export type InvestmentProductLabel = {
 	updated_at: null;
 };
 
-export type ProductSection = "asset finance" | "sme financing" | "lpo financing";
-
 // New Investment
 export type NewInvestmentPayload = {
 	name: string;
@@ -97,13 +97,13 @@ export type NewInvestmentPayload = {
 	display_image: File;
 	account_id: number;
 	product_label: string;
-	product_section: ProductSection;
+	product_section: string;
 	description: string;
 	tenor_unit: string;
 	tenor_value: number;
 	total_units: number;
 	expected_roi: number;
-	funding_deadline: string;
+	funding_deadline?: string;
 	funding_goal: string;
 	unit_price: string;
 	status: InvestmentStatus;
@@ -113,18 +113,17 @@ export type NewInvestmentPayload = {
 export type UpdateInvestmentPayload = {
 	name: string;
 	product_category_id: number;
-	display_image: File;
-	account_id: number;
+	display_image?: File;
 	product_label: string;
-	product_section: ProductSection;
+	product_section: string;
 	description: string;
 	tenor_unit: string;
 	tenor_value: number;
 	total_units: number;
 	expected_roi: number;
-	funding_deadline: string;
+	funding_deadline?: string;
 	funding_goal: string;
 	unit_price: string;
 	status: InvestmentStatus;
-	product_memo: File;
+	product_memo?: File;
 };

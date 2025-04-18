@@ -13,14 +13,11 @@ export default React.memo(function SuccessDialog() {
   }, [dialog.type, dialog.show]);
 
   const close = () => {
-    if (dialog.action) {
-      dialog.action();
-    }
-    if (dialog.dismiss) {
-      dialog.dismiss();
-    }
-    ui.resetDialog();
-  };
+		if (dialog.dismiss) {
+			dialog.dismiss();
+		}
+		ui.resetDialog();
+	};
 
   if (!dialog.data) return;
 

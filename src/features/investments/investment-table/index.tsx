@@ -45,9 +45,9 @@ export default function InvestmentTable(props: TableProps) {
 				{props.data.map((item) => {
 					const date = new Date(item.created_at);
 					const statusClx = classNames("capitalize", {
-						"text-success-200": item.status === "success",
-						"text-primary-500": item.status === "pending",
-						"text-error-200": item.status === "failed",
+						"text-success-200": item.status === "active",
+						"text-primary-500": item.status === "inactive",
+						"text-neutral-500": item.status === "draft",
 					});
 					return (
 						<TableRow
@@ -62,8 +62,12 @@ export default function InvestmentTable(props: TableProps) {
 									timeStyle: "short",
 								})}
 							</TableCell>
-							<TableCell className="capitalize">{truncate(item.name)}</TableCell>
-							<TableCell className="capitalize">{truncate(item.category.name)}</TableCell>
+							<TableCell className="capitalize" title={item.name}>
+								{truncate(item.name)}
+							</TableCell>
+							<TableCell className="capitalize" title={item.category.name}>
+								{truncate(item.category.name)}
+							</TableCell>
 							<TableCell>{amountSeparator(item.total_units)}</TableCell>
 							<TableCell>{amountSeparator(item.units_sold)}</TableCell>
 							<TableCell>

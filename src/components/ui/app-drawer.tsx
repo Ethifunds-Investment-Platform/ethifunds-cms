@@ -41,24 +41,20 @@ export default function AppDrawer(props: DrawerProps) {
   );
 
   return (
-    <Drawer
-      direction={props.direction}
-      onOpenChange={props.handleChange}
-      open={props.open}
-    >
-      <DrawerContent className={cn}>
-        <DrawerDescription />
-        <DrawerHeader className={headerClx}>
-          <DrawerTitle className="feature-bold text-neutral-1000">
-            {props.title}
-          </DrawerTitle>
-          <DrawerClose>
-            <X />
-          </DrawerClose>
-        </DrawerHeader>
-        <ErrorBoundary>{props.children}</ErrorBoundary>
-        {props.footer && <DrawerFooter>{props.footer}</DrawerFooter>}
-      </DrawerContent>
-    </Drawer>
-  );
+		<ErrorBoundary>
+			<Drawer direction={props.direction} onOpenChange={props.handleChange} open={props.open}>
+				<DrawerContent className={cn}>
+					<DrawerDescription />
+					<DrawerHeader className={headerClx}>
+						<DrawerTitle className="feature-bold text-neutral-1000">{props.title}</DrawerTitle>
+						<DrawerClose>
+							<X />
+						</DrawerClose>
+					</DrawerHeader>
+					{props.children}
+					{props.footer && <DrawerFooter>{props.footer}</DrawerFooter>}
+				</DrawerContent>
+			</Drawer>
+		</ErrorBoundary>
+	);
 }

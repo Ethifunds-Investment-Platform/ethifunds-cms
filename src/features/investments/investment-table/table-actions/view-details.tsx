@@ -1,15 +1,19 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import useCustomNavigation from "@/hooks/use-navigation";
+import useActions from "@/store/actions";
 import { EyeIcon } from "lucide-react";
 
 type ViewDetailsProps = {
 	id: string;
 };
 export default function ViewDetails(props: ViewDetailsProps) {
-	const { navigate } = useCustomNavigation();
+	const { ui } = useActions();
 
 	const toggleShow = () => {
-		navigate(`/investments/${props.id}`);
+		ui.changeDialog({
+			show: true,
+			type: "investment_details",
+			id: props.id,
+		});
 	};
 
 	return (

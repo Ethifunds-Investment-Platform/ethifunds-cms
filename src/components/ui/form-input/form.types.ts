@@ -7,7 +7,8 @@ export type FORM_FIELDS = {
 	required: boolean;
 	readOnly?: boolean;
 	containerStyle?: string;
-	className?: string;
+  className?: string;
+  accept?: string
 };
 export type SelectOptions = {
 	title: string;

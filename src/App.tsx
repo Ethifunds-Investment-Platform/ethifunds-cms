@@ -5,7 +5,6 @@ import { useIsMobile } from "./hooks/use-mobile";
 import MobileRestriction from "./components/prompts/mobile-restriction";
 import DashboardLayout from "./layouts/dashboard.layout";
 import NotFound from "./components/prompts/not-found";
-import Dialogs from "./dialogs";
 
 export default function App() {
 	const isMobile = useIsMobile();
@@ -30,7 +29,6 @@ export default function App() {
 				</Route>
 				<Route path="*" element={<NotFound />} />
 			</Routes>
-			<Dialogs />
 		</React.Fragment>
 	);
 }

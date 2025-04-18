@@ -12,7 +12,7 @@ type TableActionsProps = {
 }
 export default React.memo(function TableActions(props:TableActionsProps) {
 	return (
-		<DropdownMenu>
+		<DropdownMenu modal={false}>
 			<DropdownMenuTrigger className="!outline-non">
 				<img src={assets.option_icon_01} alt="" />
 			</DropdownMenuTrigger>

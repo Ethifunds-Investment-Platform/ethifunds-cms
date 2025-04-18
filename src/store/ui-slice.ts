@@ -8,6 +8,10 @@ type DialogType =
 	| "listing_details"
 	| "success_dialog"
 	| "new_admin"
+	| "investment_details"
+	| "preview_investment"
+	| "create_investment"
+	| "edit_investment"
 	| "logout";
 
 export type DialogPayload = {

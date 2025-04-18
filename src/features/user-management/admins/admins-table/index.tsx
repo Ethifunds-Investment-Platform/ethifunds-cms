@@ -7,16 +7,16 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import TableActions from "./table-actions";
-import EmptyTransactions from "@/components/prompts/empty-transactions";
 import classNames from "classnames";
 import { Admin } from "@/types/admin.types";
+import EmptyData from "@/components/empty-data";
 
 type TableProps = {
 	data: Admin[];
 	isEmpty: boolean;
 };
 export default function AdminsTable(props: TableProps) {
-	if (props.isEmpty) return <EmptyTransactions />;
+	if (props.isEmpty) return <EmptyData title="No admin added yet"  />;
 
 	return (
 		<Table>

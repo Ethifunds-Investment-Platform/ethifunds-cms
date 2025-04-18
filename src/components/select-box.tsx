@@ -42,7 +42,7 @@ export default React.memo(function SelectBox(props: SelectBoxProps) {
 		<div className={container}>
 			{props.label && (
 				<label htmlFor={props.name} className="capitalize">
-					{props.label}
+					{props.label} {props.required && "*"}
 				</label>
 			)}
 			<Select

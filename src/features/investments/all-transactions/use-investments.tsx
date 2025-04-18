@@ -12,9 +12,20 @@ export default function useInvestments() {
 
 	const category_id = queryParams.get("category_id") ?? "";
 
+	const hasActionQuery = queryParams.has("action");
+
 	const query_string = React.useMemo(() => formatSearchString(location.search), [location.search]);
 
 	const query = useQuery(["all-investments", query_string], () => getInvestments({ query_string }));
+
+	// this triggers a refetch whenever an action has been performed
+	React.useMemo(() => {
+		if (!hasActionQuery && query.isFetched) {
+			query.refetch();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [hasActionQuery, query.isFetched]);
+
 	return {
 		...query,
 		sign: currency.sign,

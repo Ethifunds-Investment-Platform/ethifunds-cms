@@ -1,0 +1,120 @@
+// edit-investment/data.ts
+import { FORM_FIELDS } from "@/components/ui/form-input/form.types";
+import { InvestmentsStatus } from "@/types/investment.types";
+
+export const formFields: FORM_FIELDS[] = [
+	{
+		name: "name",
+		type: "text",
+		label: "Investment Name",
+		placeholder: "Enter investment name",
+		required: true,
+	},
+	{
+		name: "product_category_id",
+		type: "select",
+		label: "Category",
+		placeholder: "Select category",
+		required: true,
+	},
+
+	{
+		name: "product_label",
+		type: "text",
+		label: "Product Label",
+		placeholder: "Enter product label",
+		required: true,
+	},
+	{
+		name: "product_section",
+		type: "text",
+		label: "Product Section",
+		placeholder: "enter section",
+		required: true,
+	},
+	{
+		name: "description",
+		type: "textarea",
+		label: "Description",
+		placeholder: "Enter description",
+		required: true,
+	},
+	{
+		name: "tenor_unit",
+		type: "select",
+		label: "Tenor Unit",
+		placeholder: "Select tenor unit",
+		required: true,
+		options: [
+			{ title: "Days", value: "days" },
+			{ title: "Months", value: "months" },
+			{ title: "Years", value: "years" },
+		],
+	},
+	{
+		name: "tenor_value",
+		type: "number",
+		label: "Tenor Value",
+		placeholder: "Enter tenor value",
+		required: true,
+	},
+	{
+		name: "total_units",
+		type: "number",
+		label: "Total Units",
+		placeholder: "Enter total units",
+		required: true,
+	},
+	{
+		name: "expected_roi",
+		type: "number",
+		label: "Expected ROI (%)",
+		placeholder: "Enter expected ROI",
+		required: true,
+	},
+	{
+		name: "funding_deadline",
+		type: "date",
+		label: "Funding Deadline",
+		placeholder: "Select deadline",
+		required: false,
+	},
+	{
+		name: "funding_goal",
+		type: "text",
+		label: "Funding Goal",
+		placeholder: "Enter funding goal",
+		required: true,
+	},
+	{
+		name: "unit_price",
+		type: "text",
+		label: "Unit Price",
+		placeholder: "Enter unit price",
+		required: true,
+	},
+	{
+		name: "status",
+		type: "select",
+		label: "Status",
+		placeholder: "Select status",
+		required: true,
+		options: InvestmentsStatus.map((item) => ({ title: item, value: item })),
+	},
+	{
+		name: "display_image",
+		type: "file",
+		label: "Display Image",
+		placeholder: "Upload image",
+		accept: ".png, .jpg, .jpeg .svg",
+		required: true,
+	},
+	{
+		name: "product_memo",
+		type: "file",
+		label: "Product Memo",
+		placeholder: "Upload memo",
+		accept: ".pdf, .docx",
+		required: true,
+	},
+];
