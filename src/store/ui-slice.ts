@@ -12,6 +12,7 @@ type DialogType =
 	| "preview_investment"
 	| "create_investment"
 	| "edit_investment"
+	| "savings_transaction_details"
 	| "logout";
 
 export type DialogPayload = {

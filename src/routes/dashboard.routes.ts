@@ -5,6 +5,9 @@ import InvestmentsPage from "@/pages/investments";
 import AllInvestmentsPage from "@/pages/investments/all-investments";
 import ListingPage from "@/pages/listings";
 import AllListingPage from "@/pages/listings/all-listings";
+import SavingsPage from "@/pages/savings";
+import SavingsDetailsPage from "@/pages/savings/savings-details";
+import SavingsTransactionsPage from "@/pages/savings/savings-transactions";
 import TransactionsPage from "@/pages/transactions";
 import AllTransactionsPage from "@/pages/transactions/all-transactions";
 import TransactionDetailsPage from "@/pages/transactions/transactions-details";
@@ -18,17 +21,25 @@ type CustomRouteProps = RouteProps & {};
 
 const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/dashboard", Component: DashboardPage },
+
 	{ path: "/listings", Component: ListingPage },
 	{ path: "/listings/all-listings", Component: AllListingPage },
+
 	{ path: "/transactions", Component: TransactionsPage },
 	{ path: "/transactions/all-transactions", Component: AllTransactionsPage },
 	{ path: "/transactions/:transaction_id", Component: TransactionDetailsPage },
+
 	{ path: "/users", Component: UsersManagementPage },
 	{ path: "/users/:user_id", Component: UserAccountDetailsPage },
 	{ path: "users/all-users", Component: AllUsersPage },
+
 	{ path: "/investments", Component: InvestmentsPage },
 	{ path: "/investments/all-investments", Component: AllInvestmentsPage },
-	{ path: "/savings", Component: UnderConstruction },
+
+	{ path: "/savings", Component: SavingsPage },
+	{ path: "/savings/:savings_id", Component: SavingsDetailsPage },
+	{ path: "/savings/:savings_id/transactions", Component: SavingsTransactionsPage },
+	
 	{ path: "/notifications", Component: UnderConstruction },
 	{ path: "/reports", Component: UnderConstruction },
 	{ path: "/support", Component: UnderConstruction },
