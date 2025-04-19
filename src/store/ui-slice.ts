@@ -12,6 +12,8 @@ type DialogType =
 	| "preview_investment"
 	| "create_investment"
 	| "edit_investment"
+	| "create_savings"
+	| "update_savings"
 	| "savings_transaction_details"
 	| "logout";
 

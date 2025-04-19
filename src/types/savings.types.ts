@@ -55,3 +55,21 @@ export type SavingsContributor = {
 	created_at: string;
 	updated_at: string;
 };
+
+
+
+export type CreateSavingsPayload = {
+	start_date: string;
+	created_by: number;
+	roi: string;
+	min_amount: string;
+	max_amount: string;
+};
+
+export type UpdateSavingsPayload = {
+	start_date: string;
+	savings_id: number;
+	roi: string;
+	min_amount: string;
+	max_amount: string;
+};
