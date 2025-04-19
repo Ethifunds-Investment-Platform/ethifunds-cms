@@ -47,7 +47,7 @@ const Input = React.forwardRef<Ref, InputProps>((props: InputProps, ref) => {
     return { isInvalid };
   }, [invalid, rest.value, rest.required, override_invalid]);
 
-	const container = classNames("input-container", containerStyle);
+	const container = classNames("input-container z-50 ", containerStyle);
 
 	const cn = classNames(className, {
 		invalid: isInvalid || unChecked,
@@ -55,7 +55,7 @@ const Input = React.forwardRef<Ref, InputProps>((props: InputProps, ref) => {
 	return (
 		<div className={container}>
 			{label && (
-				<label htmlFor={name} className="capitalize ">
+				<label htmlFor={name} className="capitalize  ">
 					{label} {rest.required && "*"}
 				</label>
 			)}

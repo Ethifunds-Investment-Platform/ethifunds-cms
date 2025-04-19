@@ -5,6 +5,8 @@ import InvestmentsPage from "@/pages/investments";
 import AllInvestmentsPage from "@/pages/investments/all-investments";
 import ListingPage from "@/pages/listings";
 import AllListingPage from "@/pages/listings/all-listings";
+import NotificationsPage from "@/pages/notifications";
+import AllNotificationsPage from "@/pages/notifications/all-notifications";
 import SavingsPage from "@/pages/savings";
 import SavingsDetailsPage from "@/pages/savings/savings-details";
 import SavingsTransactionsPage from "@/pages/savings/savings-transactions";
@@ -39,9 +41,10 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/savings", Component: SavingsPage },
 	{ path: "/savings/:savings_id", Component: SavingsDetailsPage },
 	{ path: "/savings/:savings_id/transactions", Component: SavingsTransactionsPage },
+
+	{ path: "/notifications", Component: NotificationsPage },
+	{ path: "/notifications/all-notifications", Component: AllNotificationsPage },
 	
-	{ path: "/notifications", Component: UnderConstruction },
-	{ path: "/reports", Component: UnderConstruction },
 	{ path: "/support", Component: UnderConstruction },
 	{ path: "/settings", Component: UnderConstruction },
 	{ path: "*", Component: NotFound },

@@ -5,6 +5,7 @@ import NewAdminDialog from "./new-admin-dialog";
 import InvestmentsDialogs from "./investments-dialogs";
 import useActions from "@/store/actions";
 import SavingsDialogs from "./savings-dialogs";
+import NotificationDialogs from "./notifications-dialogs";
 
 export default React.memo(function Dialogs() {
 	const { ui } = useActions();
@@ -22,6 +23,7 @@ export default React.memo(function Dialogs() {
 			<NewAdminDialog />
 			<InvestmentsDialogs />
 			<SavingsDialogs />
+			<NotificationDialogs />
 		</React.Fragment>
 	);
 });
