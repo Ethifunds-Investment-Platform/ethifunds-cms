@@ -1,16 +1,16 @@
 import { variables } from "@/constants";
-import { users } from "@/constants/data/users";
+import { admins } from "@/constants/data/admins";
 import axios from "@/lib/axios";
-import { User } from "@/types/user.types";
+import { Admin } from "@/types/admin.types";
 
 type Parameters = {
 	email?: string;
-	username?:string 
+	username?: string;
 	password: string;
 };
 
 type Response = {
-	user: User;
+	user: Admin;
 	token: string;
 };
 
@@ -33,7 +33,7 @@ export async function development(): Promise<Response> {
 		setTimeout(
 			() =>
 				resolve({
-					user: users[0],
+					user: admins[0],
 					token: "key12455677",
 				}),
 			2000

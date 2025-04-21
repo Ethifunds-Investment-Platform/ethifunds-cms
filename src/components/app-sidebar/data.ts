@@ -59,21 +59,21 @@ export const sidebarLinks: SidebarLink[] = [
 		relativePaths: [],
 	},
 
-	{
-		name: "report & analysis",
-		path: "reports",
-		icon: icons.reports_icon,
-		activeIcon: icons.reports_icon_active,
-		relativePaths: [],
-	},
+	// {
+	// 	name: "report & analysis",
+	// 	path: "reports",
+	// 	icon: icons.reports_icon,
+	// 	activeIcon: icons.reports_icon_active,
+	// 	relativePaths: [],
+	// },
 
-	{
-		name: "support",
-		path: "support",
-		icon: icons.support_icon,
-		activeIcon: icons.support_icon_active,
-		relativePaths: [],
-	},
+	// {
+	// 	name: "support",
+	// 	path: "support",
+	// 	icon: icons.support_icon,
+	// 	activeIcon: icons.support_icon_active,
+	// 	relativePaths: [],
+	// },
 	{
 		name: "settings",
 		path: "settings",

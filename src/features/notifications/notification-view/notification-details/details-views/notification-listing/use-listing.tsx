@@ -3,7 +3,7 @@ import useAppSelectors from "@/store/use-app-selectors";
 import { MyInvestmentMarketplaceNotification, Notification,  } from "@/types/notification.types";
 import { useQuery } from "react-query";
 import { amountSeparator } from "@/lib/amount-separator";
-import getUserById from "@/services/account/get-user-by-id";
+import getUserById from "@/services/users/get-user-by-id";
 import ensureError from "@/lib/ensure-error";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";

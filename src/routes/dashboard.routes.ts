@@ -1,5 +1,4 @@
 import NotFound from "@/components/prompts/not-found";
-import UnderConstruction from "@/components/prompts/under-construction";
 import DashboardPage from "@/pages/dashboard";
 import InvestmentsPage from "@/pages/investments";
 import AllInvestmentsPage from "@/pages/investments/all-investments";
@@ -10,6 +9,7 @@ import AllNotificationsPage from "@/pages/notifications/all-notifications";
 import SavingsPage from "@/pages/savings";
 import SavingsDetailsPage from "@/pages/savings/savings-details";
 import SavingsTransactionsPage from "@/pages/savings/savings-transactions";
+import SettingsPage from "@/pages/settings";
 import TransactionsPage from "@/pages/transactions";
 import AllTransactionsPage from "@/pages/transactions/all-transactions";
 import TransactionDetailsPage from "@/pages/transactions/transactions-details";
@@ -44,9 +44,9 @@ const dashboardRoutes: CustomRouteProps[] = [
 
 	{ path: "/notifications", Component: NotificationsPage },
 	{ path: "/notifications/all-notifications", Component: AllNotificationsPage },
-	
-	{ path: "/support", Component: UnderConstruction },
-	{ path: "/settings", Component: UnderConstruction },
+
+	{ path: "/settings", Component: SettingsPage },
+
 	{ path: "*", Component: NotFound },
 ];
 

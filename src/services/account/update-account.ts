@@ -1,35 +1,28 @@
 import { variables } from "@/constants";
-import { users } from "@/constants/data/users";
+import { admins } from "@/constants/data/admins";
 import axios from "@/lib/axios";
-import { User } from "@/types/user.types";
+import { Admin } from "@/types/admin.types";
 
 type Parameters = {
 	first_name: string;
 	last_name: string;
-	middle_name?: string;
 	phone_number: string;
-	username: string;
-	date_of_birth: string;
-	gender: string;
-	// address?: string;
-	// occupation: string;
-	// income_level?: string;
 };
 
-type Response = User;
+type Response = Admin;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/auth/login`, data);
+	const response = await axios.post(`/auth/update-profile`, data);
 	return response.data;
 }
 
 export async function development(): Promise<Response> {
 	return new Promise((resolve) => {
-		setTimeout(() => resolve(users[0]), 2000);
+		setTimeout(() => resolve(admins[0]), 2000);
 	});
 }
 
-export default async function updateUser(data: Parameters): Promise<Response> {
+export default async function updateAccount(data: Parameters): Promise<Response> {
 	if (variables.NODE_ENV === "development") return development();
 
 	return production(data);

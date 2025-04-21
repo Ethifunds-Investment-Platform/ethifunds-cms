@@ -1,9 +1,9 @@
 import { variables } from "@/constants";
-import { users } from "@/constants/data/users";
+import { admins } from "@/constants/data/admins";
 import axios from "@/lib/axios";
-import { User } from "@/types/user.types";
+import { Admin } from "@/types/admin.types";
 
-type Response = User;
+type Response = Admin;
 
 export async function production(): Promise<Response> {
 	const response = await axios.get(`/me`);
@@ -12,7 +12,7 @@ export async function production(): Promise<Response> {
 
 export async function development(): Promise<Response> {
 	return new Promise((resolve) => {
-		setTimeout(() => resolve(users[0]), 2000);
+		setTimeout(() => resolve(admins[0]), 2000);
 	});
 }
 

@@ -1,16 +1,16 @@
 import { currencyList } from "@/constants/currency-list";
+import { Admin } from "@/types/admin.types";
 import { Currency } from "@/types/global.types";
-import { User } from "@/types/user.types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type AccountState = {
-	account: User;
+	account: Admin;
 	token: string;
 	currency: Currency;
 };
 
 const initialState: AccountState = {
-	account: {} as User,
+	account: {} as Admin,
 	token: "",
 	currency: currencyList[0],
 };
@@ -19,7 +19,7 @@ const accountSlice = createSlice({
 	name: "account",
 	initialState,
 	reducers: {
-		changeAccount: (state, action: PayloadAction<User>) => {
+		changeAccount: (state, action: PayloadAction<Admin>) => {
 			return {
 				...state,
 				account: action.payload,
@@ -33,7 +33,7 @@ const accountSlice = createSlice({
 			};
 		},
 
-		updateAccount: (state, action: PayloadAction<Partial<User>>) => {
+		updateAccount: (state, action: PayloadAction<Partial<Admin>>) => {
 			return {
 				...state,
 				account: { ...state.account, ...action.payload },

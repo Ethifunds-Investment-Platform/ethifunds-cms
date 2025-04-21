@@ -1,4 +1,3 @@
-import { User } from "@/types/user.types";
 import { changeAccount, changeCurrency, changeToken, updateAccount } from "./account-slice";
 import { useAppDispatch } from "./hooks";
 import { Currency } from "@/types/global.types";
@@ -19,6 +18,7 @@ import {
 	resetNotificationDialog,
 } from "./notification-slice";
 import { Notification } from "@/types/notification.types";
+import { Admin } from "@/types/admin.types";
 
 export default function useActions() {
 	const dispatch = useAppDispatch();
@@ -30,9 +30,9 @@ export default function useActions() {
 	};
 
 	const account = {
-		changeAccount: (payload: User) => dispatch(changeAccount(payload)),
+		changeAccount: (payload: Admin) => dispatch(changeAccount(payload)),
 		changeToken: (payload: string) => dispatch(changeToken(payload)),
-		updateAccount: (payload: Partial<User>) => dispatch(updateAccount(payload)),
+		updateAccount: (payload: Partial<Admin>) => dispatch(updateAccount(payload)),
 		changeCurrency: (payload: Currency) => dispatch(changeCurrency(payload)),
 	};
 

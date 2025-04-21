@@ -76,9 +76,6 @@ export default function useForm() {
 				handleRememberMe();
 			}
 
-			if (response.user.two_factor) {
-				return navigate("2fa-verify");
-			}
 			return navigate("/dashboard");
 		} catch (error) {
 			const errMsg = ensureError(error);

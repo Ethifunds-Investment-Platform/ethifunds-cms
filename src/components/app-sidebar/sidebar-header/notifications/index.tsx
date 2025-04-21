@@ -26,8 +26,8 @@ export default React.memo(function Notifications() {
 		>
 			{showIndicator && (
 				<Badge className="absolute right-0 top-0 !size-2.5 rounded-full bg-error-200 p-0" />
-      )}
-      <BellPlus/>
+			)}
+			<BellPlus className="text-primary-600" />
 		</button>
 	);
 });
