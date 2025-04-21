@@ -7,36 +7,40 @@ import SearchedResults from "./searched-results";
 
 export default React.memo(function Searchbar() {
   const [text, setText] = React.useState("");
-	const { navigate } = useCustomNavigation();
-	 const searchbarRef = React.useRef<HTMLDivElement>(null);
+  const { navigate } = useCustomNavigation();
+  const searchbarRef = React.useRef<HTMLDivElement>(null);
 
-
-	  React.useEffect(() => {
-      function handleClickOutside(event: MouseEvent) {
-        if (
-          searchbarRef.current &&
-          !searchbarRef.current.contains(event.target as Node)
-        ) {
-          setText(""); // Reset search input
-        }
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        searchbarRef.current &&
+        !searchbarRef.current.contains(event.target as Node)
+      ) {
+        setText(""); // Reset search input
       }
+    }
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () =>
-        document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-	
-	
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const results = React.useMemo(() => {
-    const sanitizedInput = sanitizeText(text).split("-").join(" ");
+    const sanitizedInput = sanitizeText(text).toLowerCase().split("-").join(" ");
 
     if (!sanitizedInput) return [];
 
-    const filteredList = featureList.filter(
-      (item) =>
-        sanitizeText(item.name).includes(sanitizedInput) ||
-        item.tags?.some((tag) => sanitizeText(tag).includes(sanitizedInput)),
-    );
+    const filteredList = featureList.filter((item) => {
+      const sanitizedName = sanitizeText(item.name).toLowerCase();
+      const sanitizedTags = item.tags?.map((tag) =>
+        sanitizeText(tag).toLowerCase()
+      );
+
+      return (
+        sanitizedName.includes(sanitizedInput) ||
+        sanitizedTags?.some((tag) => tag.includes(sanitizedInput))
+      );
+    });
 
     return filteredList;
   }, [text]);
@@ -64,4 +68,3 @@ export default React.memo(function Searchbar() {
     </div>
   );
 });
-
