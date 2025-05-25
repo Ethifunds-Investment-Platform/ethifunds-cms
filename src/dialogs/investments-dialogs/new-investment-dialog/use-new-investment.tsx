@@ -19,14 +19,14 @@ const validation = z.object({
 	product_category_id: z.string().min(1, "Category is required"),
 	product_custodian_id: z.number().positive("Custodian id is required"),
 	account_id: z.number().positive("Account ID is required"),
-	product_label: z.string().min(3, "Label must be at least 3 characters"),
-	product_section: z.string().min(3, "Section must be at least 3 characters"),
+	product_label: z.string().optional(),
+	product_section: z.string().optional(),
 	description: z.string().min(10, "Description must be at least 10 characters"),
 	tenor_unit: z.enum(["days", "months", "years"]),
 	tenor_value: z.number().positive("Tenor value must be a positive value"),
 	total_units: z.number().positive("Total units must be at positive value"),
 	expected_roi: z.number().positive("ROI cannot be negative"),
-	funding_deadline: z.string().min(1, "Deadline is required").optional(),
+	funding_deadline: z.string().optional(),
 	funding_goal: z.string().min(1, "Funding goal is required"),
 	unit_price: z.string().min(1, "Unit price is required"),
 	status: z.enum(InvestmentsStatus),
@@ -57,7 +57,7 @@ const init: FormData = {
 };
 
 export default function useNewInvestment() {
-	const { account } = useAppSelectors("account");
+	const { account, currency } = useAppSelectors("account");
 	const { dialog } = useAppSelectors("ui");
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [formData, setFormData] = React.useState(init);
@@ -146,6 +146,10 @@ export default function useNewInvestment() {
 				total_units: Number(formData.total_units),
 				expected_roi: Number(formData.expected_roi),
 				product_custodian_id: account.id,
+				product_label: formData.product_label ?? "",
+				product_section: formData.product_section ?? "",
+				funding_deadline: formData.funding_deadline ?? "",
+
 				account_id: account.id,
 			});
 
@@ -216,6 +220,8 @@ export default function useNewInvestment() {
 		categoryOptions,
 		updateForm,
 		closeDrawer,
+		categories,
+		currency,
 		toggleDrawer,
 		updateFile,
 		showPreview,

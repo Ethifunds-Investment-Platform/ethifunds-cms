@@ -1,27 +1,26 @@
 import AppButton from "@/components/app-button";
 import ErrorBoundary from "@/components/error-boundary";
+import Render from "@/components/render";
 import { PopupModal } from "@/components/ui/modal";
 import ensureError from "@/lib/ensure-error";
 import acceptRejectOffer from "@/services/listing/accept-reject-offer";
 import getListingDetails from "@/services/listing/get-listing-details";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
-import { useQuery, useQueryClient } from "react-query";
 import * as React from "react";
+import { useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
-import Render from "@/components/render";
 
-export default React.memo(function RejectOfferDialog() {
+export default React.memo(function ApproveOfferDialog() {
 	const { dialog } = useAppSelector((state) => state.ui);
-	const [isLoading, setIsLoading] = React.useState(false);
 	const { currency } = useAppSelector((state) => state.account);
+	const [isLoading, setIsLoading] = React.useState(false);
 
 	const { ui } = useActions();
 	const id = dialog.id;
-	
 	const queryClient = useQueryClient();
 
-	const { data, isFetching, isError, error } = useQuery(["reject-offer", id], () =>
+	const { data, isFetching, isError, error } = useQuery(["approve-offer", id], () =>
 		getListingDetails({ id })
 	);
 
@@ -43,7 +42,7 @@ export default React.memo(function RejectOfferDialog() {
 	};
 
 	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "reject_offer";
+		return dialog.show && dialog.type === "approve_offer";
 	}, [dialog.show, dialog.type]);
 
 	const close = () => {
@@ -57,10 +56,9 @@ export default React.memo(function RejectOfferDialog() {
 		try {
 			await acceptRejectOffer({
 				listing_id: id,
-				status: "rejected",
+				status: "approved",
 			});
 			showSuccessDialog();
-			
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);
@@ -69,25 +67,24 @@ export default React.memo(function RejectOfferDialog() {
 		}
 	};
 
+	const showSuccessDialog = () => {
+		const text =
+			"You have successfully approved this offer, parties involved would be notified shortly.";
 
-		const showSuccessDialog = () => {
-			const text =
-				"You have successfully rejected this offer, parties involved would be notified shortly.";
-
-			const data = {
-				title: "Congratulations!!!",
-				subtitle: text,
-			};
-
-			ui.changeDialog({
-				show: true,
-				type: "success_dialog",
-				data,
-				dismiss: () => {
-					queryClient.invalidateQueries(["listings"]);
-				},
-			});
+		const data = {
+			title: "Congratulations!!!",
+			subtitle: text,
 		};
+
+		ui.changeDialog({
+			show: true,
+			type: "success_dialog",
+			data,
+			dismiss: () => {
+				queryClient.invalidateQueries(["listings"]);
+			},
+		});
+	};
 
 	return (
 		<PopupModal
@@ -99,9 +96,8 @@ export default React.memo(function RejectOfferDialog() {
 			<ErrorBoundary>
 				<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
 					<div className="flex flex-col gap-3">
-						<h1 className="feature-accent text-neutral-1000">Reject offer</h1>
-
-						<p className="text-neutral-1000">Are you sure you want to reject this offer?</p>
+						<h1 className="highlight-standard text-neutral-1000">Approve Offer</h1>
+						<span>Are you sure you want to approve this offer?</span>
 
 						<div className="p-3 space-y-5 border rounded-lg bg-neutral-50">
 							{Object.entries(details).map(([key, value]) => {
@@ -116,17 +112,13 @@ export default React.memo(function RejectOfferDialog() {
 								);
 							})}
 						</div>
-						<div className="flex justify-center w-full gap-10 mt-5">
+
+						<div className="flex justify-center w-full gap-10 pt-5">
 							<AppButton variant="outline" className="w-1/2" onClick={close} disabled={isLoading}>
 								Cancel
 							</AppButton>
-							<AppButton
-								variant="destructive"
-								className="w-1/2 text-white"
-								onClick={submit}
-								isLoading={isLoading}
-							>
-								Reject
+							<AppButton variant="primary" className="w-1/2" onClick={submit} isLoading={isLoading}>
+								Approve
 							</AppButton>
 						</div>
 					</div>

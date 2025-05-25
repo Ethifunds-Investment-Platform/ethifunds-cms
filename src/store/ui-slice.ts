@@ -5,6 +5,8 @@ type DialogType =
 	| "approve_offer"
 	| "counter_offer"
 	| "reject_offer"
+	| "reject_listing"
+	| "approve_listing"
 	| "listing_details"
 	| "success_dialog"
 	| "new_admin"

@@ -15,16 +15,29 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ValueType } from "recharts/types/component/DefaultTooltipContent";
 import useAppSelectors from "@/store/use-app-selectors";
 import capitalize from "@/lib/capitalize";
+import FilterByYear from "@/components/table-filters/filter-by-year";
+import useCustomNavigation from "@/hooks/use-navigation";
 
 export function InvestmentAllocation() {
 	const { currency } = useAppSelectors("account");
 	const [allocations, setAllocations] = React.useState<Record<string, number>>({});
+	const { queryParams } = useCustomNavigation();
+	
+	const year = React.useMemo(
+		() => queryParams.get("year") || new Date().getFullYear().toString(),
+		[queryParams]
+	);
+	
 
-	const { isFetching, isError, error } = useQuery(["investment"], () => getInvestmentAllocation(), {
+	const { isFetching, isError, error } = useQuery(["investment-allocation", year], () => getInvestmentAllocation({year}), {
 		onSuccess(data) {
 			setAllocations(data);
 		},
 	});
+
+	const handleSelect = (value: string) => {
+		queryParams.set("year", value);
+	};
 
 	const chartData = Object.entries(allocations).map(([Key, value]) => ({
 		category: capitalize(Key),
@@ -47,12 +60,16 @@ export function InvestmentAllocation() {
 				loadingComponent={<Skeleton className="h-80" />}
 			>
 				<Card className="">
-					<CardHeader>
-						<CardTitle>Investment Allocation</CardTitle>
-						<CardDescription>
-							Overview of investment allocation performance over time.
-						</CardDescription>
-						<small className="caption-accent text-neutral-700">Amount({currency.sign})</small>
+					<CardHeader className="flex flex-row items-center justify-between w-full">
+						<div>
+							<CardTitle>Investment Allocation</CardTitle>
+							<CardDescription>
+								Overview of investment allocation performance over time.
+							</CardDescription>
+							<small className="caption-accent text-neutral-700">Amount({currency.sign})</small>
+						</div>
+						
+						<FilterByYear name="year" value={year} onchange={handleSelect} />
 					</CardHeader>
 					<CardContent>
 						<ChartContainer config={chartConfig}>

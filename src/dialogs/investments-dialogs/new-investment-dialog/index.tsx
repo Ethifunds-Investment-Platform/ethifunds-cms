@@ -18,7 +18,23 @@ export default React.memo(function NewInvestmentDialog() {
 		closeDrawer,
 		toggleDrawer,
 		showPreview,
+		currency,
+		categories,
 	} = useNewInvestment();
+
+	const items = React.useMemo(() => {
+		const excludedFields = ["product_label", "product_section"];
+		const product_category_id = Number(formData.product_category_id);
+		const isEthivest =
+			product_category_id > 0
+				? categories.find((item) => item.name.toLowerCase().includes("ethivest"))?.id ===
+				  product_category_id
+				: false;
+		if (isEthivest) {
+			return formFields.filter((item) => !excludedFields.includes(item.name));
+		}
+		return formFields;
+	}, [formData.product_category_id, categories]);
 
 	return (
 		<AppDrawer
@@ -38,21 +54,22 @@ export default React.memo(function NewInvestmentDialog() {
 					</AppButton>
 
 					<AppButton variant="primary" isLoading={isLoading} onClick={showPreview}>
-						Preview Changes
+						Preview
 					</AppButton>
 				</div>
 			}
 			className="overflow-y-auto hideScrollbar"
 		>
-			<div className="mt-5 flex h-full flex-col space-y-5 overflow-auto px-5">
+			<div className="flex flex-col h-full px-5 mt-5 space-y-5 overflow-auto">
 				<span className="content-standard text-neutral-500">
 					Please update the investment details below.
 				</span>
 
-				<form className="space-y-3 pb-3">
-					{formFields.map((item) => {
+				<form className="pb-3 space-y-3">
+					{items.map((item) => {
 						const defaultValue = formData[item.name as keyof typeof formData];
-
+						const currencyFields = ["funding_goal", "unit_price"];
+						const isCurrencyField = currencyFields.includes(item.name);
 						if (item.type === "select") {
 							if (item.name === "product_category_id") {
 								return (
@@ -111,7 +128,6 @@ export default React.memo(function NewInvestmentDialog() {
 									onChange={(e) => updateForm(item.name as any, new Date(e).toISOString())}
 									triggerStyle="w-full "
 									disabled={isLoading}
-								
 								/>
 							);
 						}
@@ -119,6 +135,7 @@ export default React.memo(function NewInvestmentDialog() {
 							<Input
 								{...item}
 								key={item.name}
+								label={isCurrencyField ? `${item.label} (${currency.sign}) ` : item.label}
 								value={defaultValue?.toString()}
 								onChange={(e) => updateForm(item.name as any, e)}
 								disabled={isLoading}

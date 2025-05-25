@@ -58,24 +58,24 @@ export default React.memo(function ListingDetailsDialog() {
 	};
 
 	return (
-		<PopupModal handleClose={close} open={open} className="relative w-full lg:w-1/2 h-96 p-8">
+		<PopupModal handleClose={close} open={open} className="relative w-full p-8 overflow-auto lg:w-1/2 h-96" showCloseBtn>
 			<ErrorBoundary>
 				<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
 					<button
 						onClick={close}
-						className="absolute top-0 right-0 lg:-top-8 lg:-right-8 flex items-center justify-center size-8 p-2 rounded-full bg-white"
+						className="absolute top-0 right-0 flex items-center justify-center p-2 bg-white rounded-full lg:-top-8 lg:-right-8 size-8"
 					>
 						<X color="#908b8b" />
 					</button>
-					<div className="flex flex-col gap-10">
+					<div className="flex flex-col gap-5">
 						<h1 className="highlight-standard text-neutral-1000">Listing Details</h1>
 
-						<div className="space-y-5 rounded-lg border bg-neutral-50 p-3">
+						<div className="p-3 space-y-3 border rounded-lg bg-neutral-50">
 							{Object.entries(details).map(([key, value]) => {
 								return (
 									<div
 										key={key}
-										className="caption-standard flex items-center justify-between capitalize text-neutral-700"
+										className="flex items-center justify-between capitalize caption-standard text-neutral-700"
 									>
 										<span className="w-full">{key.split("_").join(" ")} </span>
 										<span className="w-full">{value}</span>

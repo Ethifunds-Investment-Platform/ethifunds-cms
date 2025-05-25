@@ -2,17 +2,16 @@ import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import useActions from "@/store/actions";
 import { CheckCircle } from "lucide-react";
 
-type ApproveOfferProps = {
+type ApproveListingProps = {
 	id: string;
-	setIsLoading(state: boolean): void;
 };
-export default function ApproveOffer(props: ApproveOfferProps) {
+export default function ApproveListing(props: ApproveListingProps) {
 	const { ui } = useActions();
 
 	const approve = () => {
 		ui.changeDialog({
 			show: true,
-			type: "approve_offer",
+			type: "approve_listing",
 			id: props.id,
 		});
 	};
@@ -21,7 +20,7 @@ export default function ApproveOffer(props: ApproveOfferProps) {
 		<DropdownMenuItem>
 			<button onClick={approve} className="flex items-center gap-2">
 				<CheckCircle className="text-primary" />
-				Approve Offer
+				Approve Listing
 			</button>
 		</DropdownMenuItem>
 	);

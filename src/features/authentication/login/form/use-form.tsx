@@ -31,7 +31,7 @@ export default function useForm() {
 	const { setCookie } = useCookie(variables.STORAGE.session, "");
 
 	const { account } = useActions();
-	const { navigate } = useCustomNavigation();
+	const { navigate, queryParams } = useCustomNavigation();
 
 	const sanitizePayload = (): FormData => {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -64,6 +64,10 @@ export default function useForm() {
 	const submit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setIsLoading(true);
+
+		const redirect = queryParams.get("redirect");
+		const path = redirect ? redirect : "/dashboard";
+
 		try {
 			const formValues = validate.parse(sanitizePayload());
 
@@ -76,7 +80,7 @@ export default function useForm() {
 				handleRememberMe();
 			}
 
-			return navigate("/dashboard");
+			return navigate(path);
 		} catch (error) {
 			const errMsg = ensureError(error);
 			setErrorMsg(errMsg.message);

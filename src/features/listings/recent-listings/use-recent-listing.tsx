@@ -8,7 +8,7 @@ export default function useRecentListing() {
 	const { currency } = useAppSelector((state) => state.account);
 	const { queryParams } = useCustomNavigation();
 	const hasQuery = queryParams.has("status");
-	const query = useQuery(["recent-listing"], () => getRecentListing({}));
+	const query = useQuery(["recent-listing", "listings"], () => getRecentListing({}));
 
 	useMemo(() => {
 		if (!hasQuery && query.isFetched) {

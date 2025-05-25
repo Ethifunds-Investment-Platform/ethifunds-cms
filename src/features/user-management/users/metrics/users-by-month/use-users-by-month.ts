@@ -11,7 +11,7 @@ export default function useUsersByMonth() {
 	const year = queryParams.get("year") || new Date().getFullYear().toString();
 
 	const { isFetching, isError, error } = useQuery(
-		["users-by-months"],
+		["users-by-months", year],
 		() => getUsersByMonth({ year }),
 		{
 			onSuccess(data) {
@@ -32,12 +32,6 @@ export default function useUsersByMonth() {
 		},
 	} satisfies ChartConfig;
 
-	const currentYear = new Date().getFullYear();
-	const selectOptions = Array.from({ length: currentYear - 2024 + 1 }, (_, i) => ({
-		title: (2025 + i).toString(),
-		value: (2025 + i).toString(),
-	}));
-
 	const handleSelect = (value: string) => {
 		const year = parseInt(value, 10);
 		queryParams.set("year", year.toString());
@@ -49,8 +43,6 @@ export default function useUsersByMonth() {
 		error,
 		chartData,
 		chartConfig,
-		selectOptions,
-		currentYear,
 		users,
 		year,
 		setUsers,

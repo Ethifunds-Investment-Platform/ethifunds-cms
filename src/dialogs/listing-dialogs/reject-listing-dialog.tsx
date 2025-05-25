@@ -1,27 +1,31 @@
 import AppButton from "@/components/app-button";
 import ErrorBoundary from "@/components/error-boundary";
+import Render from "@/components/render";
+import { Checkbox } from "@/components/ui/checkbox";
+import Textarea from "@/components/ui/form-input/textarea";
 import { PopupModal } from "@/components/ui/modal";
 import ensureError from "@/lib/ensure-error";
-import acceptRejectOffer from "@/services/listing/accept-reject-offer";
 import getListingDetails from "@/services/listing/get-listing-details";
+import approveRejectListing from "@/services/listing/approve-reject-listing";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
-import { useQuery, useQueryClient } from "react-query";
 import * as React from "react";
+import { useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
-import Render from "@/components/render";
 
-export default React.memo(function RejectOfferDialog() {
+export default React.memo(function RejectListingDialog() {
 	const { dialog } = useAppSelector((state) => state.ui);
+	const [reason, setReasons] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false);
+	const [checked, setChecked] = React.useState(false);
 	const { currency } = useAppSelector((state) => state.account);
+
+	const queryClient = useQueryClient();
 
 	const { ui } = useActions();
 	const id = dialog.id;
-	
-	const queryClient = useQueryClient();
 
-	const { data, isFetching, isError, error } = useQuery(["reject-offer", id], () =>
+	const { data, isFetching, isError, error } = useQuery(["reject-listing", id], () =>
 		getListingDetails({ id })
 	);
 
@@ -43,24 +47,33 @@ export default React.memo(function RejectOfferDialog() {
 	};
 
 	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "reject_offer";
+		return dialog.show && dialog.type === "reject_listing";
 	}, [dialog.show, dialog.type]);
 
+	const toggleChecked = (val: boolean) => {
+		setChecked(val);
+	};
 	const close = () => {
 		if (isLoading) return;
+		setReasons("");
+		setChecked(false);
 		ui.resetDialog();
 	};
 
+	const updateReason = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		setReasons(e.target.value);
+	};
 	const submit = async () => {
 		if (!id) return toast.error("Listing ID is required");
 		setIsLoading(true);
 		try {
-			await acceptRejectOffer({
+			await approveRejectListing({
 				listing_id: id,
 				status: "rejected",
+				reason: reason,
+				flag_listing: checked,
 			});
 			showSuccessDialog();
-			
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);
@@ -69,25 +82,24 @@ export default React.memo(function RejectOfferDialog() {
 		}
 	};
 
+	const showSuccessDialog = () => {
+		const text =
+			"You have successfully rejected this offer, parties involved would be notified shortly.";
 
-		const showSuccessDialog = () => {
-			const text =
-				"You have successfully rejected this offer, parties involved would be notified shortly.";
-
-			const data = {
-				title: "Congratulations!!!",
-				subtitle: text,
-			};
-
-			ui.changeDialog({
-				show: true,
-				type: "success_dialog",
-				data,
-				dismiss: () => {
-					queryClient.invalidateQueries(["listings"]);
-				},
-			});
+		const data = {
+			title: "Congratulations!!!",
+			subtitle: text,
 		};
+
+		ui.changeDialog({
+			show: true,
+			type: "success_dialog",
+			data,
+			dismiss: () => {
+				queryClient.invalidateQueries(["listings"]);
+			},
+		});
+	};
 
 	return (
 		<PopupModal
@@ -99,9 +111,7 @@ export default React.memo(function RejectOfferDialog() {
 			<ErrorBoundary>
 				<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
 					<div className="flex flex-col gap-3">
-						<h1 className="feature-accent text-neutral-1000">Reject offer</h1>
-
-						<p className="text-neutral-1000">Are you sure you want to reject this offer?</p>
+						<h1 className="feature-accent text-neutral-1000">Listing Details</h1>
 
 						<div className="p-3 space-y-5 border rounded-lg bg-neutral-50">
 							{Object.entries(details).map(([key, value]) => {
@@ -116,7 +126,23 @@ export default React.memo(function RejectOfferDialog() {
 								);
 							})}
 						</div>
-						<div className="flex justify-center w-full gap-10 mt-5">
+						<h1 className="caption-accent text-neutral-1000">Reason for Rejection</h1>
+
+						<div className="p-3 space-y-5">
+							<Textarea
+								rows={5}
+								placeholder="write reason for rejection"
+								onChange={updateReason}
+								disabled={isLoading}
+							/>
+
+							<div className="flex items-center gap-2">
+								<Checkbox checked={checked} onCheckedChange={toggleChecked} disabled={isLoading} />
+								<span className="caption-standard text-neutral-700">Flag Listing</span>
+							</div>
+						</div>
+
+						<div className="flex justify-center w-full gap-10">
 							<AppButton variant="outline" className="w-1/2" onClick={close} disabled={isLoading}>
 								Cancel
 							</AppButton>

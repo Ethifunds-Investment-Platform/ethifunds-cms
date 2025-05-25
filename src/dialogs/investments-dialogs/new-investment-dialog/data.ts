@@ -23,14 +23,19 @@ export const formFields: FORM_FIELDS[] = [
 		type: "text",
 		label: "Product Label",
 		placeholder: "Enter product label",
-		required: true,
+		required: false,
 	},
 	{
 		name: "product_section",
-		type: "text",
+		type: "select",
 		label: "Product Section",
-		placeholder: "enter section",
-		required: true,
+		placeholder: "Select section",
+		options: [
+			{ title: "SME Financing", value: "sme_financing" },
+			{ title: "Asset Financing", value: "asset_financing" },
+			{ title: "LPO Financing", value: "lpo_financing" },
+		],
+		required: false,
 	},
 	{
 		name: "description",

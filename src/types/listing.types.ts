@@ -28,7 +28,7 @@ export type Listing = {
 	counter_price_per_unit: string;
 	total_price: string;
 	sale_option: SaleOption;
-	status: string;
+	status: Status;
 	created_at: string;
 	updated_at: string;
 };

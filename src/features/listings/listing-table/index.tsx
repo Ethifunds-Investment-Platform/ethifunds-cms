@@ -74,7 +74,11 @@ export default function ListingTable(props: TableProps) {
 
 							<TableCell className={statusClx}>{item.status}</TableCell>
 							<TableCell>
-								<TableActions id={item.id.toString()} sale_option={item.sale_option} />
+								<TableActions
+									id={item.id.toString()}
+									sale_option={item.sale_option}
+									hide_actions={item.status === "rejected" || item.status === "approved"}
+								/>
 							</TableCell>
 						</TableRow>
 					);

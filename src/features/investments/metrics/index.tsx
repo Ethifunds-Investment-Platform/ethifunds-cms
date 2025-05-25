@@ -7,11 +7,11 @@ export default function Metrics() {
 	return (
 		<div className="space-y-5">
 			<Counters />
-			<div className="flex justify-between gap-5 flex-wrap lg:flex-nowrap">
-				<div className="lg:w-3/5  w-full">
+			<div className="flex flex-wrap justify-between gap-5 lg:flex-nowrap">
+				<div className="w-full lg:w-3/5">
 					<InvestmentByUnits />
 				</div>
-				<div className="lg:w-2/5 w-full">
+				<div className="w-full lg:w-2/5">
 					<TopInvestments />
 				</div>
 			</div>

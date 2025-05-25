@@ -96,8 +96,8 @@ export type NewInvestmentPayload = {
 	product_category_id: number;
 	display_image: File;
 	account_id: number;
-	product_label: string;
-	product_section: string;
+	product_label?: string;
+	product_section?: string;
 	description: string;
 	tenor_unit: string;
 	tenor_value: number;

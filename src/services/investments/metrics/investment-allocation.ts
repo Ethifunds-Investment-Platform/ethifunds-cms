@@ -1,5 +1,6 @@
 import { variables } from "@/constants";
 import axios from "@/lib/axios";
+import buildQueryString from "@/lib/build-query-string";
 import { generateDigits } from "@/lib/generate-digits";
 
 type Response = {
@@ -8,8 +9,12 @@ type Response = {
 	ethicoop: number;
 };
 
-export async function production(): Promise<Response> {
-	const response = await axios.post(`/investments/allocation-metrics`);
+type Parameters = {
+	year: string;
+};
+export async function production(data: Parameters): Promise<Response> {
+	const query = buildQueryString(data);
+	const response = await axios.post(`/investments/allocation-metrics?${query}`);
 
 	return response.data.data;
 }
@@ -28,8 +33,8 @@ export async function development(): Promise<Response> {
 	});
 }
 
-export default async function getInvestmentAllocation(): Promise<Response> {
+export default async function getInvestmentAllocation(data: Parameters): Promise<Response> {
 	if (variables.NODE_ENV === "development") return development();
 
-	return production();
+	return production(data);
 }

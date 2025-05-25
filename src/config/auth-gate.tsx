@@ -15,21 +15,29 @@ export default React.memo(function AuthGate({ children }: { children: React.Reac
 	const { cookie: authToken, deleteCookie } = useCookie(variables.STORAGE.session, "");
 	const { cookie: remember_me } = useCookie(variables.STORAGE.remember_me, false);
 	const { account } = useActions();
-	const { navigate } = useCustomNavigation();
+	const {location, navigate } = useCustomNavigation();
 
 	const INACTIVITY_LIMIT = variables.INACTIVE_LIMIT * 60 * 1000;
 
-	const logout = React.useCallback(async () => {
+	const logout = React.useCallback(async (autoLogout = false) => {
 		await logoutAccount();
 		if (!remember_me) {
 			deleteCookie();
 		}
+
+		if (autoLogout) {
+			const path = `/?redirect=${location.pathname}${location.search}`;
+			navigate(path);
+			return;
+		}
+
 		navigate("/");
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const autoLogout = React.useCallback(() => {
-		logout();
+		logout(true);
 	}, [logout]);
 
 	const resetTimer = React.useCallback(() => {

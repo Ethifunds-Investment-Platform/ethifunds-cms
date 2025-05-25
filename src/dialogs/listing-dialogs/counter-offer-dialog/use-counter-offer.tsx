@@ -5,7 +5,7 @@ import getListingDetails from "@/services/listing/get-listing-details";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
 
 export default function useCounterOffer() {
@@ -15,6 +15,7 @@ export default function useCounterOffer() {
 	const { dialog } = useAppSelector((state) => state.ui);
 	const id = dialog.id;
 
+	const queryClient = useQueryClient();
 	const { ui } = useActions();
 
 	const open = React.useMemo(() => {
@@ -83,7 +84,7 @@ export default function useCounterOffer() {
 
 	const showSuccessDialog = () => {
 		const text =
-			"You have successfully Approved this Listing, parties involved would be notified shortly.";
+			"You have successfully Placed an counter offer for this Listing, parties involved would be notified shortly.";
 
 		const data = {
 			title: "Congratulations!!!",
@@ -91,8 +92,7 @@ export default function useCounterOffer() {
 		};
 
 		const dismiss = () => {
-			ui.resetDialog();
-			reset();
+			queryClient.invalidateQueries(["listings"]);
 		};
 		ui.changeDialog({
 			show: true,

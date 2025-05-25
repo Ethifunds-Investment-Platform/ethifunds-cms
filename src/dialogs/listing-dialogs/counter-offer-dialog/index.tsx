@@ -27,15 +27,15 @@ export default React.memo(function CounterOfferDialog() {
 
 	return (
 		<PopupModal
-			handleClose={close}
+			handleClose={reset}
 			open={open}
-			className="relative w-full lg:w-1/2 h-full p-8 overflow-auto"
+			className="relative w-full h-full p-8 overflow-auto lg:w-1/2"
 		>
 			<ErrorBoundary>
 				<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
 					<button
-						onClick={close}
-						className="absolute top-0 right-0 lg:-top-8 lg:-right-8 flex items-center justify-center size-8 p-2 rounded-full bg-white"
+						onClick={reset}
+						className="absolute top-0 right-0 flex items-center justify-center p-2 bg-white rounded-full lg:-top-8 lg:-right-8 size-8"
 					>
 						<X color="#908b8b" />
 					</button>
@@ -43,12 +43,12 @@ export default React.memo(function CounterOfferDialog() {
 						<h1 className="highlight-standard text-neutral-1000">Create Counter Offer</h1>
 						<span>Use the form below to buy units from other in this investment.</span>
 
-						<div className="space-y-5 rounded-lg border bg-neutral-50 p-3">
+						<div className="p-3 space-y-5 border rounded-lg bg-neutral-50">
 							{Object.entries(details).map(([key, value]) => {
 								return (
 									<div
 										key={key}
-										className="caption-standard flex items-center justify-between capitalize text-neutral-700"
+										className="flex items-center justify-between capitalize caption-standard text-neutral-700"
 									>
 										<span className="w-full">{key.split("_").join(" ")} </span>
 										<span className="w-full">{value}</span>
@@ -75,7 +75,7 @@ export default React.memo(function CounterOfferDialog() {
 							/>
 						</div>
 
-						<div className="w-full flex justify-center gap-10 pt-5">
+						<div className="flex justify-center w-full gap-10 pt-5">
 							<AppButton variant="outline" className="w-1/2" onClick={reset} disabled={isLoading}>
 								Cancel
 							</AppButton>

@@ -13,7 +13,7 @@ export default function RecentSavingsTransactions(props: SavingsTransactionsProp
 	const { currency } = useAppSelector((state) => state.account);
 	const { params } = useCustomNavigation();
 
-	const savings_id = params.saving_id;
+	const savings_id = params.savings_id;
 
 	const sign = currency.sign;
 	const data = props.data;
@@ -24,13 +24,13 @@ export default function RecentSavingsTransactions(props: SavingsTransactionsProp
 				<div className="flex items-center justify-between px-1">
 					<h1 className="highlight-accent text-neutral-1000">Recent Savings Transactions </h1>
 					{data && data?.length > 0 && (
-						<Link to={`/savings/${savings_id}/transactions`} className="text-primary underline">
+						<Link to={`/savings/${savings_id}/transactions`} className="underline text-primary">
 							View All
 						</Link>
 					)}
 				</div>
 
-				<div className="h-full max-h-96 min-h-60 overflow-auto">
+				<div className="h-full overflow-auto max-h-96 min-h-60">
 					<SavingsTransactionTable data={data ?? []} isEmpty={!data?.length} sign={sign} />
 				</div>
 			</ErrorBoundary>

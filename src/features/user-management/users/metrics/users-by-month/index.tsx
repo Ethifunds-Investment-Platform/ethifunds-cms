@@ -5,12 +5,11 @@ import ErrorBoundary from "@/components/error-boundary";
 import Render from "@/components/render";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ValueType } from "recharts/types/component/DefaultTooltipContent";
-
-import SelectBox from "@/components/select-box";
 import useUsersByMonth from "./use-users-by-month";
+import FilterByYear from "@/components/table-filters/filter-by-year";
 
 export function UsersByMonth() {
-	const { isFetching, isError, error, chartData, chartConfig, selectOptions, year, handleSelect } =
+	const { isFetching, isError, error, chartData, chartConfig, year, handleSelect } =
 		useUsersByMonth();
 
 	return (
@@ -27,12 +26,12 @@ export function UsersByMonth() {
 							<div>
 								<CardTitle>Users By Months</CardTitle>
 								<CardDescription>
-									A graphical representation of Account created by mouths
+									A graphical representation of Account created by months
 								</CardDescription>
 								<small className="caption-accent text-neutral-700">Count</small>
 							</div>
 
-							<SelectBox name="year" options={selectOptions} onchange={handleSelect} value={year} />
+							<FilterByYear name="year" value={year} onchange={handleSelect} />
 						</div>
 					</CardHeader>
 					<CardContent>
