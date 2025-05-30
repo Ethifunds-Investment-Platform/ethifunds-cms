@@ -4,7 +4,7 @@ import getSavings from "@/services/savings/get-savings";
 
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useSavingsHistory() {
 	const { currency } = useAppSelector((state) => state.account);

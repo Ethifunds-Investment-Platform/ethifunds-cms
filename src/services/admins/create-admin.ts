@@ -15,7 +15,7 @@ type Parameters = {
 type Response = Admin;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/admins/create`, data);
+	const response = await axios.post(`/create`, data);
 
 	return response.data.data;
 }

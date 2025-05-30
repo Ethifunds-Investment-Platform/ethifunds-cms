@@ -11,7 +11,7 @@ type Response = TopInvestment[];
 
 export async function production(data: Parameters): Promise<Response> {
 	const query = `category_id=${data.category_id}`;
-	const response = await axios.post(
+	const response = await axios.get(
 		`/investments/top-investments?${data.category_id ? query : ""}`
 	);
 

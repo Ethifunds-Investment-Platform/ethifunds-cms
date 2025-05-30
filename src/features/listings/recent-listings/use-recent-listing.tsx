@@ -2,7 +2,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import getRecentListing from "@/services/listing/get-recent-listing";
 import { useAppSelector } from "@/store/hooks";
 import { useMemo } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useRecentListing() {
 	const { currency } = useAppSelector((state) => state.account);

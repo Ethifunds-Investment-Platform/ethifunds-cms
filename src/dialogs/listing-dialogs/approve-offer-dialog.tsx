@@ -8,7 +8,7 @@ import getListingDetails from "@/services/listing/get-listing-details";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export default React.memo(function ApproveOfferDialog() {
@@ -20,8 +20,16 @@ export default React.memo(function ApproveOfferDialog() {
 	const id = dialog.id;
 	const queryClient = useQueryClient();
 
-	const { data, isFetching, isError, error } = useQuery(["approve-offer", id], () =>
-		getListingDetails({ id })
+	const open = React.useMemo(() => {
+		return dialog.show && dialog.type === "approve_offer";
+	}, [dialog.show, dialog.type]);
+
+	const { data, isFetching, isError, error } = useQuery(
+		["approve-offer", id],
+		() => getListingDetails({ id }),
+		{
+			enabled: open,
+		}
 	);
 
 	const getDate = (date: string) =>
@@ -40,10 +48,6 @@ export default React.memo(function ApproveOfferDialog() {
 		).toLocaleString()}`,
 		interest_rate: `${data?.product.expected_roi}%`,
 	};
-
-	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "approve_offer";
-	}, [dialog.show, dialog.type]);
 
 	const close = () => {
 		if (isLoading) return;
@@ -81,7 +85,7 @@ export default React.memo(function ApproveOfferDialog() {
 			type: "success_dialog",
 			data,
 			dismiss: () => {
-				queryClient.invalidateQueries(["listings"]);
+				queryClient.invalidateQueries({ queryKey: ["listings", "recent-listing"] });
 			},
 		});
 	};

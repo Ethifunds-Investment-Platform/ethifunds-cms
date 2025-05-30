@@ -1,4 +1,3 @@
-import ExportFilter from "@/components/table-filters/export-filter";
 import { DateFilter } from "@/components/table-filters/date-filter";
 import StatusFilter from "@/components/table-filters/status-filter";
 
@@ -27,7 +26,7 @@ export default function TableFilters(props: FilterProps) {
 			{/* <TransactionTypeFilter {...props} /> */}
 			{/* <CurrencyFilter {...props} /> */}
 			<StatusFilter {...props} statusList={options} />
-			<ExportFilter {...props} url="" />
+			{/* <ExportFilter {...props} url="" /> */}
 			<DateFilter {...props} />
 		</div>
 	);

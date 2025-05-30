@@ -9,7 +9,7 @@ import useAppSelectors from "@/store/use-app-selectors";
 import * as React from "react";
 import { toast } from "sonner";
 import { z } from "zod";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import getInvestmentCategories from "@/services/investments/get-investment-categories";
 import blobReader, { generatePreview } from "@/lib/blob-reader";
 import createInvestment from "@/services/investments/create-investment";

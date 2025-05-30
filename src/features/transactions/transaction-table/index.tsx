@@ -7,10 +7,10 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { amountSeparator } from "@/lib/amount-separator";
-import TableActions from "./table-actions";
 import EmptyTransactions from "@/components/prompts/empty-transactions";
 import classNames from "classnames";
 import { Transaction } from "@/types/transaction.types";
+import useActions from "@/store/actions";
 
 type TableProps = {
 	data: Transaction[];
@@ -18,7 +18,16 @@ type TableProps = {
 	isEmpty: boolean;
 };
 export default function TransactionTable(props: TableProps) {
+	const { ui } = useActions();
 	if (props.isEmpty) return <EmptyTransactions />;
+
+	const approveDialog = (id: string) => {
+		ui.changeDialog({
+			show: true,
+			type: "approve_transaction",
+			id,
+		});
+	};
 
 	return (
 		<Table>
@@ -42,6 +51,7 @@ export default function TransactionTable(props: TableProps) {
 						"text-primary-500": item.status === "pending",
 						"text-error-200": item.status === "failed",
 					});
+
 					return (
 						<TableRow
 							key={item.id}
@@ -69,8 +79,16 @@ export default function TransactionTable(props: TableProps) {
                 {props.sign} {amountSeparator(item.fee)}
               </TableCell> */}
 							<TableCell className={statusClx}>{item.status}</TableCell>
-							<TableCell>
-								<TableActions id={item.id.toString()} />
+
+							{/* <TableActions id={item.id.toString()} /> */}
+
+							<TableCell className="text-">
+								<button
+									className=" bg-gray-100/25 border py-1 rounded-md button hover:!bg-slate-100 transition-colors"
+									onClick={() => approveDialog(item.id.toString())}
+								>
+									Approve
+								</button>
 							</TableCell>
 						</TableRow>
 					);

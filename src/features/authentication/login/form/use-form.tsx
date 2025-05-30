@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const validate = z.object({
-	email: z.string().trim().toLowerCase().email().optional(),
+	email: z.string().trim().toLowerCase().email({ message: "Invalid email address, enter a valid email" }).optional(),
 	username: z.string().trim().min(3, "username must be at least 3 characters long").optional(),
 	password: z.string().trim().min(1, "Password is required"),
 });
@@ -71,7 +71,7 @@ export default function useForm() {
 		try {
 			const formValues = validate.parse(sanitizePayload());
 
-			const response = await loginAccount(formValues);
+			const response = await loginAccount({login:formValues.email, password:formData.password});
 			account.changeAccount(response.user);
 			account.changeToken(response.token);
 			setCookie(response.token);

@@ -11,7 +11,7 @@ type Response = SavingsByAmount;
 
 export async function production(data: Parameters): Promise<Response> {
 	const query = `savings_id=${data.savings_id}`;
-	const response = await axios.post(`/savings/savings-by-amount?${data.savings_id ? query : ""}`);
+	const response = await axios.get(`/savings/savings-by-amount?${data.savings_id ? query : ""}`);
 
 	return response.data.data;
 }

@@ -1,6 +1,6 @@
 import AppContainer from "@/components/container/container";
 import RecentSavingsTransactions from "./recent-savings-transactions";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import useCustomNavigation from "@/hooks/use-navigation";
 import getSavingsDetails from "@/services/savings/get-savings-details";
 import Render from "@/components/render";
@@ -29,7 +29,7 @@ export default function SavingsDetails() {
 
 	return (
 		<AppContainer className="space-y-5">
-			<SavingsInfo isFetching={isFetching} isError={isError} error={error} data={data} />
+			<SavingsInfo isFetching={isFetching} isError={isError} error={error} data={data?.savings} />
 
 			<Render isLoading={isFetching} isError={isError} error={error}>
 				<RecentSavingsTransactions data={data?.recent_transactions ?? []} />

@@ -1,7 +1,7 @@
 import EmptyData from "@/components/empty-data";
 import ErrorBoundary from "@/components/error-boundary";
 import Render from "@/components/render";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import ListingTrendCard from "./listing-trend-card";
 import useAppSelectors from "@/store/use-app-selectors";
 import { Skeleton } from "@/components/ui/skeleton";

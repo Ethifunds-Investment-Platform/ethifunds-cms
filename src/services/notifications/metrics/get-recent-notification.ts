@@ -6,7 +6,7 @@ import { Notification } from "@/types/notification.types";
 type Response = Notification[];
 
 export async function production(): Promise<Response> {
-	const response = await axios.get(`/notifications/recent-investments`);
+	const response = await axios.get(`/notifications/recent-notifications`);
 
 	return response.data.data;
 }

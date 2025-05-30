@@ -1,7 +1,7 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import getRecentUsers from "@/services/users/get-recent-users";
 import { useMemo } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useRecentUsers() {
 	const { queryParams } = useCustomNavigation();

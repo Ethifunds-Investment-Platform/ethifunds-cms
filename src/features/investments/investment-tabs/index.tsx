@@ -1,7 +1,7 @@
 import useUi from "@/hooks/use-ui";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useCustomNavigation from "@/hooks/use-navigation";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import getInvestmentCategories from "@/services/investments/get-investment-categories";
 import Render from "@/components/render";
 import Overview from "./overview";

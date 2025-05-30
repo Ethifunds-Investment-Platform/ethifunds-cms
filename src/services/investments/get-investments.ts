@@ -10,7 +10,7 @@ type Parameters = Partial<PaginationQuery> & {};
 type Response = PaginatedResponse<InvestmentProduct>;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.get(`/Investments${data.query_string}`);
+	const response = await axios.get(`/investments${data.query_string}`);
 	return paginate(response.data.data);
 }
 

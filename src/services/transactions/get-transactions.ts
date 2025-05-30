@@ -12,6 +12,7 @@ type Response = PaginatedResponse<Transaction>;
 
 export async function production(data: Parameters): Promise<Response> {
 	const response = await axios.get(`/transactions${data.query_string}`);
+	console.log(response.data.data);
 	return paginate(response.data.data);
 }
 

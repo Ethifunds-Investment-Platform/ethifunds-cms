@@ -11,7 +11,7 @@ type Parameters = {
 type Response = Listing;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.get(`/listings/${data.id}`);
+	const response = await axios.get(`/listing/${data.id}`);
 	return response.data.data;
 }
 

@@ -9,7 +9,7 @@ type Response = {
 	amount_disbursed: number;
 };
 export async function production(): Promise<Response> {
-	const response = await axios.post(`/savings/metrics`);
+	const response = await axios.get(`/savings/metrics`);
 
 	return response.data.data;
 }

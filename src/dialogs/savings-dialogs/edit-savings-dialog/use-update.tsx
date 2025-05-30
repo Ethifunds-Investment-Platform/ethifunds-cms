@@ -4,7 +4,7 @@ import useAppSelectors from "@/store/use-app-selectors";
 import * as React from "react";
 import { toast } from "sonner";
 import { z } from "zod";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import getSavingsDetails from "@/services/savings/get-savings-details";
 import updateSavings from "@/services/savings/update-savings";
 
@@ -42,12 +42,12 @@ export default function useUpdate() {
 		{
 			enabled: open,
 			onSuccess(data) {
-				console.log(data, data.roi.split("%")[0]);
+				
 				setFormData({
-					start_date: data.start_date,
-					roi: data.roi,
-					min_amount: data.min_amount,
-					max_amount: data.max_amount,
+					start_date: data?.savings?.start_date,
+					roi: data?.savings?.roi,
+					min_amount: data?.savings?.min_amount,
+					max_amount: data?.savings?.max_amount,
 				});
 			},
 		}

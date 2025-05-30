@@ -1,7 +1,7 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import getInvestmentMetrics from "@/services/investments/metrics/investment-metrics";
 
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useCounter() {
 	const { queryParams } = useCustomNavigation();

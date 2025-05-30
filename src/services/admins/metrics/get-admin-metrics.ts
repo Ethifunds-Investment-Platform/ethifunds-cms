@@ -9,7 +9,7 @@ type Response = {
 	suspended_admins: number;
 };
 export async function production(): Promise<Response> {
-	const response = await axios.post(`/admins/metrics`);
+	const response = await axios.get(`/metrics`);
 
 	return response.data.data;
 }

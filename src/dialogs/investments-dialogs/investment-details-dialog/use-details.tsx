@@ -5,7 +5,7 @@ import useActions from "@/store/actions";
 import useAppSelectors from "@/store/use-app-selectors";
 import classNames from "classnames";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useDetails() {
 	const { dialog } = useAppSelectors("ui");

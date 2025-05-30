@@ -14,7 +14,7 @@ type Parameters = {
 type Response = Listing;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/listings/approve-reject`, data);
+	const response = await axios.post(`/listing/approve-reject`, data);
 	return response.data.data;
 }
 

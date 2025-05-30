@@ -3,7 +3,7 @@ import getUserDetails from "@/services/users/get-user-details";
 import { Transaction } from "@/types/transaction.types";
 import { User } from "@/types/user.types";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useOverview() {
 	const [user, setUser] = React.useState<User | null>(null);

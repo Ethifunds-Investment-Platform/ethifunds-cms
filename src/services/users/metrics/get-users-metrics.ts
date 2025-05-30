@@ -10,7 +10,7 @@ type Response = {
 	investors: number;
 };
 export async function production(): Promise<Response> {
-	const response = await axios.post(`/users/metrics`);
+	const response = await axios.get(`/users/metrics`);
 
 	return response.data.data;
 }

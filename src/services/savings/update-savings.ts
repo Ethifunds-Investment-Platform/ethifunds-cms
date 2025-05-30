@@ -8,7 +8,7 @@ type Parameters = UpdateSavingsPayload;
 type Response = Savings;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.patch(`/savings/${data.savings_id}/edit`, data);
+	const response = await axios.post(`/savings/${data.savings_id}/edit`, data);
 	return response.data.data;
 }
 

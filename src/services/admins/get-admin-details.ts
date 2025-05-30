@@ -10,7 +10,7 @@ type Parameters = {
 type Response = Admin;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/admins/${data.user_id}`);
+	const response = await axios.get(`/${data.user_id}`);
 
 	return response.data.data;
 }

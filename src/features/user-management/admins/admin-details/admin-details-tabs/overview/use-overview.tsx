@@ -2,7 +2,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import getAdminDetails from "@/services/admins/get-admin-details";
 import { Admin } from "@/types/admin.types";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useOverview() {
 	const [admin, setAdmin] = React.useState<Admin | null>(null);

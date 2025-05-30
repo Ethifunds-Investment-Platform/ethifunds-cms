@@ -10,7 +10,7 @@ import approveRejectListing from "@/services/listing/approve-reject-listing";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export default React.memo(function RejectListingDialog() {
@@ -25,8 +25,16 @@ export default React.memo(function RejectListingDialog() {
 	const { ui } = useActions();
 	const id = dialog.id;
 
-	const { data, isFetching, isError, error } = useQuery(["reject-listing", id], () =>
-		getListingDetails({ id })
+	const open = React.useMemo(() => {
+		return dialog.show && dialog.type === "reject_listing";
+	}, [dialog.show, dialog.type]);
+
+	const { data, isFetching, isError, error } = useQuery(
+		["reject-listing", id],
+		() => getListingDetails({ id }),
+		{
+			enabled: open,
+		}
 	);
 
 	const getDate = (date: string) =>
@@ -45,10 +53,6 @@ export default React.memo(function RejectListingDialog() {
 		).toLocaleString()}`,
 		interest_rate: `${data?.product.expected_roi}%`,
 	};
-
-	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "reject_listing";
-	}, [dialog.show, dialog.type]);
 
 	const toggleChecked = (val: boolean) => {
 		setChecked(val);
@@ -96,7 +100,7 @@ export default React.memo(function RejectListingDialog() {
 			type: "success_dialog",
 			data,
 			dismiss: () => {
-				queryClient.invalidateQueries(["listings"]);
+				queryClient.invalidateQueries({ queryKey: ["listings", "recent-listing"] });
 			},
 		});
 	};

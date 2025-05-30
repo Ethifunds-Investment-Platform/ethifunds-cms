@@ -20,7 +20,7 @@ type Response = {
 	december: number;
 };
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/users/users-by-month?year=${data.year}`);
+	const response = await axios.get(`/users/users-by-month?year=${data.year}`);
 
 	return response.data.data;
 }

@@ -8,7 +8,8 @@ type Parameters = {
 	savings_id: string;
 };
 
-type Response = Savings & {
+type Response = {
+	savings: Savings;
 	recent_transactions: SavingsTransaction[];
 };
 
@@ -22,7 +23,7 @@ export async function development(): Promise<Response> {
 		setTimeout(
 			() =>
 				resolve({
-					...savings[0],
+					savings: savings[0],
 					recent_transactions: savingsTransactions,
 				}),
 			2000

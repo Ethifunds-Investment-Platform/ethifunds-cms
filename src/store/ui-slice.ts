@@ -12,6 +12,7 @@ type DialogType =
 	| "new_admin"
 	| "investment_details"
 	| "preview_investment"
+	| "approve_transaction"
 	| "create_investment"
 	| "edit_investment"
 	| "create_savings"

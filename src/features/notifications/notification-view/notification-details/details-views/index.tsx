@@ -5,8 +5,16 @@ import NotificationProduct from "./notification-product";
 import NotificationUserInvestment from "./notification-user-investment";
 import NotificationUserSavings from "./notification-user-savings";
 import NotificationInfo from "./notification-info";
+import EmptyData from "@/components/empty-data";
 
 export default React.memo(function DetailsViews(props: Notification) {
+	if (!props.data) {
+		return (
+			<div className="rounded-lg border p-4 flex overflow-auto">
+				<EmptyData title="Nothing to see here" text="Some data anomalies occurred" />
+			</div>
+		);
+	}
 	// Find the key that corresponds to NotificationDataTypes
 	const type = Object.keys(props.data).find((key): key is NotificationDataTypes =>
 		["user_savings", "product", "listing", "user_investment"].includes(key)

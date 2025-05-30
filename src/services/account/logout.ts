@@ -4,7 +4,7 @@ import axios from "@/lib/axios";
 type Response = void;
 
 export async function production(): Promise<Response> {
-  await axios.post(`/auth/logout`);
+  await axios.post(`/logout`);
 }
 
 export async function development(): Promise<Response> {

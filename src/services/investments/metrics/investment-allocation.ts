@@ -14,7 +14,7 @@ type Parameters = {
 };
 export async function production(data: Parameters): Promise<Response> {
 	const query = buildQueryString(data);
-	const response = await axios.post(`/investments/allocation-metrics?${query}`);
+	const response = await axios.get(`/investments/allocation-metrics?${query}`);
 
 	return response.data.data;
 }

@@ -11,6 +11,7 @@ import TableActions from "./table-actions";
 import classNames from "classnames";
 import { Listing } from "@/types/listing.types";
 import EmptyData from "@/components/empty-data";
+import truncate from "@/lib/truncate";
 
 type TableProps = {
 	data: Listing[];
@@ -61,9 +62,13 @@ export default function ListingTable(props: TableProps) {
 									timeStyle: "short",
 								})}
 							</TableCell>
-							<TableCell className="capitalize">{item?.seller_info?.name}</TableCell>
+							<TableCell className="capitalize" title={item?.seller_info?.name}>
+								{truncate(item?.seller_info?.name, 15)}
+							</TableCell>
 							<TableCell className="capitalize">{amountSeparator(item.units)}</TableCell>
-							<TableCell className="capitalize">{item?.product?.name}</TableCell>
+							<TableCell className="capitalize" title={item?.product?.name}>
+								{truncate(item?.product?.name, 20)}
+							</TableCell>
 
 							<TableCell>
 								{props.sign} {amountSeparator(item?.final_price_per_unit)}
@@ -77,7 +82,7 @@ export default function ListingTable(props: TableProps) {
 								<TableActions
 									id={item.id.toString()}
 									sale_option={item.sale_option}
-									hide_actions={item.status === "rejected" || item.status === "approved"}
+									hide_actions={item.status !== "pending"}
 								/>
 							</TableCell>
 						</TableRow>

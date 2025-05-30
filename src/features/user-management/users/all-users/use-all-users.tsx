@@ -2,7 +2,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import { formatSearchString } from "@/lib/build-query-string";
 import getUsers from "@/services/users/get-users";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useAllUsers() {
 	const { location, queryParams } = useCustomNavigation();

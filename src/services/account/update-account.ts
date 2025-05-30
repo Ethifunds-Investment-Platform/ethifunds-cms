@@ -12,7 +12,7 @@ type Parameters = {
 type Response = Admin;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/auth/update-profile`, data);
+	const response = await axios.post(`/update-profile`, data);
 	return response.data;
 }
 

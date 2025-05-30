@@ -30,7 +30,7 @@ export default function AllAdmins() {
 			<Render isLoading={isFetching} isError={isError} error={error}>
 				<div className="flex h-screen flex-col">
 					<div className="grow overflow-auto">
-						<AdminsTable data={data ?? []} isEmpty={!data?.length} />
+						<AdminsTable data={data?.docs ?? []} isEmpty={!data?.docs?.length} />
 					</div>
 				</div>
 			</Render>

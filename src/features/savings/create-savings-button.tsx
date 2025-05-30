@@ -1,6 +1,6 @@
 import AppButton from "@/components/app-button";
 import useActions from "@/store/actions";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import getActiveCycle from "@/services/savings/get-active-cycle";
 import * as React from "react";
 

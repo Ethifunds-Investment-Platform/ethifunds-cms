@@ -1,7 +1,7 @@
 import * as React from "react";
 import useAppSelectors from "@/store/use-app-selectors";
 import { MyInvestmentMarketplaceNotification, Notification,  } from "@/types/notification.types";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { amountSeparator } from "@/lib/amount-separator";
 import getUserById from "@/services/users/get-user-by-id";
 import ensureError from "@/lib/ensure-error";

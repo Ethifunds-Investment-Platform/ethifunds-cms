@@ -13,7 +13,7 @@ export default function NotificationHeader(props: HeaderProps) {
 				<NotificationIcon type={props.type} />
 
 				<h1 className="capitalize content-accent">
-					{props.type.toLowerCase().split("_").join(" ")}{" "}
+					{props?.type?.toLowerCase()?.split("_")?.join(" ")}{" "}
 				</h1>
 			</div>
 				<small className="content-accent text-neutral-700 w-1/3">

@@ -11,6 +11,8 @@ export default function AllTransactions() {
 	const { isFetching, isError, error, data, sign } = useTransactions();
 	const { changeBackBtn } = useUi({});
 
+	console.log(data);
+
 	React.useLayoutEffect(() => {
 		changeBackBtn({
 			show: true,

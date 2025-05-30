@@ -1,7 +1,7 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import getRecentInvestments from "@/services/investments/get-recent-investments";
 import { useAppSelector } from "@/store/hooks";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import * as React from "react";
 
 export default function useRecentInvestment() {

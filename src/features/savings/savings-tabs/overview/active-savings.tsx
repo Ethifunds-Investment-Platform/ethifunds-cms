@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import getActiveCycle from "@/services/savings/get-active-cycle";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import SavingsInfo from "@/features/savings/savings-details/savings-info";
 
 export default function ActiveSavings() {

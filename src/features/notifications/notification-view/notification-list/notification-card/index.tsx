@@ -22,7 +22,7 @@ export default function NotificationCard(props: NotificationCardProps) {
 		<div onClick={click} className={cn}>
 			<div className="flex justify-between items-start">
 				<h1 className="capitalize content-accent">
-					{props.data.type.toLowerCase().split("_").join(" ")}{" "}
+					{props?.data?.type?.toLowerCase()?.split("_")?.join(" ")}{" "}
 				</h1>
 				<span>
 					{new Date(props.created_at).toLocaleDateString("en-us", {
@@ -32,7 +32,7 @@ export default function NotificationCard(props: NotificationCardProps) {
 			</div>
 
 			<div>
-				<p className="caption-standard text-neutral-700 line-clamp-2">{props.data.message}</p>
+				<p className="caption-standard text-neutral-700 line-clamp-2">{props?.data?.message}</p>
 			</div>
 		</div>
 	);

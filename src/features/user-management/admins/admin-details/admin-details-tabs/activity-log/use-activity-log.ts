@@ -2,7 +2,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import getAdminActivityLog from "@/services/admins/get-admin-activity-logs";
 import { ActivityLog } from "@/types/user.types";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useActivityLog() {
 	const [activityLog, setActivityLog] = React.useState<ActivityLog[]>([]);

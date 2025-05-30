@@ -1,5 +1,6 @@
 import { variables } from "@/constants";
 import { transactions } from "@/constants/data/transactions";
+
 import axios from "@/lib/axios";
 import { TransactCategory, Transaction } from "@/types/transaction.types";
 
@@ -10,7 +11,11 @@ type Parameters = {
 type Response = Transaction[];
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/transactions/recent-transactions?category=${data.category}`);
+	const response = await axios.get(
+		`${
+			data.category ? `/transactions?category=${data.category}` : "/dashboard/transactions/recent"
+		}`
+	);
 
 	return response.data.data;
 }

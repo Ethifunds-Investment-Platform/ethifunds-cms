@@ -9,7 +9,7 @@ type Response = {
 };
 
 export async function production(): Promise<Response> {
-	const response = await axios.post(`/listing/metrics`);
+	const response = await axios.get(`/listing/metrics`);
 
 	return response.data.data;
 }

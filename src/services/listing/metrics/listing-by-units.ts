@@ -6,7 +6,7 @@ import { ListingByUnits } from "@/types/listing.types";
 type Response = ListingByUnits;
 
 export async function production(): Promise<Response> {
-	const response = await axios.post(`  /listing/listing-by-units`);
+	const response = await axios.get(`/listing/listing-by-units`);
 
 	return response.data.data;
 }

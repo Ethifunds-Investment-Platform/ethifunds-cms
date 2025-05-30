@@ -52,8 +52,8 @@ export default function UsersTable(props: TableProps) {
 								})}
 							</TableCell>
 							<TableCell className="capitalize">{item.username}</TableCell>
-							<TableCell className="capitalize">{item.email}</TableCell>
-							<TableCell className="capitalize">{item.phone_number}</TableCell>
+							<TableCell className="">{item.email}</TableCell>
+							<TableCell className="capitalize">{item.phone_number?item.phone_number:"N/A"}</TableCell>
 
 							<TableCell className={statusClx}>{item.status}</TableCell>
 							<TableCell>

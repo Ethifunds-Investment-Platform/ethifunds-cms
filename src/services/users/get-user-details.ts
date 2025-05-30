@@ -14,7 +14,7 @@ type Response = User & {
 };
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/users/${data.user_id}`);
+	const response = await axios.get(`/users/${data.user_id}`);
 
 	return response.data.data;
 }

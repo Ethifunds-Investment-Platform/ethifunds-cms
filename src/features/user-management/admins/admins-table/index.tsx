@@ -16,7 +16,10 @@ type TableProps = {
 	isEmpty: boolean;
 };
 export default function AdminsTable(props: TableProps) {
-	if (props.isEmpty) return <EmptyData title="No admin added yet"  />;
+	if (props.isEmpty)
+		return (
+			<EmptyData title="No admin added yet" text="all admins would be listed here" />
+		);
 
 	return (
 		<Table>
@@ -39,7 +42,8 @@ export default function AdminsTable(props: TableProps) {
 						"text-primary-500": item.status === "inactive",
 						"text-error-200": item.status === "suspended",
 					});
-					const name = `${item.first_name} ${item.last_name}`;
+					const name = `${(item as any).username}`;
+				
 					return (
 						<TableRow
 							key={item.id}
@@ -53,9 +57,9 @@ export default function AdminsTable(props: TableProps) {
 									timeStyle: "short",
 								})}
 							</TableCell>
-							<TableCell className="capitalize">{name}</TableCell>
+							<TableCell className="capitalize">{name.length>0?name:"hah"}</TableCell>
 							<TableCell className="capitalize">{item.email}</TableCell>
-							<TableCell className="capitalize">{item.phone_number}</TableCell>
+							<TableCell className="capitalize">{item.phone_number?item.phone_number:"N/A"}</TableCell>
 							<TableCell className="capitalize">{item.role}</TableCell>
 							<TableCell className={statusClx}>{item.status}</TableCell>
 							<TableCell>

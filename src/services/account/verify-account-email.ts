@@ -9,7 +9,7 @@ type Parameters = {
 type Response = void;
 
 export async function production(data: Parameters): Promise<Response> {
-	await axios.post(`/auth/verify-email-otp`, data);
+	await axios.post(`/verify-email-otp`, data);
 }
 
 export async function development(): Promise<Response> {

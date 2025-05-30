@@ -10,7 +10,7 @@ type Parameters = {
 type Response = UserAccountBalances;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/users/${data.user_id}/balances`);
+	const response = await axios.get(`/users/${data.user_id}/balances`);
 
 	return response.data.data;
 }

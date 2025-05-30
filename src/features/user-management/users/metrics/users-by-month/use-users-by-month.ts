@@ -3,7 +3,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import capitalize from "@/lib/capitalize";
 import getUsersByMonth from "@/services/users/metrics/get-users-by-month";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useUsersByMonth() {
 	const [users, setUsers] = React.useState<Record<string, number>>({});

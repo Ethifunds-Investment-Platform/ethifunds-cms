@@ -89,7 +89,7 @@ export default function SavingsInfo({
 					</div>
 				</div>
 
-				<ActiveContributorsList savings_id={data?.id.toString() ?? ""} />
+				<ActiveContributorsList savings_id={data?.id?.toString() ?? ""} />
 			</div>
 		</Render>
 	);

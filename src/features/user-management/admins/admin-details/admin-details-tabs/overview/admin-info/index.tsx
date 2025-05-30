@@ -4,7 +4,7 @@ import { Admin } from "@/types/admin.types";
 
 type AdminInfoProps = Admin & {};
 export default function AdminInfo(props: AdminInfoProps) {
-	const userName = `${props.first_name} ${props.last_name}`;
+	
 
 	const data = {
 		email: props.email,
@@ -21,7 +21,7 @@ export default function AdminInfo(props: AdminInfoProps) {
 		<div className="border rounded-lg p-4 space-y-4">
 			<AdminInfoHeader
 				signedUpAt={props.created_at}
-				userName={userName}
+				userName={(props as any).username}
 				id={props.id}
 				accountStatus={props.status}
 				profile={props.profile_picture}

@@ -7,6 +7,7 @@ import useActions from "@/store/actions";
 import SavingsDialogs from "./savings-dialogs";
 import NotificationDialogs from "./notifications-dialogs";
 import LogoutDialog from "./logout.-dialog";
+import TransactionDetailsDialog from "./approve-transaction.dialog";
 
 export default React.memo(function Dialogs() {
 	const { ui } = useActions();
@@ -25,6 +26,7 @@ export default React.memo(function Dialogs() {
 			<InvestmentsDialogs />
 			<SavingsDialogs />
 			<NotificationDialogs />
+			<TransactionDetailsDialog />
 			<LogoutDialog />
 		</React.Fragment>
 	);

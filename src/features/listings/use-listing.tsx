@@ -4,7 +4,7 @@ import getListing from "@/services/listing/get-listing";
 
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useListing() {
 	const { currency } = useAppSelector((state) => state.account);

@@ -5,7 +5,7 @@ import getListingDetails from "@/services/listing/get-listing-details";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export default function useCounterOffer() {
@@ -92,7 +92,7 @@ export default function useCounterOffer() {
 		};
 
 		const dismiss = () => {
-			queryClient.invalidateQueries(["listings"]);
+			queryClient.invalidateQueries({ queryKey: ["listings", "recent-listing"] });
 		};
 		ui.changeDialog({
 			show: true,

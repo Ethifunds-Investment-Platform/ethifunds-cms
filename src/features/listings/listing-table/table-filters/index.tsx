@@ -26,6 +26,10 @@ export default function TableFilters(props: FilterProps) {
 			name: "rejected",
 			path: "rejected",
 		},
+		{
+			name: "completed",
+			path: "completed",
+		},
 	];
 
 	return (
@@ -33,7 +37,7 @@ export default function TableFilters(props: FilterProps) {
 			<TableSearchBar {...props} />
 
 			<StatusFilter {...props} statusList={statusList} />
-			<ExportFilter {...props} url="" />
+			<ExportFilter {...props} url="/listing/export" />
 			<DateFilter {...props} />
 		</div>
 	);

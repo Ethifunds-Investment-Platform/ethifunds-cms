@@ -12,7 +12,7 @@ type Parameters = {
 type Response = ActivityLog[];
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/admins/${data.user_id}/activity-logs`);
+	const response = await axios.get(`/${data.user_id}/activity-logs`);
 
 	return response.data.data;
 }

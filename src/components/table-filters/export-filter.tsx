@@ -23,12 +23,13 @@ export default function ExportFilter(props: ExportFilterProps) {
 
   const sendExport = React.useCallback(
     async (format: string) => {
+      toast.info("Initiating export...");
       setIsLoading(true);
       try {
-        const url = `${props.url}?${format}`;
+        const url = `${props.url}?format=${format}`;
         await exportTransactions({ url });
         toast.info(
-          "Transactions export successful, Check your email for details",
+          "export successful, Check your email for details",
         );
       } catch (err) {
         const errMsg = ensureError(err);

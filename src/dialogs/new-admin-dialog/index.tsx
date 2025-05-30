@@ -45,6 +45,7 @@ export default React.memo(function NewAdminDialog() {
 							return (
 								<SelectBox
 									{...item}
+									key={item.name}
 									value={formData[item.name]}
 									onchange={(e) => updateForm(item.name as any, e)}
 									disabled={isLoading}
@@ -56,6 +57,7 @@ export default React.memo(function NewAdminDialog() {
 							return (
 								<Password
 									{...item}
+									key={item.name}
 									value={formData[item.name]}
 									onChange={(e) => updateForm(item.name as any, e)}
 									isLoading={isLoading}
@@ -65,6 +67,7 @@ export default React.memo(function NewAdminDialog() {
 						return (
 							<Input
 								{...item}
+								key={item.name}
 								value={formData[item.name]}
 								onChange={(e) => updateForm(item.name as any, e)}
 								disabled={isLoading}

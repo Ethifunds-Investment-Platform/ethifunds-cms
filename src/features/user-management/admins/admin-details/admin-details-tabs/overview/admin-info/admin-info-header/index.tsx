@@ -11,7 +11,7 @@ type AdminInfoHeaderProps = {
 	profile: Admin["profile_picture"];
 };
 export default function AdminInfoHeader(props: AdminInfoHeaderProps) {
-	const initials = props.userName.split(" ");
+	const initials ="A"
 	const statusClx = classNames("capitalize text-md px-4", {
 		"bg-success-100 text-success-300 border-success-300": props.accountStatus === "active",
 		"bg-warning-100 text-warning-300 border-warning-300": props.accountStatus === "inactive",
@@ -26,14 +26,14 @@ export default function AdminInfoHeader(props: AdminInfoHeaderProps) {
 					variant={"outline"}
 				>
 					{props.profile ? (
-						<img src={props.profile} alt={initials[0][0]} className="object-cover size-full" />
+						<img src={props.profile} alt={initials} className="object-cover size-full" />
 					) : (
-						<span className="heading-3"> {initials[0][0] + initials[1][0]}</span>
+						<span className="heading-3"> {initials}</span>
 					)}
 				</Badge>
 
 				<div>
-					<h1 className="feature-standard">{props.userName}</h1>
+					<h1 className="feature-standard first-letter:uppercase">{props.userName}</h1>
 					<span>
 						Signed up:{" "}
 						{new Date(props.signedUpAt).toLocaleDateString("en-us", {

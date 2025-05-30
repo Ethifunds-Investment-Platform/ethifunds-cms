@@ -15,9 +15,10 @@ export default function NotificationView(props: NotificationViewProps) {
 	const [details, setDetails] = React.useState<Notification | null>(null);
 	const [activeId, setActiveId] = React.useState("");
 
+
 	const onSelect = (data: Notification) => {
 		setDetails(data);
-		setActiveId(data.id.toString());
+		setActiveId(data?.id?.toString() ?? "");
 	};
 
 	const cn = classNames(

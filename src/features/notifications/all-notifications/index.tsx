@@ -24,7 +24,7 @@ export default function AllNotifications() {
 	return (
 		<AppContainer className="space-y-5">
 			<div className="flex justify-between items-center">
-				<h1 className="hero-accent">Notification History</h1>
+				<h1 className="hero-accent">Notifications </h1>
 			</div>
 
 			<Render
@@ -33,7 +33,7 @@ export default function AllNotifications() {
 				error={error}
 				loadingComponent={<LoadingComponent />}
 			>
-				<NotificationView data={data?.docs ?? []} className="h-screen" pagination={data} />
+				<NotificationView data={data ?? []} className="h-screen" />
 			</Render>
 		</AppContainer>
 	);

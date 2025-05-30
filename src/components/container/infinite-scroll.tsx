@@ -1,6 +1,6 @@
 import { PaginatedResponse } from "@/types/global.types";
 import * as React from "react";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import Spinner from "../spinner";
 import ErrorBox from "../error-box";
 import ErrorBoundary from "../error-boundary";

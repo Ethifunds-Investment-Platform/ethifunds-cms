@@ -4,11 +4,13 @@ import { TopInvestment } from "@/types/investment.types";
 
 export default function TopInvestmentCard(props: TopInvestment) {
 	return (
-		<div className="flex justify-between [&_span]:content-standard capitalize">
-			<span>
+		<div className="flex justify-between capitalize">
+			<div className="space-x-1">
 				{" "}
-				{props.name} <Badge className="text-xs bg-primary-500 text-white">{props.category_name} </Badge>{" "}
-			</span>
+				<span className="!text-sm font-medium">{props.name}</span>
+				
+				<Badge className="text-[10px] px-1 text-white bg-primary-500 ">{props.category_name.toLowerCase().replace("investment", "")} </Badge>{" "}
+			</div>
 			<span> {amountSeparator(props.value)} </span>
 		</div>
 	);

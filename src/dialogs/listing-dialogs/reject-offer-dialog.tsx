@@ -6,7 +6,7 @@ import acceptRejectOffer from "@/services/listing/accept-reject-offer";
 import getListingDetails from "@/services/listing/get-listing-details";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import * as React from "react";
 import { toast } from "sonner";
 import Render from "@/components/render";
@@ -18,11 +18,19 @@ export default React.memo(function RejectOfferDialog() {
 
 	const { ui } = useActions();
 	const id = dialog.id;
-	
+
 	const queryClient = useQueryClient();
 
-	const { data, isFetching, isError, error } = useQuery(["reject-offer", id], () =>
-		getListingDetails({ id })
+	const open = React.useMemo(() => {
+		return dialog.show && dialog.type === "reject_offer";
+	}, [dialog.show, dialog.type]);
+
+	const { data, isFetching, isError, error } = useQuery(
+		["reject-offer", id],
+		() => getListingDetails({ id }),
+		{
+			enabled: open,
+		}
 	);
 
 	const getDate = (date: string) =>
@@ -42,10 +50,6 @@ export default React.memo(function RejectOfferDialog() {
 		interest_rate: `${data?.product.expected_roi}%`,
 	};
 
-	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "reject_offer";
-	}, [dialog.show, dialog.type]);
-
 	const close = () => {
 		if (isLoading) return;
 		ui.resetDialog();
@@ -60,7 +64,6 @@ export default React.memo(function RejectOfferDialog() {
 				status: "rejected",
 			});
 			showSuccessDialog();
-			
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);
@@ -69,25 +72,24 @@ export default React.memo(function RejectOfferDialog() {
 		}
 	};
 
+	const showSuccessDialog = () => {
+		const text =
+			"You have successfully rejected this offer, parties involved would be notified shortly.";
 
-		const showSuccessDialog = () => {
-			const text =
-				"You have successfully rejected this offer, parties involved would be notified shortly.";
-
-			const data = {
-				title: "Congratulations!!!",
-				subtitle: text,
-			};
-
-			ui.changeDialog({
-				show: true,
-				type: "success_dialog",
-				data,
-				dismiss: () => {
-					queryClient.invalidateQueries(["listings"]);
-				},
-			});
+		const data = {
+			title: "Congratulations!!!",
+			subtitle: text,
 		};
+
+		ui.changeDialog({
+			show: true,
+			type: "success_dialog",
+			data,
+			dismiss: () => {
+				queryClient.invalidateQueries({ queryKey: ["listings", "recent-listing"] });
+			},
+		});
+	};
 
 	return (
 		<PopupModal

@@ -2,7 +2,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import getAdmins from "@/services/admins/get-admins";
 
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useAllAdmins() {
 	const { queryParams } = useCustomNavigation();

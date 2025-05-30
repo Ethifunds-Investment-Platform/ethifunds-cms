@@ -5,7 +5,7 @@ import { User } from "@/types/user.types";
 
 type Response = User[];
 export async function production(): Promise<Response> {
-	const response = await axios.post(`/users/recent-users`);
+	const response = await axios.get(`/users/recent-users`);
 
 	return response.data.data;
 }

@@ -3,7 +3,7 @@ import { amountSeparator } from "@/lib/amount-separator";
 import ErrorBoundary from "@/components/error-boundary";
 import useAppSelectors from "@/store/use-app-selectors";
 import { ActiveInvestmentInvestmentsNotification, Notification } from "@/types/notification.types";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import Render from "@/components/render";
 import getInvestmentDetails from "@/services/investments/get-investment-details";
 import { Skeleton } from "@/components/ui/skeleton";

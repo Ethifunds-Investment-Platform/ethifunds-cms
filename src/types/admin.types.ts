@@ -1,7 +1,7 @@
 export type AccountStatus = "active" | "inactive" | "suspended";
 export type AdminRole = "admin" | "staff";
 
-export const AdminRoles = ["staff"] as const;
+export const AdminRoles = ["admin"] as const;
 
 export type Admin = {
 	id: number;

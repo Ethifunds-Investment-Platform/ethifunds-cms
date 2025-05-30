@@ -4,7 +4,7 @@ import axios from "@/lib/axios";
 import { Admin } from "@/types/admin.types";
 
 type Parameters = {
-	email?: string;
+	login?: string;
 	username?: string;
 	password: string;
 };
@@ -15,10 +15,10 @@ type Response = {
 };
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/auth/login`, data);
+	const response = await axios.post(`/login`, data);
 	const user = await axios.get("/me", {
 		headers: {
-			Authorization: `Bearer ${response.data.token}`,
+			Authorization: `Bearer ${response.data.data.token}`,
 		},
 	});
 

@@ -1,6 +1,6 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import getUserAccountBalances from "@/services/users/get-user-account-balances";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import * as React from "react";
 import { UserAccountBalances } from "@/types/user.types";
 import useAppSelectors from "@/store/use-app-selectors";

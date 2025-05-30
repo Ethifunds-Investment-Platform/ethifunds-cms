@@ -1,4 +1,4 @@
-import AllInvestments from "@/features/investments/all-transactions";
+import AllInvestments from "@/features/investments/all-investments";
 import useSeo from "@/hooks/use-seo";
 
 export default function AllInvestmentsPage() {

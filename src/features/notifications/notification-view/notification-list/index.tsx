@@ -1,7 +1,6 @@
 import { Notification } from "@/types/notification.types";
 import NotificationCard from "./notification-card";
 import classNames from "classnames";
-import ListPagination from "./list-pagination";
 import * as React from "react";
 import { NotificationViewProps } from "..";
 
@@ -22,7 +21,7 @@ export default React.memo(function NotificationList(
 					/>
 				))}
 			</div>
-			{props.pagination && <ListPagination {...props.pagination} />}
+			{/* {props.pagination && <ListPagination {...props.pagination} />} */}
 		</div>
 	);
 });

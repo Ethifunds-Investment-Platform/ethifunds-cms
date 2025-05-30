@@ -6,7 +6,7 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import getInvestmentAllocation from "@/services/investments/metrics/investment-allocation";
 import * as React from "react";
 import ErrorBoundary from "@/components/error-boundary";

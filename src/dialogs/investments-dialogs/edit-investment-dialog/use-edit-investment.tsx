@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import updateInvestment from "@/services/investments/update-investment";
 import getInvestmentDetails from "@/services/investments/get-investment-details";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import getInvestmentCategories from "@/services/investments/get-investment-categories";
 import { formatDateToYYYYMMDD } from "@/lib/format-date";
 import blobReader, { generatePreview } from "@/lib/blob-reader";
@@ -70,31 +70,34 @@ export default function useEditInvestment() {
 	const investment_id = React.useMemo(() => dialog.id, [dialog.id]);
 
 	const { isFetching, isError, error, data } = useQuery(
-		["investment-edit-details", investment_id],
+		["investment-edit-details", investment_id, open],
 		() => getInvestmentDetails({ id: investment_id }),
 		{
 			enabled: open && !formData.name,
-			onSuccess(data) {
-				setFormData({
-					name: data.name,
-					product_category_id: String(data.product_category_id),
-					display_image: undefined,
-					status: data.status,
-					product_label: data.product_label.name,
-					product_section: data.product_section.name,
-					description: data.description,
-					tenor_unit: data.tenor_unit as any,
-					tenor_value: data.tenor_value,
-					total_units: data.total_units,
-					expected_roi: data.expected_roi,
-					funding_deadline: formatDateToYYYYMMDD(data.funding_deadline ?? ""),
-					funding_goal: data.funding_goal,
-					unit_price: data.unit_price,
-					product_memo: undefined,
-				});
-			},
 		}
 	);
+
+	React.useEffect(() => {
+		if (data) {
+			setFormData({
+				name: data.name,
+				product_category_id: String(data.product_category_id),
+				display_image: undefined,
+				status: data.status,
+				product_label: data.product_label.name,
+				product_section: data.product_section.name,
+				description: data.description,
+				tenor_unit: data.tenor_unit as any,
+				tenor_value: data.tenor_value,
+				total_units: data.total_units,
+				expected_roi: data.expected_roi,
+				funding_deadline: formatDateToYYYYMMDD(data.funding_deadline ?? ""),
+				funding_goal: data.funding_goal,
+				unit_price: data.unit_price,
+				product_memo: undefined,
+			});
+		}
+	}, [data]);
 
 	useQuery(["investment-categories-edit"], () => getInvestmentCategories(), {
 		enabled: open,
@@ -103,6 +106,8 @@ export default function useEditInvestment() {
 		},
 	});
 
+	const queryClient = useQueryClient()
+	
 	const toggleDrawer = (value: boolean) => {
 		if (isLoading) return;
 		ui.changeDialog({
@@ -141,8 +146,9 @@ export default function useEditInvestment() {
 
 	const submit = async (payload: globalThis.FormData) => {
 		try {
+			
 			await updateInvestment({ investment_id: dialog.id, ...payload });
-			console.log("Submit log");
+			
 			showSuccessDialog();
 		} catch (error) {
 			const errMsg = ensureError(error).message;
@@ -222,6 +228,7 @@ export default function useEditInvestment() {
 		};
 
 		const dismiss = () => {
+			queryClient.invalidateQueries({ queryKey: ["all-investments"] });
 			ui.resetDialog();
 			reset();
 		};

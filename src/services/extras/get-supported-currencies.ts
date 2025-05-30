@@ -4,7 +4,9 @@ import axios from "@/lib/axios";
 type Response = string[];
 
 export async function production(): Promise<Response> {
-	const response = await axios.get(`/public/supported-currencies`);
+	const response = await axios.get(`/public/supported-currencies`, {
+		baseURL: `${variables.BASE_URL}/api`,
+	});
 
 	return response.data.data;
 }

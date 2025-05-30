@@ -3,6 +3,7 @@ import createAdmin from "@/services/admins/create-admin";
 import useActions from "@/store/actions";
 import useAppSelectors from "@/store/use-app-selectors";
 import { AdminRoles } from "@/types/admin.types";
+import { useQueryClient } from "@tanstack/react-query";
 import * as React from "react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -28,8 +29,8 @@ const init: FormData = {
 	first_name: "",
 	last_name: "",
 	phone_number: "",
-	password: "",
-	role: "staff",
+	password: "$Default123",
+	role: "admin",
 };
 
 export default function useNewAdmin() {
@@ -38,7 +39,7 @@ export default function useNewAdmin() {
 	const [isLoading, setIsLoading] = React.useState(false);
 
 	const { ui } = useActions();
-
+	const clientQuery = useQueryClient();
 	const open = React.useMemo(
 		() => dialog.show && dialog.type === "new_admin",
 		[dialog.show, dialog.type]
@@ -97,7 +98,9 @@ export default function useNewAdmin() {
 		const dismiss = () => {
 			ui.resetDialog();
 			reset();
+			clientQuery.invalidateQueries({ queryKey: ["admins"] });
 		};
+
 
 		ui.changeDialog({
 			show: true,

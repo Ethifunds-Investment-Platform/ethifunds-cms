@@ -16,7 +16,7 @@ type Response = {
 };
 
 export async function production(): Promise<Response> {
-	const response = await axios.post(`/transactions/metrics`);
+	const response = await axios.get(`/transactions/metrics`);
 
 	return response.data.data;
 }

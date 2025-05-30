@@ -10,7 +10,7 @@ type Parameters = {
 type Response = Listing[];
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/listing/recent-listing?sale_option=${data.sale_option}`);
+	const response = await axios.get(`/listing/recent-listing?sale_option=${data.sale_option??""}`);
 
 	return response.data.data;
 }

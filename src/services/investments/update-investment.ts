@@ -10,7 +10,7 @@ type Parameters = FormData & {
 type Response = InvestmentProduct;
 
 export async function production({ investment_id, ...data }: Parameters): Promise<Response> {
-	const response = await axios.patch(`/investments/${investment_id}/update`, data, {
+	const response = await axios.post(`/investments/${investment_id}/edit`, data, {
 		headers: {
 			"Content-Type": "multipart/form-data",
 		},

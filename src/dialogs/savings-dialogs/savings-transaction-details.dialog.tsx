@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import useActions from "@/store/actions";
 import { PopupModal } from "@/components/ui/modal";

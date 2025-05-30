@@ -15,7 +15,7 @@ type Response = {
 };
 export async function production(data: Parameters): Promise<Response> {
 	const query = `category_id=${data.category_id}`;
-	const response = await axios.post(`/investments/metrics?${data.category_id ? query : ""}`);
+	const response = await axios.get(`/investments/metrics?${data.category_id ? query : ""}`);
 
 	return response.data.data;
 }

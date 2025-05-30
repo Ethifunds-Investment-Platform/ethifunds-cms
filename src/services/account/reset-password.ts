@@ -12,7 +12,7 @@ type Parameters = {
 type Response = User;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/auth/reset-password`, data);
+	const response = await axios.post(`/reset-password`, data);
 	return response.data.data;
 }
 

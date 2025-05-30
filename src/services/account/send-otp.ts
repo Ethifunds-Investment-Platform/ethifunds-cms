@@ -9,7 +9,7 @@ type Parameters = Partial<{
 type Response = void;
 
 export async function production({ phone_number, email }: Parameters): Promise<Response> {
-	await axios.post(`/auth/send-otp`, phone_number ? { phone_number } : { email });
+	await axios.post(`/send-otp`, phone_number ? { phone_number } : { email });
 }
 
 export async function development(): Promise<Response> {
