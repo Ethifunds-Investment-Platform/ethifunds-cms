@@ -14,7 +14,7 @@ export type ListingByUnits = {
 };
 
 export type SaleOption = "ethifunds" | "marketplace";
-export type Status = "pending" | "approved" | "rejected";
+export type Status = "pending" | "approved" | "rejected" | "completed";
 
 export type Listing = {
 	id: number;

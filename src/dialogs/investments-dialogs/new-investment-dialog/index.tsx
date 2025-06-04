@@ -30,7 +30,7 @@ export default React.memo(function NewInvestmentDialog() {
 				? categories.find((item) => item.name.toLowerCase().includes("ethivest"))?.id ===
 				  product_category_id
 				: false;
-		if (isEthivest) {
+		if (!isEthivest) {
 			return formFields.filter((item) => !excludedFields.includes(item.name));
 		}
 		return formFields;
@@ -135,7 +135,7 @@ export default React.memo(function NewInvestmentDialog() {
 							<Input
 								{...item}
 								key={item.name}
-								label={isCurrencyField ? `${item.label} (${currency.sign}) ` : item.label}
+								label={isCurrencyField ? `${item.label} (${currency?.sign}) ` : item.label}
 								value={defaultValue?.toString()}
 								onChange={(e) => updateForm(item.name as any, e)}
 								disabled={isLoading}

@@ -10,12 +10,13 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import * as React from "react";
 import { toast } from "sonner";
 import Render from "@/components/render";
+import useCustomNavigation from "@/hooks/use-navigation";
 
 export default React.memo(function RejectOfferDialog() {
 	const { dialog } = useAppSelector((state) => state.ui);
 	const [isLoading, setIsLoading] = React.useState(false);
 	const { currency } = useAppSelector((state) => state.account);
-
+	const { queryParams } = useCustomNavigation();
 	const { ui } = useActions();
 	const id = dialog.id;
 
@@ -58,12 +59,14 @@ export default React.memo(function RejectOfferDialog() {
 	const submit = async () => {
 		if (!id) return toast.error("Listing ID is required");
 		setIsLoading(true);
+		queryParams.set("action", " ");
 		try {
 			await acceptRejectOffer({
 				listing_id: id,
 				status: "rejected",
 			});
 			showSuccessDialog();
+			queryParams.delete("action");
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);

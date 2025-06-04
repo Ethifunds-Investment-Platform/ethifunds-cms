@@ -6,7 +6,7 @@ export default function ListingTrendCard(props: ListingTrends) {
 		<div className="flex justify-between [&_span]:content-standard capitalize">
 			<span>
 				{" "}
-				{props.username} ({props.listed_units})
+				{props.username?.toLowerCase()} ({props.listed_units})
 			</span>
 			<span> {amountSeparator(props.valued_at)} </span>
 		</div>

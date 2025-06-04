@@ -7,13 +7,14 @@ import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-
+import useCustomNavigation from "@/hooks/use-navigation";
 export default function useCounterOffer() {
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [counterPrice, setCounterPrice] = React.useState("");
 	const { currency } = useAppSelector((state) => state.account);
 	const { dialog } = useAppSelector((state) => state.ui);
 	const id = dialog.id;
+	const { queryParams } = useCustomNavigation();
 
 	const queryClient = useQueryClient();
 	const { ui } = useActions();
@@ -69,11 +70,13 @@ export default function useCounterOffer() {
 		if (!counterPrice.trim() || !data) return toast.error("counter price required");
 		setIsLoading(true);
 		try {
+			queryParams.set("action", "counter_offer");
 			await counterOffer({
 				listing_id: data.id,
 				counter_price_per_unit: counterPrice,
 			});
 			showSuccessDialog();
+			queryParams.delete("action");
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);

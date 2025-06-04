@@ -18,11 +18,13 @@ export default function NotificationCard(props: NotificationCardProps) {
 		props.onSelect(props);
 	};
 
+	console.log(props.data);
+	const notificationType = (props as any)?.type;
 	return (
 		<div onClick={click} className={cn}>
-			<div className="flex justify-between items-start">
+			<div className="flex items-start justify-between">
 				<h1 className="capitalize content-accent">
-					{props?.data?.type?.toLowerCase()?.split("_")?.join(" ")}{" "}
+					{notificationType?.toLowerCase()?.split("_")?.join(" ")}{" "}
 				</h1>
 				<span>
 					{new Date(props.created_at).toLocaleDateString("en-us", {

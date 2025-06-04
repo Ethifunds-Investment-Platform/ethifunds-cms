@@ -12,6 +12,7 @@ import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import useCustomNavigation from "@/hooks/use-navigation";
 
 export default React.memo(function RejectListingDialog() {
 	const { dialog } = useAppSelector((state) => state.ui);
@@ -19,6 +20,7 @@ export default React.memo(function RejectListingDialog() {
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [checked, setChecked] = React.useState(false);
 	const { currency } = useAppSelector((state) => state.account);
+	const { queryParams } = useCustomNavigation();
 
 	const queryClient = useQueryClient();
 
@@ -70,6 +72,7 @@ export default React.memo(function RejectListingDialog() {
 	const submit = async () => {
 		if (!id) return toast.error("Listing ID is required");
 		setIsLoading(true);
+		queryParams.set("action", " ");
 		try {
 			await approveRejectListing({
 				listing_id: id,
@@ -78,6 +81,7 @@ export default React.memo(function RejectListingDialog() {
 				flag_listing: checked,
 			});
 			showSuccessDialog();
+			queryParams.delete("action");
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);

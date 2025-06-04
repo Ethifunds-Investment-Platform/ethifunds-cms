@@ -12,9 +12,7 @@ import useAppSelectors from "@/store/use-app-selectors";
 export default React.memo(function AppSidebarFooter() {
   const { account } = useAppSelectors("account");
   const { ui } = useActions();
-  const fullName = React.useMemo(() => {
-		return `${account?.first_name} ${account?.last_name}`;
-	}, [account?.first_name, account?.last_name]);
+
 
 	const showLogoutDialog = () => {
 		ui.changeDialog({
@@ -26,10 +24,12 @@ export default React.memo(function AppSidebarFooter() {
 		<SidebarFooter>
 			<div className="flex items-start justify-between p-3 group-data-[collapsible=icon]:hidden">
 				<div className="flex flex-col">
-					<span className="content-standard line-clamp-1 capitalize text-neutral-1000">
-						{fullName}
+					<span className="capitalize content-standard line-clamp-1 text-neutral-1000">
+						{(account as any).username}
 					</span>
-					<small className="caption-standard text-[#667085] capitalize">{account.role}</small>
+					<small className="caption-standard text-[#667085] capitalize">
+						{(account as any).user_type}
+					</small>
 				</div>
 				<AppButton variant="ghost" className="!py-0" onClick={showLogoutDialog}>
 					<img src={assets.logout_01} alt="logout" />

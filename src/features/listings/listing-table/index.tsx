@@ -63,11 +63,11 @@ export default function ListingTable(props: TableProps) {
 								})}
 							</TableCell>
 							<TableCell className="capitalize" title={item?.seller_info?.name}>
-								{truncate(item?.seller_info?.name, 15)}
+								{truncate(item?.seller_info?.name?.toLowerCase(), 15)}
 							</TableCell>
 							<TableCell className="capitalize">{amountSeparator(item.units)}</TableCell>
 							<TableCell className="capitalize" title={item?.product?.name}>
-								{truncate(item?.product?.name, 20)}
+								{truncate(item?.product?.name?.toLowerCase(), 20)}
 							</TableCell>
 
 							<TableCell>
@@ -82,7 +82,10 @@ export default function ListingTable(props: TableProps) {
 								<TableActions
 									id={item.id.toString()}
 									sale_option={item.sale_option}
-									hide_actions={item.status !== "pending"}
+									hide_actions={
+										item.status === "completed" ||
+										(item.sale_option === "marketplace" && item.status !== "pending")
+									}
 								/>
 							</TableCell>
 						</TableRow>

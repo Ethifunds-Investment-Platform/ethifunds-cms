@@ -11,6 +11,7 @@ import EmptyTransactions from "@/components/prompts/empty-transactions";
 import classNames from "classnames";
 import { Transaction } from "@/types/transaction.types";
 import useActions from "@/store/actions";
+import TableActions from "./table-actions";
 
 type TableProps = {
 	data: Transaction[];
@@ -80,16 +81,21 @@ export default function TransactionTable(props: TableProps) {
               </TableCell> */}
 							<TableCell className={statusClx}>{item.status}</TableCell>
 
-							{/* <TableActions id={item.id.toString()} /> */}
-
-							<TableCell className="text-">
-								<button
-									className=" bg-gray-100/25 border py-1 rounded-md button hover:!bg-slate-100 transition-colors"
-									onClick={() => approveDialog(item.id.toString())}
-								>
-									Approve
-								</button>
+							<TableCell>
+								{item.status === "pending" ? (
+									<button
+										className=" bg-gray-100/25 border py-1 rounded-md button hover:!bg-slate-100 transition-colors"
+										onClick={() => approveDialog(item.id.toString())}
+									>
+										Approve
+									</button>
+								) : (
+									<TableActions id={item.id.toString()} />
+								)}
 							</TableCell>
+							{/* <TableCell className="text-">
+								
+							</TableCell> */}
 						</TableRow>
 					);
 				})}

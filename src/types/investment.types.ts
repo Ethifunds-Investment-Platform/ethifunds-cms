@@ -113,9 +113,9 @@ export type NewInvestmentPayload = {
 export type UpdateInvestmentPayload = {
 	name: string;
 	product_category_id: number;
-	display_image?: File;
-	product_label: string;
-	product_section: string;
+	display_image?: string;
+	product_label?: string;
+	product_section?: string;
 	description: string;
 	tenor_unit: string;
 	tenor_value: number;
@@ -125,5 +125,5 @@ export type UpdateInvestmentPayload = {
 	funding_goal: string;
 	unit_price: string;
 	status: InvestmentStatus;
-	product_memo?: File;
+	product_memo?: string;
 };

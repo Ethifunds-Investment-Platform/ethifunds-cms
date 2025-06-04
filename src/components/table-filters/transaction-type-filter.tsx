@@ -37,10 +37,7 @@ export default function TransactionTypeFilter(props: TransactionTypeProps) {
       name: "debit",
       path: "debit",
     },
-    {
-      name: "transfer",
-      path: "transfer",
-    },
+ 
   ];
 
   return (

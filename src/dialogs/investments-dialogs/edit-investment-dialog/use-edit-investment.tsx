@@ -14,14 +14,14 @@ import getInvestmentDetails from "@/services/investments/get-investment-details"
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import getInvestmentCategories from "@/services/investments/get-investment-categories";
 import { formatDateToYYYYMMDD } from "@/lib/format-date";
-import blobReader, { generatePreview } from "@/lib/blob-reader";
+import blobReader from "@/lib/blob-reader";
 
 const validation = z.object({
 	name: z.string().min(3, "Name must be at least 3 characters"),
 	product_category_id: z.string().min(1, "Category is required"),
-	display_image: z.instanceof(File, { message: "Display image is required" }).optional(),
-	product_label: z.string().min(3, "Label must be at least 3 characters"),
-	product_section: z.string().min(3, "Section must be at least 3 characters"),
+	display_image: z.string().optional(),
+	product_label: z.string().min(3, "Label must be at least 3 characters").optional(),
+	product_section: z.string().min(3, "Section must be at least 3 characters").optional(),
 	description: z.string().min(10, "Description must be at least 10 characters"),
 	tenor_unit: z.enum(["days", "months", "years"]),
 	tenor_value: z.number().positive("Tenor value must be a positive value"),
@@ -31,7 +31,7 @@ const validation = z.object({
 	funding_goal: z.string().min(1, "Funding goal is required"),
 	unit_price: z.string().min(1, "Unit price is required"),
 	status: z.enum(InvestmentsStatus),
-	product_memo: z.instanceof(File, { message: "Product Memo is required" }).optional(),
+	product_memo: z.string().optional(),
 });
 
 type FormData = z.infer<typeof validation>;
@@ -39,7 +39,7 @@ type FormData = z.infer<typeof validation>;
 const init: FormData = {
 	name: "",
 	product_category_id: "",
-	display_image: undefined,
+	display_image: "",
 	status: "active",
 	product_label: "",
 	product_section: "",
@@ -51,7 +51,7 @@ const init: FormData = {
 	funding_deadline: "",
 	funding_goal: "",
 	unit_price: "",
-	product_memo: undefined,
+	product_memo: "",
 };
 
 export default function useEditInvestment() {
@@ -59,6 +59,7 @@ export default function useEditInvestment() {
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [formData, setFormData] = React.useState(init);
 	const [categories, setCategories] = React.useState<InvestmentCategory[]>([]);
+	const { currency } = useAppSelectors("account");
 
 	const { ui } = useActions();
 
@@ -68,6 +69,13 @@ export default function useEditInvestment() {
 	);
 
 	const investment_id = React.useMemo(() => dialog.id, [dialog.id]);
+
+	useQuery(["investment-categories-edit"], () => getInvestmentCategories(), {
+		enabled: open,
+		onSuccess(data) {
+			setCategories(data);
+		},
+	});
 
 	const { isFetching, isError, error, data } = useQuery(
 		["investment-edit-details", investment_id, open],
@@ -82,10 +90,10 @@ export default function useEditInvestment() {
 			setFormData({
 				name: data.name,
 				product_category_id: String(data.product_category_id),
-				display_image: undefined,
+				display_image: data.display_image,
 				status: data.status,
-				product_label: data.product_label.name,
-				product_section: data.product_section.name,
+				product_label: data?.product_label?.name,
+				product_section: data?.product_section?.name,
 				description: data.description,
 				tenor_unit: data.tenor_unit as any,
 				tenor_value: data.tenor_value,
@@ -94,7 +102,7 @@ export default function useEditInvestment() {
 				funding_deadline: formatDateToYYYYMMDD(data.funding_deadline ?? ""),
 				funding_goal: data.funding_goal,
 				unit_price: data.unit_price,
-				product_memo: undefined,
+				product_memo: data.product_memo,
 			});
 		}
 	}, [data]);
@@ -106,8 +114,8 @@ export default function useEditInvestment() {
 		},
 	});
 
-	const queryClient = useQueryClient()
-	
+	const queryClient = useQueryClient();
+
 	const toggleDrawer = (value: boolean) => {
 		if (isLoading) return;
 		ui.changeDialog({
@@ -134,21 +142,20 @@ export default function useEditInvestment() {
 		}));
 	};
 
-	const updateFile = (name: keyof typeof formData, e: React.ChangeEvent<HTMLInputElement>) => {
+	const updateFile = async (name: keyof typeof formData, e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (!file) return;
-
+		const fileBase64 = await blobReader(file);
 		setFormData((prev) => ({
 			...prev,
-			[name]: file,
+			[name]: fileBase64,
 		}));
 	};
 
-	const submit = async (payload: globalThis.FormData) => {
+	const submit = async (payload: UpdateInvestmentPayload) => {
 		try {
-			
 			await updateInvestment({ investment_id: dialog.id, ...payload });
-			
+
 			showSuccessDialog();
 		} catch (error) {
 			const errMsg = ensureError(error).message;
@@ -157,15 +164,21 @@ export default function useEditInvestment() {
 	};
 
 	const prepareFormData = (data: UpdateInvestmentPayload) => {
-		const formData = new FormData();
-
+		// const formData = new FormData();
+		const payload = {};
 		Object.entries(data).forEach(([key, value]) => {
 			if (value !== undefined && value !== null) {
-				formData.append(key, typeof value === "number" ? value.toString() : value);
+				payload[key] = typeof value === "number" ? value.toString() : value;
 			}
 		});
 
-		return formData;
+		// Object.entries(data).forEach(([key, value]) => {
+		// 	if (value !== undefined && value !== null) {
+		// 		formData.append(key, typeof value === "number" ? value.toString() : value);
+		// 	}
+		// });
+
+		return payload;
 	};
 
 	const showPreview = async () => {
@@ -185,8 +198,8 @@ export default function useEditInvestment() {
 			let display_image_preview = data?.display_image;
 
 			if (display_image) {
-				const imgBase64 = await blobReader(display_image);
-				display_image_preview = generatePreview(imgBase64, display_image.type);
+				
+				display_image_preview = display_image;
 			}
 
 			const category_name =
@@ -210,12 +223,13 @@ export default function useEditInvestment() {
 				show: true,
 				type: "preview_investment",
 				data: { ...validatedData, display_image_preview, category_name, action_type: "edit" },
-				action: () => submit(formDataToSend),
+				action: () => submit(formDataToSend as UpdateInvestmentPayload),
 				dismiss: goBack,
 			});
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);
+			throw error;
 		} finally {
 			setIsLoading(false);
 		}
@@ -260,5 +274,7 @@ export default function useEditInvestment() {
 		toggleDrawer,
 		updateFile,
 		showPreview,
+		categories,
+		currency,
 	};
 }
