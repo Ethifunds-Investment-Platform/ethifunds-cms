@@ -20,19 +20,24 @@ export default React.memo(function AuthGate({ children }: { children: React.Reac
 	const INACTIVITY_LIMIT = variables.INACTIVE_LIMIT * 60 * 1000;
 
 	const logout = React.useCallback(async (autoLogout = false) => {
-		await logoutAccount();
-		if (!remember_me) {
-			deleteCookie();
+		try {
+			await logoutAccount();
+			if (!remember_me) {
+				deleteCookie();
+			}
+
+			if (autoLogout) {
+				const path = `/?redirect=${location.pathname}${location.search}`;
+				navigate(path);
+				return;
+			}
+
+			navigate("/");
+		} catch (error) {
+			navigate("/");
+			throw error;
 		}
-
-		if (autoLogout) {
-			const path = `/?redirect=${location.pathname}${location.search}`;
-			navigate(path);
-			return;
-		}
-
-		navigate("/");
-
+			
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
