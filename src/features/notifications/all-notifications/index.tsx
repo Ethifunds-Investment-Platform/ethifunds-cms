@@ -23,7 +23,7 @@ export default function AllNotifications() {
 
 	return (
 		<AppContainer className="space-y-5">
-			<div className="flex justify-between items-center">
+			<div className="flex items-center justify-between">
 				<h1 className="hero-accent">Notifications </h1>
 			</div>
 
@@ -33,7 +33,7 @@ export default function AllNotifications() {
 				error={error}
 				loadingComponent={<LoadingComponent />}
 			>
-				<NotificationView data={data ?? []} className="h-screen" />
+				<NotificationView data={data?.docs ?? []} className="h-screen" />
 			</Render>
 		</AppContainer>
 	);
@@ -42,8 +42,8 @@ export default function AllNotifications() {
 function LoadingComponent() {
 	return (
 		<div className="flex justify-between gap-5">
-			<Skeleton className="h-screen w-full" />
-			<Skeleton className="h-screen w-full" />
+			<Skeleton className="w-full h-screen" />
+			<Skeleton className="w-full h-screen" />
 		</div>
 	);
 }
