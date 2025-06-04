@@ -107,7 +107,7 @@ export const formFields: FORM_FIELDS[] = [
 		label: "Display Image",
 		placeholder: "Upload image",
 		accept: ".png, .jpg, .jpeg .svg",
-		required: true,
+		required: false,
 	},
 	{
 		name: "product_memo",
@@ -115,6 +115,6 @@ export const formFields: FORM_FIELDS[] = [
 		label: "Product Memo",
 		placeholder: "Upload memo",
 		accept: ".pdf, .docx",
-		required: true,
+		required: false,
 	},
 ];

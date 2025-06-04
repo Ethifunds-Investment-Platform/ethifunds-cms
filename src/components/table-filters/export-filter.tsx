@@ -52,10 +52,10 @@ export default function ExportFilter(props: ExportFilterProps) {
       name: "CSV",
       path: "csv",
     },
-    {
-      name: "PDF",
-      path: "pdf",
-    },
+    // {
+    //   name: "PDF",
+    //   path: "pdf",
+    // },
   ];
 
   return (

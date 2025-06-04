@@ -40,19 +40,23 @@ export default function useDetails() {
 			"bg-warning-100 text-warning-300 border-warning-300": data.status === "inactive",
 			"bg-neutral-100 text-neutral-300 border-neutral-300": data.status === "draft",
 		});
-		return {
+		const infoData =
+		 {
 			category: data.category.name,
 			unit_price: `${currency.sign} ${amountSeparator(data.unit_price)}`,
 			total_units: amountSeparator(data.total_units),
 			units_sold: amountSeparator(data.units_sold),
 			RIO: data.expected_roi,
 			tenor: `${data.tenor_value} ${data.tenor_unit}`,
-			label: data.product_label.name,
-			section: data.product_section.name,
+			label: data?.product_label?.name,
+			section: data?.product_section?.name,
 			status: <Badge className={statusClx}>{data.status}</Badge>,
 			funding_goal: `${currency.sign} ${amountSeparator(data.funding_goal)}`,
 			amount_raised: `${currency.sign} ${amountSeparator(data.amount_raised)}`,
 		};
+		return Object.fromEntries(
+			Object.entries(infoData).filter((entries) => entries[1] !== undefined)
+		);
 	}, [currency.sign, data]);
 
 	const edit = () => {

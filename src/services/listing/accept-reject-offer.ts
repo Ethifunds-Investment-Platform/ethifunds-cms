@@ -9,10 +9,7 @@ type Parameters = {
 type Response = void;
 
 export async function production(data: Parameters): Promise<Response> {
-  const response = await axios.post(
-    `/investment/marketplace/approve-reject-offer`,
-    data,
-  );
+  const response = await axios.post(`/listing/approve-reject-offer`, data);
   return response.data.data;
 }
 

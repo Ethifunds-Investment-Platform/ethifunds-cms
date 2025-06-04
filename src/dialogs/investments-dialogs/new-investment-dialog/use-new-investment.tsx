@@ -44,7 +44,7 @@ const init: FormData = {
 	product_label: "",
 	product_section: "",
 	description: "",
-	tenor_unit: "days",
+	tenor_unit: "years",
 	tenor_value: 0,
 	total_units: 0,
 	expected_roi: 0,

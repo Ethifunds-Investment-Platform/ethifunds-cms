@@ -13,8 +13,8 @@ export default function RecentNotifications() {
 			<ErrorBoundary>
 				<div className="flex items-center justify-between px-1">
 					<h1 className="highlight-accent text-neutral-1000">Recent Notifications </h1>
-					{data && data?.length > 0 && (
-						<Link to={`/notifications/all-notifications`} className="text-primary underline">
+					{data && data.docs?.length > 0 && (
+						<Link to={`/notifications/all-notifications`} className="underline text-primary">
 							View All
 						</Link>
 					)}
@@ -26,7 +26,7 @@ export default function RecentNotifications() {
 					error={error}
 					loadingComponent={<LoadingComponent />}
 				>
-					<NotificationView data={data ?? []} className="" />
+					<NotificationView data={data?.docs ?? []} className="" />
 				</Render>
 			</ErrorBoundary>
 		</div>
@@ -36,8 +36,8 @@ export default function RecentNotifications() {
 function LoadingComponent() {
 	return (
 		<div className="flex justify-between gap-5">
-			<Skeleton className="h-80 w-full" />
-			<Skeleton className="h-80 w-full" />
+			<Skeleton className="w-full h-80" />
+			<Skeleton className="w-full h-80" />
 		</div>
 	);
 }

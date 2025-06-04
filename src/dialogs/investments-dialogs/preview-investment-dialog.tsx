@@ -30,7 +30,8 @@ export default React.memo(function PreviewInvestmentDialog() {
 			"bg-warning-100 text-warning-300 border-warning-300": data.status === "inactive",
 			"bg-neutral-100 text-neutral-300 border-neutral-300": data.status === "draft",
 		});
-		return {
+		const infoData=
+		 {
 			category: data.category_name,
 			unit_price: `${currency.sign} ${amountSeparator(data.unit_price)}`,
 			total_units: amountSeparator(data.total_units),
@@ -41,6 +42,9 @@ export default React.memo(function PreviewInvestmentDialog() {
 			status: <Badge className={statusClx}>{data.status}</Badge>,
 			funding_goal: `${currency.sign} ${amountSeparator(data.funding_goal)}`,
 		};
+		return Object.fromEntries(
+			Object.entries(infoData).filter((entries) => entries[1] !== undefined)
+		);
 	}, [currency.sign, data]);
 
 	const toggleDrawer = (value: boolean) => {
@@ -93,25 +97,25 @@ export default React.memo(function PreviewInvestmentDialog() {
 			}
 			className="overflow-y-auto hideScrollbar"
 		>
-			<div className="mt-5 flex h-full flex-col space-y-5 overflow-auto px-5">
+			<div className="flex flex-col h-full px-5 mt-5 space-y-5 overflow-auto">
 				<div className="space-y-3">
 					<div className="w-full h-28">
 						<img
 							src={data?.display_image_preview}
 							alt={data?.name}
-							className="size-full object-cover  rounded-lg"
+							className="object-cover rounded-lg size-full"
 						/>
 					</div>
-					<h1 className="content-accent capitalize">{data?.name} </h1>
+					<h1 className="capitalize content-accent">{data?.name} </h1>
 					<span className="caption-standard text-neutral-500">{data?.description}</span>
 				</div>
 
-				<div className="space-y-5 rounded-lg border bg-neutral-50 p-3">
+				<div className="p-3 space-y-5 border rounded-lg bg-neutral-50">
 					{Object.entries(info).map(([key, value]) => {
 						return (
 							<div
 								key={key}
-								className="caption-standard flex items-center justify-between capitalize text-neutral-700"
+								className="flex items-center justify-between capitalize caption-standard text-neutral-700"
 							>
 								<span className="w-full">{key.split("_").join(" ")} </span>
 								<span className="w-full">{value}</span>
