@@ -1,8 +1,8 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import useCustomNavigation from "@/hooks/use-navigation";
 import ensureError from "@/lib/ensure-error";
 import updateUserStatus from "@/services/users/update-user-status";
 import { User } from "@/types/user.types";
+import { useQueryClient } from "@tanstack/react-query";
 import { CheckSquare2, XSquare } from "lucide-react";
 import { toast } from "sonner";
 
@@ -12,17 +12,19 @@ type SuspendUserProps = {
 	status: User["status"];
 };
 export default function UpdateUserStatus(props: SuspendUserProps) {
-	const { queryParams } = useCustomNavigation();
+
+
+	const clientQuery = useQueryClient()
 
 	const toggleShow = async () => {
 		props.setIsLoading(true);
-		queryParams.set("status", "");
 		try {
 			await updateUserStatus({
 				user_id: props.id,
 				status: props.status === "suspended" ? "active" : "suspended",
 			});
-			queryParams.delete("status");
+			clientQuery.invalidateQueries({ queryKey: ["users"] });
+			
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);
