@@ -71,7 +71,10 @@ export default function useForm() {
 		try {
 			const formValues = validate.parse(sanitizePayload());
 
-			const response = await loginAccount({login:formValues.email, password:formData.password});
+			const response = await loginAccount({
+				login: formValues.email ? formValues.email : formValues.username,
+				password: formData.password,
+			});
 			account.changeAccount(response.user);
 			account.changeToken(response.token);
 			setCookie(response.token);

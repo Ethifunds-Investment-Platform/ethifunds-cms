@@ -15,7 +15,6 @@ export default function useActivityLog() {
 		() => getUserActivityLog({ user_id }),
 		{
 			onSuccess(data) {
-				console.log(data, "data");
 				setActivityLog(data);
 			},
 		}

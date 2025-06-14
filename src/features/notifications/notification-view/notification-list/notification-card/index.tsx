@@ -18,7 +18,6 @@ export default function NotificationCard(props: NotificationCardProps) {
 		props.onSelect(props);
 	};
 
-	console.log(props.data);
 	const notificationType = (props as any)?.type;
 	return (
 		<div onClick={click} className={cn}>

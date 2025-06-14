@@ -99,7 +99,7 @@ export default function useEditInvestment() {
 				tenor_value: data.tenor_value,
 				total_units: data.total_units,
 				expected_roi: data.expected_roi,
-				funding_deadline: formatDateToYYYYMMDD(data.funding_deadline ?? ""),
+				funding_deadline: data.funding_deadline ? formatDateToYYYYMMDD(data.funding_deadline) : undefined,
 				funding_goal: data.funding_goal,
 				unit_price: data.unit_price,
 				product_memo: data.product_memo,
@@ -142,9 +142,17 @@ export default function useEditInvestment() {
 		}));
 	};
 
-	const updateFile = async (name: keyof typeof formData, e: React.ChangeEvent<HTMLInputElement>) => {
+	const updateFile = async (
+		name: keyof typeof formData,
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
 		const file = e.target.files?.[0];
 		if (!file) return;
+		if (file.size > 1024 * 1024 * 1) {
+			toast.error("File size must be less than 1MB");
+			return;
+		}
+
 		const fileBase64 = await blobReader(file);
 		setFormData((prev) => ({
 			...prev,

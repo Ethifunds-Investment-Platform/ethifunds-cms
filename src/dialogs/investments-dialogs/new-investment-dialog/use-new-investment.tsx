@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import getInvestmentCategories from "@/services/investments/get-investment-categories";
 import blobReader, { generatePreview } from "@/lib/blob-reader";
 import createInvestment from "@/services/investments/create-investment";
+import { queryClient } from "@/config/query-client-config";
 
 const validation = z.object({
 	name: z.string().min(3, "Name must be at least 3 characters"),
@@ -103,13 +104,22 @@ export default function useNewInvestment() {
 		}));
 	};
 
-	const updateFile = (name: keyof typeof formData, e: React.ChangeEvent<HTMLInputElement>) => {
+	const updateFile = async (name: keyof typeof formData, e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (!file) return;
+		const  compressedFile = file;
+		// if ( name === "display_image" ) {
+		// 	compressedFile = await compressImage(file);
+		// }
+		if (compressedFile.size > 1024 * 1024 * 1) {
+			toast.error("File size must be less than 1MB");
+			return;
+		}
 
+		
 		setFormData((prev) => ({
 			...prev,
-			[name]: file,
+			[name]: compressedFile,
 		}));
 	};
 
@@ -123,14 +133,26 @@ export default function useNewInvestment() {
 		}
 	};
 
-	const prepareFormData = (data: NewInvestmentPayload) => {
+	const prepareFormData = async (data: NewInvestmentPayload) => {
 		const formData = new FormData();
 
-		Object.entries(data).forEach(([key, value]) => {
+		const files = ["display_image"];
+		for (const [key, value] of Object.entries(data)) {
 			if (value !== undefined && value !== null) {
-				formData.append(key, typeof value === "number" ? value.toString() : value);
+				if (files.includes(key)) {
+					const imgBase64 = await blobReader(value as File);
+					formData.append(key, imgBase64);
+				} else {
+					formData.append(key, typeof value === "number" ? value.toString() : value);
+				}
 			}
-		});
+		}
+
+		// Object.entries(data).forEach(([key, value]) => {
+		// 	if (value !== undefined && value !== null) {
+		// 		formData.append(key, typeof value === "number" ? value.toString() : value);
+		// 	}
+		// });
 
 		return formData;
 	};
@@ -163,7 +185,7 @@ export default function useNewInvestment() {
 				categories.find((item) => item.id === Number(validatedData.product_category_id))?.name ??
 				"";
 
-			const formDataToSend = prepareFormData({
+			const formDataToSend = await prepareFormData({
 				...validatedData,
 				product_category_id: Number(validatedData.product_category_id),
 			});
@@ -197,7 +219,8 @@ export default function useNewInvestment() {
 		};
 
 		const dismiss = () => {
-			ui.resetDialog();
+			queryClient.invalidateQueries( ["all-investments"] );
+			queryClient.invalidateQueries( ["recent-investments"] );
 			reset();
 		};
 

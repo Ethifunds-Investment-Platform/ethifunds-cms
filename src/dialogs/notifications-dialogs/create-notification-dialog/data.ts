@@ -28,7 +28,7 @@ export const formFields: FORM_FIELDS[] = [
 	},
 	{
 		name: "schedule_for",
-		type: "datetime-local",
+		type: "date",
 		label: "Schedule Date (optional)",
 		placeholder: "Pick Date",
 		required: false,

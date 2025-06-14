@@ -19,7 +19,7 @@ export const formFields: FORM_FIELDS[] = [
 
 	{
 		name: "roi",
-		type: "number",
+		type: "text",
 		label: "ROI(%)",
 		placeholder: "Enter ROI",
 		required: true,
