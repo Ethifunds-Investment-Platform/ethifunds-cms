@@ -4,8 +4,8 @@ export const formFields: FORM_FIELDS[] = [
 	{
 		name: "email",
 		type: "text",
-		label: "email/username",
-		placeholder: "Enter Email or Username",
+		label: "email",
+		placeholder: "Enter Email",
 		required: true,
 	},
 

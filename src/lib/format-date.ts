@@ -1,4 +1,5 @@
 export function formatDateToYYYYMMDD(dateString: string) {
+	if (!dateString) return "";
 	// Check if the dateString matches the expected format YYYY-MM-DD
 	const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
 	if (dateFormatRegex.test(dateString)) {

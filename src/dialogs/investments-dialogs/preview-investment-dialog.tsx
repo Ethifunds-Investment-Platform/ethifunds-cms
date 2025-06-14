@@ -43,7 +43,7 @@ export default React.memo(function PreviewInvestmentDialog() {
 			funding_goal: `${currency.sign} ${amountSeparator(data.funding_goal)}`,
 		};
 		return Object.fromEntries(
-			Object.entries(infoData).filter((entries) => entries[1] !== undefined)
+			Object.entries(infoData).filter((entries) => entries[1]  )
 		);
 	}, [currency.sign, data]);
 
