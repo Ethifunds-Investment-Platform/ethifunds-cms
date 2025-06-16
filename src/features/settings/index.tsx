@@ -5,6 +5,7 @@ import { settingsTab } from "./data";
 import Profile from "./profile";
 import useCustomNavigation from "@/hooks/use-navigation";
 import * as React from "react";
+import Security from "./security";
 
 export default function Settings() {
 	useUi({ title: "Settings" });
@@ -33,7 +34,7 @@ export default function Settings() {
 				</TabsList>
 
 				<Profile />
-				{/* <Security /> */}
+				<Security />
 			</Tabs>
 		</AppContainer>
 	);
