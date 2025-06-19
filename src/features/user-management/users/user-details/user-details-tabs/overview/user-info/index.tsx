@@ -30,12 +30,12 @@ export default function UserInfo(props: UserInfoProps) {
 			  }),
 	};
 
-	const isVerified = Object.entries(props.user_verifications)
+	const isVerified = Object.entries(props?.user_verifications ?? {})
 		.filter(([, value]) => typeof value === "boolean")
 		.every((item) => item);
 
 	return (
-		<div className="border rounded-lg p-4 space-y-4">
+		<div className="p-4 space-y-4 border rounded-lg">
 			<UserInfoHeader
 				signedUpAt={props.created_at}
 				userName={userName}
@@ -51,7 +51,7 @@ export default function UserInfo(props: UserInfoProps) {
 				{Object.entries(data).map(([key, value], idx) => {
 					return (
 						<div key={idx} className="">
-							<span className="caption-standard capitalize text-neutral-500">
+							<span className="capitalize caption-standard text-neutral-500">
 								{key.split("_").join(" ")}
 							</span>
 							<h2 className="highlight-standard"> {capitalize(value ?? "")}</h2>
