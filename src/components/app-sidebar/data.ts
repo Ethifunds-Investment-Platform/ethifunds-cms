@@ -37,19 +37,19 @@ export const sidebarLinks: SidebarLink[] = [
 		relativePaths: [],
 	},
 	{
-		name: "investments",
+		name: "Ethivest",
 		path: "investments",
 		icon: icons.investments_icon,
 		activeIcon: icons.investments_icon_active,
 		relativePaths: [],
 	},
-	{
-		name: "savings",
-		path: "savings",
-		icon: icons.savings_icon,
-		activeIcon: icons.savings_icon_active,
-		relativePaths: [],
-	},
+	// {
+	// 	name: "savings",
+	// 	path: "savings",
+	// 	icon: icons.savings_icon,
+	// 	activeIcon: icons.savings_icon_active,
+	// 	relativePaths: [],
+	// },
 
 	{
 		name: "notifications",

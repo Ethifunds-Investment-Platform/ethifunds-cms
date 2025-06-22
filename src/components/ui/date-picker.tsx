@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 type DatePickerProps = {
 	name?: string;
-	value: Date;
+	value?: Date;
 	onChange: (value: Date) => void;
 	disabled?: boolean;
 	triggerStyle?: string;
@@ -38,7 +38,7 @@ export function DatePicker({
 		<Popover modal={true}>
 			<PopoverTrigger asChild>
 				<Button name={props.name} variant={"outline"} className={triggerCn}>
-					<CalendarIcon className="mr-2 h-4 w-4" />
+					<CalendarIcon className="w-4 h-4 mr-2" />
 					{date ? format(date, "PPP") : <span>Pick a date</span>}
 				</Button>
 			</PopoverTrigger>

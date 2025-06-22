@@ -20,8 +20,8 @@ const validation = z.object({
 	product_category_id: z.string().min(1, "Category is required"),
 	product_custodian_id: z.number().positive("Custodian id is required"),
 	account_id: z.number().positive("Account ID is required"),
-	product_label: z.string().optional(),
-	product_section: z.string().optional(),
+	product_label: z.string().min(1, "Product label is required").optional(),
+	product_section: z.string().min(1, "Product section is required").optional(),
 	description: z.string().min(10, "Description must be at least 10 characters"),
 	tenor_unit: z.enum(["days", "months", "years"]),
 	tenor_value: z.number().positive("Tenor value must be a positive value"),
@@ -32,7 +32,7 @@ const validation = z.object({
 	unit_price: z.string().min(1, "Unit price is required"),
 	status: z.enum(InvestmentsStatus),
 	display_image: z.instanceof(File, { message: "Display image is required" }),
-	product_memo: z.instanceof(File, { message: "Product Memo is required" }),
+	product_memo: z.instanceof(File, { message: "Product Memo is required" }).nullable(),
 });
 
 type FormData = z.infer<typeof validation>;
@@ -52,7 +52,7 @@ const init: FormData = {
 	funding_deadline: "",
 	funding_goal: "",
 	unit_price: "",
-	product_memo: {} as any,
+	product_memo: null,
 	product_custodian_id: 0,
 	account_id: 0,
 };
@@ -104,10 +104,13 @@ export default function useNewInvestment() {
 		}));
 	};
 
-	const updateFile = async (name: keyof typeof formData, e: React.ChangeEvent<HTMLInputElement>) => {
+	const updateFile = async (
+		name: keyof typeof formData,
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
 		const file = e.target.files?.[0];
 		if (!file) return;
-		const  compressedFile = file;
+		const compressedFile = file;
 		// if ( name === "display_image" ) {
 		// 	compressedFile = await compressImage(file);
 		// }
@@ -116,7 +119,6 @@ export default function useNewInvestment() {
 			return;
 		}
 
-		
 		setFormData((prev) => ({
 			...prev,
 			[name]: compressedFile,
@@ -161,6 +163,7 @@ export default function useNewInvestment() {
 		setIsLoading(true);
 
 		try {
+			console.log(formData);
 			// Validate form data
 			const validatedData = validation.parse({
 				...formData,
@@ -219,8 +222,8 @@ export default function useNewInvestment() {
 		};
 
 		const dismiss = () => {
-			queryClient.invalidateQueries( ["all-investments"] );
-			queryClient.invalidateQueries( ["recent-investments"] );
+			queryClient.invalidateQueries(["all-investments"]);
+			queryClient.invalidateQueries(["recent-investments"]);
 			reset();
 		};
 

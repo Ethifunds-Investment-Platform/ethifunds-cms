@@ -107,7 +107,7 @@ export type NewInvestmentPayload = {
 	funding_goal: string;
 	unit_price: string;
 	status: InvestmentStatus;
-	product_memo: File;
+	product_memo: File | null;
 };
 
 export type UpdateInvestmentPayload = {
@@ -125,5 +125,5 @@ export type UpdateInvestmentPayload = {
 	funding_goal: string;
 	unit_price: string;
 	status: InvestmentStatus;
-	product_memo?: string;
+	product_memo: string | null;
 };

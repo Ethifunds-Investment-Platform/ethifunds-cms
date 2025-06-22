@@ -11,7 +11,7 @@ import ErrorBoundary from "@/components/error-boundary";
 export default function InvestmentsTabs() {
 	useUi({ title: "Investments" });
 
-	const { isFetching, isError, error, data } = useQuery(["investments-metrics"], () =>
+	const { isFetching, isError, error, data } = useQuery(["investments-categories"], () =>
 		getInvestmentCategories()
 	);
 
