@@ -153,7 +153,7 @@ export default React.memo(function ApproveTransactionDialog() {
 
 							<div className="pt-5 text-center">
 								<AppButton								
-									isLoading={isLoading}
+									isLoading={isLoading} 
 									variant="primary"
 									className="py-4 text-white content-accent w-60 rounded-xl"
 									disabled={isLoading}
