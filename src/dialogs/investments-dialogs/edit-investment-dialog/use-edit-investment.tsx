@@ -98,7 +98,7 @@ export default function useEditInvestment() {
 				tenor_value: data.tenor_value,
 				total_units: data.total_units,
 				expected_roi: data.expected_roi,
-				funding_deadline: data.funding_deadline ,
+				funding_deadline: data.funding_deadline ?? undefined,
 				funding_goal: data.funding_goal,
 				unit_price: data.unit_price,
 				product_memo: data.product_memo,
