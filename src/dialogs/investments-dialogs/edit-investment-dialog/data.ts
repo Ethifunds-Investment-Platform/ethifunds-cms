@@ -25,12 +25,19 @@ export const formFields: FORM_FIELDS[] = [
 		placeholder: "Enter product label",
 		required: true,
 	},
-	{
+		{
 		name: "product_section",
-		type: "text",
+		type: "select",
 		label: "Product Section",
-		placeholder: "enter section",
-		required: true,
+		placeholder: "Select section",
+		options: [
+			{ title: "SME Financing", value: "SME Financing" },
+			{ title: "Asset Financing", value: "Asset Financing" },
+			{ title: "LPO Financing", value: "LPO Financing" },
+			{ title: "Retail Financing", value: "Retail Financing" },
+			{ title: "Investment Banking", value: "Investment Banking" },
+		],
+		required: false,
 	},
 	{
 		name: "description",

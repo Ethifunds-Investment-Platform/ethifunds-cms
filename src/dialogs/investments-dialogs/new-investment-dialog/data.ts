@@ -27,7 +27,7 @@ export const formFields: FORM_FIELDS[] = [
 	},
 	{
 		name: "product_section",
-		type: "date",
+		type: "select",
 		label: "Product Section",
 		placeholder: "Select section",
 		options: [
