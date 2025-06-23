@@ -44,7 +44,7 @@ export const sidebarLinks: SidebarLink[] = [
 		relativePaths: [],
 	},
 	{
-		name: "savings",
+		name: "Ethisave",
 		path: "savings",
 		icon: icons.savings_icon,
 		activeIcon: icons.savings_icon_active,
