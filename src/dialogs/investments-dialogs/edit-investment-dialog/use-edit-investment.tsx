@@ -13,7 +13,6 @@ import updateInvestment from "@/services/investments/update-investment";
 import getInvestmentDetails from "@/services/investments/get-investment-details";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import getInvestmentCategories from "@/services/investments/get-investment-categories";
-import { formatDateToYYYYMMDD } from "@/lib/format-date";
 import blobReader from "@/lib/blob-reader";
 
 const validation = z.object({
@@ -31,7 +30,7 @@ const validation = z.object({
 	funding_goal: z.string().min(1, "Funding goal is required"),
 	unit_price: z.string().min(1, "Unit price is required"),
 	status: z.enum(InvestmentsStatus),
-	product_memo: z.string().optional(),
+	product_memo: z.string().nullable(),
 });
 
 type FormData = z.infer<typeof validation>;
@@ -51,7 +50,7 @@ const init: FormData = {
 	funding_deadline: "",
 	funding_goal: "",
 	unit_price: "",
-	product_memo: "",
+	product_memo: null,
 };
 
 export default function useEditInvestment() {
@@ -99,7 +98,7 @@ export default function useEditInvestment() {
 				tenor_value: data.tenor_value,
 				total_units: data.total_units,
 				expected_roi: data.expected_roi,
-				funding_deadline: formatDateToYYYYMMDD(data.funding_deadline ?? ""),
+				funding_deadline: data.funding_deadline ,
 				funding_goal: data.funding_goal,
 				unit_price: data.unit_price,
 				product_memo: data.product_memo,
@@ -142,9 +141,17 @@ export default function useEditInvestment() {
 		}));
 	};
 
-	const updateFile = async (name: keyof typeof formData, e: React.ChangeEvent<HTMLInputElement>) => {
+	const updateFile = async (
+		name: keyof typeof formData,
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
 		const file = e.target.files?.[0];
 		if (!file) return;
+		if (file.size > 1024 * 1024 * 1) {
+			toast.error("File size must be less than 1MB");
+			return;
+		}
+
 		const fileBase64 = await blobReader(file);
 		setFormData((prev) => ({
 			...prev,

@@ -4,8 +4,9 @@ import * as React from "react";
 import useNewInvestment from "./use-new-investment";
 import { formFields } from "./data";
 import SelectBox from "@/components/select-box";
-import { DateInput, FileInput, Input } from "@/components/ui/form-input";
+import { FileInput, Input } from "@/components/ui/form-input";
 import Textarea from "@/components/ui/form-input/textarea";
+import { DatePicker } from "@/components/ui/date-picker";
 
 export default React.memo(function NewInvestmentDialog() {
 	const {
@@ -83,6 +84,7 @@ export default React.memo(function NewInvestmentDialog() {
 									/>
 								);
 							}
+
 							return (
 								<SelectBox
 									{...item}
@@ -90,6 +92,17 @@ export default React.memo(function NewInvestmentDialog() {
 									value={defaultValue?.toString()}
 									onchange={(e) => updateForm(item.name as any, e)}
 									disabled={isLoading}
+								/>
+							);
+						}
+						if (item.type === "date") {
+							return (
+								<DatePicker
+									{...item}
+									triggerStyle="w-full"
+									key={item.name}
+									value={defaultValue ? new Date(defaultValue as string) : undefined}
+									onChange={(e) => updateForm(item.name as any, e.toISOString())}
 								/>
 							);
 						}
@@ -118,19 +131,7 @@ export default React.memo(function NewInvestmentDialog() {
 								/>
 							);
 						}
-						if (item.type === "date") {
-							return (
-								<DateInput
-									key={item.name}
-									{...item}
-									name={item.name}
-									value={formData[item.name]}
-									onChange={(e) => updateForm(item.name as any, new Date(e).toISOString())}
-									triggerStyle="w-full "
-									disabled={isLoading}
-								/>
-							);
-						}
+
 						return (
 							<Input
 								{...item}

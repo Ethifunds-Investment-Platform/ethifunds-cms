@@ -27,13 +27,15 @@ export const formFields: FORM_FIELDS[] = [
 	},
 	{
 		name: "product_section",
-		type: "select",
+		type: "date",
 		label: "Product Section",
 		placeholder: "Select section",
 		options: [
-			{ title: "SME Financing", value: "sme_financing" },
-			{ title: "Asset Financing", value: "asset_financing" },
-			{ title: "LPO Financing", value: "lpo_financing" },
+			{ title: "SME Financing", value: "SME Financing" },
+			{ title: "Asset Financing", value: "Asset Financing" },
+			{ title: "LPO Financing", value: "LPO Financing" },
+			{ title: "Retail Financing", value: "Retail Financing" },
+			{ title: "Investment Banking", value: "Investment Banking" },
 		],
 		required: false,
 	},
@@ -120,6 +122,6 @@ export const formFields: FORM_FIELDS[] = [
 		label: "Product Memo",
 		placeholder: "Upload memo",
 		accept: ".pdf, .docx",
-		required: true,
+		required: false,
 	},
 ];

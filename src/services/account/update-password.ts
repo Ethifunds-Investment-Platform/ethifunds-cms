@@ -10,7 +10,9 @@ type Parameters = {
 type Response = void;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/change-password`, data);
+	const response = await axios.post(`/auth/change-password`, data, {
+		baseURL: `${variables.BASE_URL}/api`,
+	});
 	return response.data;
 }
 

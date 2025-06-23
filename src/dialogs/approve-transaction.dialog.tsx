@@ -102,12 +102,12 @@ export default React.memo(function ApproveTransactionDialog() {
 	const inputClass = classNames("!size-14 bg-neutral-200 border-white");
 
 	return (
-		<PopupModal handleClose={close} open={open} className="relative w-full lg:w-1/2 min-h-96 p-8">
+		<PopupModal handleClose={close} open={open} className="relative w-full p-8 lg:w-1/2 min-h-96">
 			<ErrorBoundary>
 				<Render isLoading={isFetching} isError={isError} error={error} >
 					<button
 						onClick={close}
-						className="absolute top-0 right-0 lg:-top-8 lg:-right-8 flex items-center justify-center size-8 p-2 rounded-full bg-white"
+						className="absolute top-0 right-0 flex items-center justify-center p-2 bg-white rounded-full lg:-top-8 lg:-right-8 size-8"
 					>
 						<X color="#908b8b" />
 					</button>
@@ -115,7 +115,7 @@ export default React.memo(function ApproveTransactionDialog() {
 						<div className="flex flex-col gap-10">
 							<h1 className="highlight-standard text-neutral-1000">Transaction Details</h1>
 
-							<div className="space-y-5 border rounded-md p-5 bg-gray-100/25">
+							<div className="p-5 space-y-5 border rounded-md bg-gray-100/25">
 								{Object.entries(details).map(([key, value]) => {
 									return (
 										<div
@@ -148,14 +148,14 @@ export default React.memo(function ApproveTransactionDialog() {
 								<small className="caption-standard text-neutral-500">
 									Enter the approval OTP to approve this transaction
 								</small>
-								<PinInput value={otp} valueLength={4} onChange={setOtp} inputClass={inputClass} />
+								<PinInput value={otp} valueLength={6} onChange={setOtp} inputClass={inputClass} />
 							</div>
 
 							<div className="pt-5 text-center">
 								<AppButton								
 									isLoading={isLoading}
 									variant="primary"
-									className="content-accent w-60 rounded-xl py-4 text-white"
+									className="py-4 text-white content-accent w-60 rounded-xl"
 									disabled={isLoading}
 									onClick={approve}
 								>

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/form-input";
 import Textarea from "@/components/ui/form-input/textarea";
 import Render from "@/components/render";
 import FileInput from "@/components/ui/form-input/file-input";
+import { DatePicker } from "@/components/ui/date-picker";
 
 export default React.memo(function EditInvestmentDialog() {
 	const {
@@ -78,6 +79,18 @@ export default React.memo(function EditInvestmentDialog() {
 							const defaultValue = formData[item.name as keyof typeof formData];
 							const currencyFields = ["funding_goal", "unit_price"];
 							const isCurrencyField = currencyFields.includes(item.name);
+
+							if (item.type === "date") {
+								return (
+									<DatePicker
+										{...item}
+										key={item.name}
+										triggerStyle="w-full"
+										value={defaultValue ? new Date(defaultValue as string) : undefined}
+										onChange={(e) => updateForm(item.name as any, e.toISOString())}
+									/>
+								);
+							}
 
 							if (item.type === "select") {
 								if (item.name === "product_category_id") {

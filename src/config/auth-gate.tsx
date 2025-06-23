@@ -15,7 +15,7 @@ export default React.memo(function AuthGate({ children }: { children: React.Reac
 	const { cookie: authToken, deleteCookie } = useCookie(variables.STORAGE.session, "");
 	const { cookie: remember_me } = useCookie(variables.STORAGE.remember_me, false);
 	const { account } = useActions();
-	const {location, navigate } = useCustomNavigation();
+	const { navigate } = useCustomNavigation();
 
 	const INACTIVITY_LIMIT = variables.INACTIVE_LIMIT * 60 * 1000;
 
@@ -27,8 +27,8 @@ export default React.memo(function AuthGate({ children }: { children: React.Reac
 			}
 
 			if (autoLogout) {
-				const path = `/?redirect=${location.pathname}${location.search}`;
-				navigate(path);
+				// const path = `/?redirect=${location.pathname}${location.search}`;
+				navigate("/");
 				return;
 			}
 

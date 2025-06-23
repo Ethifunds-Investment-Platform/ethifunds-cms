@@ -10,8 +10,8 @@ export const settingsTab: SettingsTab[] = [
 		title: "profile",
 		value: "profile",
 	},
-	// {
-	// 	title: "security",
-	// 	value: "security",
-	// },
+	{
+		title: "security",
+		value: "security",
+	},
 ];

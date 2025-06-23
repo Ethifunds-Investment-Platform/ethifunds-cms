@@ -34,25 +34,25 @@ export default React.memo(function InvestmentDetailsDialog() {
 			className="overflow-y-auto hideScrollbar"
 		>
 			<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
-				<div className="mt-5 flex h-full flex-col space-y-5 overflow-auto px-5">
+				<div className="flex flex-col h-full px-5 mt-5 space-y-5 overflow-auto">
 					<div className="space-y-3">
 						<div className="w-full h-28">
 							<img
 								src={data?.display_image}
 								alt={data?.name}
-								className="size-full object-cover  rounded-lg"
+								className="object-cover rounded-lg size-full"
 							/>
 						</div>
 						<h1 className="content-accent">{data?.name} </h1>
 						<span className="caption-standard text-neutral-500">{data?.description}</span>
 					</div>
 
-					<div className="space-y-5 rounded-lg border bg-neutral-50 p-3">
+					<div className="p-3 space-y-5 border rounded-lg bg-neutral-50">
 						{Object.entries(info).map(([key, value]) => {
 							return (
 								<div
 									key={key}
-									className="caption-standard flex items-center justify-between capitalize text-neutral-700"
+									className="flex items-center justify-between capitalize caption-standard text-neutral-700"
 								>
 									<span className="w-full">{key.split("_").join(" ")} </span>
 									<span className="w-full">{value}</span>
@@ -61,16 +61,18 @@ export default React.memo(function InvestmentDetailsDialog() {
 						})}
 					</div>
 
-					<div className="text-end">
-						<a
-							href={data?.product_memo}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-primary underline"
-						>
-							View Memo{" "}
-						</a>
-					</div>
+					{data?.product_memo && (
+						<div className="text-end">
+							<a
+								href={data?.product_memo}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="underline text-primary"
+							>
+								View Memo{" "}
+							</a>
+						</div>
+					)}
 				</div>
 			</Render>
 		</AppDrawer>

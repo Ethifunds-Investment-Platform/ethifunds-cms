@@ -16,12 +16,10 @@ export default function PendingTransactions() {
 			<ErrorBoundary>
 				<div className="flex items-center justify-between px-1">
 					<h1 className="highlight-accent text-neutral-1000">Pending Transactions </h1>
-					{data && data?.length > 0 && (
-						<Link to={`/transactions/all-transactions`} className="underline text-primary">
-							View All Transactions
-						</Link>
-					)}
-					
+
+					<Link to={`/transactions/all-transactions`} className="underline text-primary">
+						View All Transactions
+					</Link>
 				</div>
 
 				<Render isLoading={isFetching} isError={isError} error={error}>
