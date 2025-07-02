@@ -66,13 +66,6 @@ export const formFields: FORM_FIELDS[] = [
 		required: true,
 	},
 	{
-		name: "total_units",
-		type: "number",
-		label: "Total Units",
-		placeholder: "Enter total units",
-		required: true,
-	},
-	{
 		name: "expected_roi",
 		type: "number",
 		label: "Expected ROI (%)",
@@ -87,18 +80,26 @@ export const formFields: FORM_FIELDS[] = [
 		required: false,
 	},
 	{
-		name: "funding_goal",
-		type: "text",
-		label: "Funding Goal",
-		placeholder: "Enter funding goal",
-		required: true,
-	},
-	{
 		name: "unit_price",
 		type: "text",
 		label: "Unit Price",
 		placeholder: "Enter unit price",
 		required: true,
+	},
+	{
+		name: "total_units",
+		type: "number",
+		label: "Total Units",
+		placeholder: "Enter total units",
+		required: true,
+	},
+	{
+		name: "funding_goal",
+		type: "text",
+		label: "Funding Goal",
+		placeholder: "Enter funding goal",
+		required: true,
+		readOnly: true,
 	},
 	{
 		name: "status",

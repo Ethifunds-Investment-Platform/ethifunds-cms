@@ -159,6 +159,22 @@ export default function useEditInvestment() {
 		}));
 	};
 
+ React.useEffect(() => {
+		let value = 0;
+		if (Number(formData.unit_price) < 1 || Number(formData.total_units) < 1) {
+			setFormData((prev) => ({
+				...prev,
+				funding_goal: "0",
+			}));
+			return;
+		}
+		value = Number(formData.unit_price) * Number(formData.total_units);
+		setFormData((prev) => ({
+			...prev,
+			funding_goal: value.toString(),
+		}));
+ }, [formData.unit_price, formData.total_units]);
+
 	const submit = async (payload: UpdateInvestmentPayload) => {
 		try {
 			await updateInvestment({ investment_id: dialog.id, ...payload });

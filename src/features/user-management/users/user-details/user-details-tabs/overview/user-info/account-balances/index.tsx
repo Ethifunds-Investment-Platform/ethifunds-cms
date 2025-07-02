@@ -7,7 +7,7 @@ import { amountSeparator } from "@/lib/amount-separator";
 export default function AccountBalances() {
 	const { isFetching, isError, error, sign, balances } = useAccountBalances();
 
-	const data = Object.entries(balances);
+	const data = Object.entries(balances).filter(item=>item[1]>0);
 
 	return (
 		<div className="grid grid-cols-4 gap-4">
@@ -21,7 +21,7 @@ export default function AccountBalances() {
 					{data.map(([key, value], idx) => {
 						return (
 							<div key={idx}>
-								<span className="caption-standard text-neutral-500 capitalize">
+								<span className="capitalize caption-standard text-neutral-500">
 									{key.split("_").join(" ")}
 								</span>
 								<h2 className="feature-bold">

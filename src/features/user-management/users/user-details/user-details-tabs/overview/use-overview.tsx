@@ -18,7 +18,7 @@ export default function useOverview() {
 		["user-details"],
 		() => getUserDetails({ user_id }),
 		{
-			onSuccess({ recent_transactions, ...data }) {
+			onSuccess({ transactions: recent_transactions, ...data }) {
 				setUser(data);
 				setRecentTransaction(recent_transactions);
 			},

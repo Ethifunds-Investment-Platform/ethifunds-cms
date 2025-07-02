@@ -69,7 +69,7 @@ export default React.memo(function EditInvestmentDialog() {
 			className="overflow-y-auto hideScrollbar"
 		>
 			<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
-				<div className="flex flex-col h-full px-5 mt-5 space-y-5 overflow-auto">
+				<div className="flex overflow-auto flex-col px-5 mt-5 space-y-5 h-full">
 					<span className="content-standard text-neutral-500">
 						Please update the investment details below.
 					</span>
@@ -146,9 +146,9 @@ export default React.memo(function EditInvestmentDialog() {
 									{...item}
 									key={item.name}
 									label={isCurrencyField ? `${item.label} (${currency?.sign}) ` : item.label}
-									value={defaultValue?.toString()}
+									value={defaultValue?.toLocaleString()}
 									onChange={(e) => updateForm(item.name as any, e)}
-									disabled={isLoading}
+									disabled={isLoading || item.readOnly}
 								/>
 							);
 						})}

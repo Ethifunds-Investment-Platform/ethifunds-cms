@@ -10,7 +10,7 @@ type Parameters = {
 };
 
 type Response = User & {
-	recent_transactions: Transaction[];
+	transactions: Transaction[];
 };
 
 export async function production(data: Parameters): Promise<Response> {
@@ -25,7 +25,7 @@ export async function development(): Promise<Response> {
 			() =>
 				resolve({
 					...users[0],
-					recent_transactions: transactions,
+					transactions: transactions,
 				}),
 			2000
 		);

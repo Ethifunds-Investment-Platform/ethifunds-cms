@@ -18,7 +18,7 @@ export default React.memo(function Overview() {
 					loadingComponent={LoadingComponent}
 				>
 					{user && <UserInfo {...user} />}
-					<UserRecentTransactions data={recentTransaction ?? []} />
+					<UserRecentTransactions data={recentTransaction?.slice(0, 20) ?? []} />
 				</Render>
 			</div>
 		</TabContainer>
