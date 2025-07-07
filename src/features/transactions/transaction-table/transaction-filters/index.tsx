@@ -7,11 +7,30 @@ export type FilterProps = {
   disabled: boolean;
 };
 export default function TransactionFilters(props: FilterProps) {
-  return (
-		<div className="flex items-center gap-3 py-1 overflow-auto">
+	const statusList = [
+		{
+			name: "all",
+			path: "all",
+		},
+		{
+			name: "completed",
+			path: "success",
+		},
+		{
+			name: "pending",
+			path: "pending",
+		},
+		{
+			name: "failed",
+			path: "failed",
+		},
+	];
+
+	return (
+		<div className="flex overflow-auto gap-3 items-center py-1">
 			<TransactionTypeFilter {...props} />
 			{/* <CurrencyFilter {...props} /> */}
-			<StatusFilter {...props} />
+			<StatusFilter {...props} statusList={statusList} />
 			<ExportFilter {...props} url="/transactions/export" />
 			<DateFilter {...props} />
 		</div>

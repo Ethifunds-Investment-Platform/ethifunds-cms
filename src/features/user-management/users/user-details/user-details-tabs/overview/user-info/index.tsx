@@ -2,10 +2,11 @@ import { User } from "@/types/user.types";
 import UserInfoHeader from "./user-info-header";
 import AccountBalances from "./account-balances";
 import capitalize from "@/lib/capitalize";
+import truncate from "@/lib/truncate";
 
 type UserInfoProps = User & {};
 export default function UserInfo(props: UserInfoProps) {
-	const userName = `${props.user_profile?.first_name} ${props.user_profile?.last_name}`;
+	const userName = `${props.user_profile?.first_name??""} ${props.user_profile?.last_name??""}`;
 
 	const getStatus = (value: boolean) => {
 		return value ? "Verified" : "Not Verified";
@@ -13,7 +14,7 @@ export default function UserInfo(props: UserInfoProps) {
 
 	const data = {
 		username: props.username,
-		email: props.email,
+		email: truncate(props.email, 20),
 		phone: props.phone_number,
 		// address: props.user_profile?.residential_address,
 
@@ -35,10 +36,10 @@ export default function UserInfo(props: UserInfoProps) {
 		.every((item) => item);
 
 	return (
-		<div className="p-4 space-y-4 border rounded-lg">
+		<div className="p-4 space-y-4 rounded-lg border">
 			<UserInfoHeader
 				signedUpAt={props.created_at}
-				userName={userName}
+				userName={userName??""}
 				isVerified={isVerified}
 				id={props.id}
 				accountStatus={props.status}
@@ -54,7 +55,7 @@ export default function UserInfo(props: UserInfoProps) {
 							<span className="capitalize caption-standard text-neutral-500">
 								{key.split("_").join(" ")}
 							</span>
-							<h2 className="highlight-standard"> {capitalize(value ?? "")}</h2>
+							<h2 className="highlight-standard" title={value}> {capitalize(value ?? "N/A")}</h2>
 						</div>
 					);
 				})}

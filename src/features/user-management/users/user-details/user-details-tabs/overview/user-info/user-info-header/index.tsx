@@ -22,19 +22,19 @@ export default function UserInfoHeader(props: UserInfoHeaderProps) {
 
 	return (
 		<div className="flex justify-between">
-			<div className="flex items-center gap-10">
+			<div className="flex gap-10 items-center">
 				<Badge
-					className="items-center justify-center flex relative size-20 rounded-full"
+					className="flex relative justify-center items-center rounded-full size-20"
 					variant={"outline"}
 				>
 					{props.profile ? (
 						<img src={props.profile} alt={initials[0][0]} className="object-cover size-full" />
 					) : (
-						<span className="heading-3"> {initials[0][0] + initials[1][0]}</span>
+						props.userName !=="" &&<span className="heading-3">{initials[0][0] + initials[1][0]}</span>
 					)}
 
 					{props.isVerified && (
-						<BadgeCheck className="text-primary-500 absolute bottom-0 right-0" />
+						<BadgeCheck className="absolute right-0 bottom-0 text-primary-500" />
 					)}
 				</Badge>
 
@@ -49,7 +49,7 @@ export default function UserInfoHeader(props: UserInfoHeaderProps) {
 				</div>
 			</div>
 
-			<div className="flex items-center gap-4">
+			<div className="flex gap-4 items-center">
 				<Badge className={statusClx}>{props.accountStatus}</Badge>
 				<AccountActions id={props.id} status={props.accountStatus} />
 			</div>

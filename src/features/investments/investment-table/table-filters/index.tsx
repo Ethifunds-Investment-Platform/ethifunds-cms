@@ -19,10 +19,14 @@ export default function TableFilters(props: FilterProps) {
 			name: "Inactive",
 			path: "inactive",
 		},
+		{
+			name: "Draft",
+			path: "draft",
+		},
 	];
 
 	return (
-		<div className="flex items-center gap-3 py-1 overflow-auto">
+		<div className="flex overflow-auto gap-3 items-center py-1">
 			{/* <TransactionTypeFilter {...props} /> */}
 			{/* <CurrencyFilter {...props} /> */}
 			<StatusFilter {...props} statusList={options} />
