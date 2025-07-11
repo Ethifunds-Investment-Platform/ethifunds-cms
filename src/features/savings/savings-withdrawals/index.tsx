@@ -25,7 +25,7 @@ export default React.memo(function SavingsWithdrawals() {
 				):null}
 			</div>
 
-			<div className="flex flex-col h-screen">
+			<div className="flex overflow-auto flex-col h-96">
 				<Render isLoading={isFetching} isError={isError} error={error}>
 					<div className="overflow-auto grow">
 						<SavingsWithdrawalTable
