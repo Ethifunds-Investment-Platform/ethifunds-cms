@@ -2,9 +2,10 @@ import { variables } from "@/constants";
 
 import { savingsQuarters } from "@/constants/data/savings/savings-quarters";
 import axios from "@/lib/axios";
+import { PaginatedResponse } from "@/types/global.types";
 import { SavingsQuarter } from "@/types/savings.types";
 
-type Response = SavingsQuarter[];
+type Response =  PaginatedResponse<SavingsQuarter>;
 
 export async function production(): Promise<Response> {
 	const response = await axios.get(`/ethicoop/quarters`);
@@ -13,7 +14,16 @@ export async function production(): Promise<Response> {
 
 export async function development(): Promise<Response> {
 	return new Promise((resolve) => {
-		setTimeout(() => resolve(savingsQuarters), 2000);
+		setTimeout(
+			() =>
+				resolve({
+					docs: savingsQuarters,
+					total: savingsQuarters.length,
+					page: 1,
+					limit: 10,
+				} as any),
+			2000
+		);
 	});
 }
 

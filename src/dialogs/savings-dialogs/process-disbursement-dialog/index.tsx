@@ -60,7 +60,7 @@ export default React.memo(function ProcessDisbursementDialog() {
 									name={item.name}
 									value={formData[item.name]}
 									onchange={(e) => updateForm(item.name as any, e)}
-									options={(quarters ?? []).map((quarter) => ({
+									options={quarters?.docs?.map((quarter) => ({
 										value: quarter.id.toString(),
 										title: `${quarter.year} Q${quarter.quarter} (${
 											quarter.status === "open" ? "Active" : "Closed"
