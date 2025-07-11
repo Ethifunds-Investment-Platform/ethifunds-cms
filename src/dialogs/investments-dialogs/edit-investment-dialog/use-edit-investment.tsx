@@ -214,7 +214,7 @@ export default function useEditInvestment() {
 				...formData,
 				tenor_value: Number(formData.tenor_value),
 				total_units: Number(formData.total_units),
-				expected_roi: Number(formData.expected_roi),
+				expected_roi: formData.expected_roi,
 			});
 
 			const display_image = validatedData.display_image;
