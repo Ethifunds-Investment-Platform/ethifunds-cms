@@ -20,13 +20,13 @@ const validation = z.object({
 	product_category_id: z.string().min(1, "Category is required"),
 	product_custodian_id: z.number().positive("Custodian id is required"),
 	account_id: z.number().positive("Account ID is required"),
-	product_label: z.string().min(1, "Product label is required").optional(),
+	product_label: z.string().min(1, "product label is required").optional(),
 	product_section: z.string().min(1, "Product section is required").optional(),
 	description: z.string().min(10, "Description must be at least 10 characters"),
 	tenor_unit: z.enum(["days", "months", "years"]),
 	tenor_value: z.number().positive("Tenor value must be a positive value"),
 	total_units: z.number().positive("Total units must be at positive value"),
-	expected_roi: z.number().positive("ROI cannot be negative"),
+	expected_roi: z.string().min(1, "ROI is required"),
 	funding_deadline: z.string().optional(),
 	funding_goal: z.string().min(1, "Funding goal is required"),
 	unit_price: z.string().min(1, "Unit price is required"),
@@ -48,7 +48,7 @@ const init: FormData = {
 	tenor_unit: "years",
 	tenor_value: 0,
 	total_units: 0,
-	expected_roi: 0,
+	expected_roi: "",
 	funding_deadline: "",
 	funding_goal: "",
 	unit_price: "",
@@ -125,22 +125,21 @@ export default function useNewInvestment() {
 		}));
 	};
 
-
-	 React.useEffect(() => {
-			let value = 0;
-			if (Number(formData.unit_price) < 1 || Number(formData.total_units) < 1) {
-				setFormData((prev) => ({
-					...prev,
-					funding_goal: "0",
-				}));
-				return;
-			}
-			value = Number(formData.unit_price) * Number(formData.total_units);
+	React.useEffect(() => {
+		let value = 0;
+		if (Number(formData.unit_price) < 1 || Number(formData.total_units) < 1) {
 			setFormData((prev) => ({
 				...prev,
-				funding_goal: value.toString(),
+				funding_goal: "0",
 			}));
-		}, [formData.unit_price, formData.total_units]);
+			return;
+		}
+		value = Number(formData.unit_price) * Number(formData.total_units);
+		setFormData((prev) => ({
+			...prev,
+			funding_goal: value.toString(),
+		}));
+	}, [formData.unit_price, formData.total_units]);
 
 	const submit = async (payload: globalThis.FormData) => {
 		try {
@@ -149,6 +148,7 @@ export default function useNewInvestment() {
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);
+			throw error;
 		}
 	};
 
@@ -180,18 +180,16 @@ export default function useNewInvestment() {
 		setIsLoading(true);
 
 		try {
-			console.log(formData);
 			// Validate form data
 			const validatedData = validation.parse({
 				...formData,
 				tenor_value: Number(formData.tenor_value),
 				total_units: Number(formData.total_units),
-				expected_roi: Number(formData.expected_roi),
+				expected_roi: formData.expected_roi,
 				product_custodian_id: account.id,
 				product_label: formData.product_label ?? "",
 				product_section: formData.product_section ?? "",
 				funding_deadline: formData.funding_deadline ?? "",
-
 				account_id: account.id,
 			});
 
@@ -227,6 +225,7 @@ export default function useNewInvestment() {
 		} catch (error) {
 			const errMsg = ensureError(error).message;
 			toast.error(errMsg);
+			throw error;
 		} finally {
 			setIsLoading(false);
 		}

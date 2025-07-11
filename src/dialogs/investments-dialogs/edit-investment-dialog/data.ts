@@ -67,8 +67,8 @@ export const formFields: FORM_FIELDS[] = [
 	},
 	{
 		name: "expected_roi",
-		type: "number",
-		label: "Expected ROI (%)",
+		type: "text",
+		label: "Expected ROI Range (%)",
 		placeholder: "Enter expected ROI",
 		required: true,
 	},

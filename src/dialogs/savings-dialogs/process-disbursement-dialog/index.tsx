@@ -1,16 +1,27 @@
 import AppButton from "@/components/app-button";
 import AppDrawer from "@/components/ui/app-drawer";
 import * as React from "react";
-import { DateInput, Input } from "@/components/ui/form-input";
-import useCreate from "./use-create";
+import { Input } from "@/components/ui/form-input";
+import useDisbursement from "./use-disbursement";
 import { formFields } from "./data";
+import SelectBox from "@/components/select-box";
 
-export default React.memo(function CreateSavingsDialog() {
-	const { open, isLoading, formData, updateForm, closeDrawer, toggleDrawer, submit } = useCreate();
+export default React.memo(function ProcessDisbursementDialog() {
+	const {
+		open,
+		isLoading,
+		formData,
+		updateForm,
+		closeDrawer,
+		toggleDrawer,
+		submit,
+		quarters,
+		isFetching,
+	} = useDisbursement();
 
 	return (
 		<AppDrawer
-			title="Create Savings"
+			title="Process Disbursement"
 			direction="right"
 			open={open}
 			handleChange={toggleDrawer}
@@ -26,31 +37,36 @@ export default React.memo(function CreateSavingsDialog() {
 					</AppButton>
 
 					<AppButton variant="primary" isLoading={isLoading} onClick={submit}>
-						Create
+						Disburse
 					</AppButton>
 				</div>
 			}
 			className="overflow-y-auto hideScrollbar"
 		>
-			<div className="mt-5 flex h-full flex-col space-y-5 overflow-auto px-5">
+			<div className="flex overflow-auto flex-col px-5 mt-5 space-y-5 h-full">
 				<span className="content-standard text-neutral-500">
 					Please fill out the details below.
 				</span>
 
-				<form className="space-y-3 pb-3">
+				<form className="pb-3 space-y-3">
 					{formFields.map((item) => {
 						const defaultValue = formData[item.name as keyof typeof formData];
 
-						if (item.type === "date") {
+						if (item.type === "select") {
 							return (
-								<DateInput
+								<SelectBox
 									key={item.name}
 									{...item}
 									name={item.name}
 									value={formData[item.name]}
-									onChange={(e) => updateForm(item.name as any, new Date(e).toISOString())}
-									triggerStyle="w-full "
-									disabled={isLoading}
+									onchange={(e) => updateForm(item.name as any, e)}
+									options={(quarters ?? []).map((quarter) => ({
+										value: quarter.id.toString(),
+										title: `${quarter.year} Q${quarter.quarter} (${
+											quarter.status === "open" ? "Active" : "Closed"
+										})`,
+									}))}
+									disabled={isLoading || isFetching}
 								/>
 							);
 						}
@@ -60,7 +76,7 @@ export default React.memo(function CreateSavingsDialog() {
 								key={item.name}
 								value={defaultValue?.toString()}
 								onChange={(e) => updateForm(item.name as any, e)}
-								disabled={isLoading}
+								disabled={isLoading || isFetching}
 							/>
 						);
 					})}

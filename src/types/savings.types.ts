@@ -9,6 +9,40 @@ export type SavingsByAmount = {
 	">10000000": number;
 };
 
+
+export type SavingsQuarter = {
+	id: number;
+	year: number;
+	quarter: number;
+	roi_percent: string;
+	start_date: string;
+	end_date: string;
+	status: string;
+	created_at: string;
+	updated_at: string;
+};
+
+export type SavingsWithdrawal = {
+	id: number;
+	user_id: number;
+	amount: string;
+	status: string;
+	requested_at: string;
+	processed_at: string;
+	target_account_id: number;
+	quarter_id: number | null;
+	created_at: string;
+	updated_at: string;
+	user: {
+		id: number;
+		email: string;
+		has_set_pin: number;
+		name: string;
+		user_profile: number | null;
+	};
+};
+
+
 export type Savings = {
 	id: number;
 	title: string;

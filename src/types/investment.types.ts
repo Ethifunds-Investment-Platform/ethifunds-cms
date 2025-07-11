@@ -102,7 +102,7 @@ export type NewInvestmentPayload = {
 	tenor_unit: string;
 	tenor_value: number;
 	total_units: number;
-	expected_roi: number;
+	expected_roi: string;
 	funding_deadline?: string;
 	funding_goal: string;
 	unit_price: string;
@@ -120,7 +120,7 @@ export type UpdateInvestmentPayload = {
 	tenor_unit: string;
 	tenor_value: number;
 	total_units: number;
-	expected_roi: number;
+	expected_roi: string;
 	funding_deadline?: string;
 	funding_goal: string;
 	unit_price: string;

@@ -9,37 +9,40 @@ import {
 import { amountSeparator } from "@/lib/amount-separator";
 import TableActions from "./table-actions";
 import classNames from "classnames";
-import { Savings } from "@/types/savings.types";
+import { SavingsWithdrawal } from "@/types/savings.types";
 import EmptyData from "@/components/empty-data";
 
 type TableProps = {
-	data: Savings[];
+	data: SavingsWithdrawal[];
 	sign?: string;
 	isEmpty: boolean;
 };
-export default function SavingsTable(props: TableProps) {
+export default function SavingsWithdrawalTable(props: TableProps) {
 	if (props.isEmpty)
-		return <EmptyData title="No savings record yet" text="all savings record will appear here" />;
+		return (
+			<EmptyData
+				title="No savings withdrawal record yet"
+				text="all savings withdrawal record will appear here"
+			/>
+		);
 
 	return (
 		<Table>
 			<TableHeader className="!bg-neutral-100/50">
 				<TableRow className="caption-standard whitespace-nowrap !text-neutral-700 [&_th]:!text-center">
 					<TableHead>Date & Time </TableHead>
-					<TableHead>Amount Raised</TableHead>
-					<TableHead>Target Amount</TableHead>
-					<TableHead>Rio%</TableHead>
-					<TableHead>Contributors</TableHead>
+					<TableHead>Amount</TableHead>
+					<TableHead>User Account</TableHead>
 					<TableHead>Status</TableHead>
 					<TableHead>Action</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>
 				{props.data.map((item) => {
-					const date = new Date(item.start_date);
+					const date = new Date(item.requested_at);
 					const statusClx = classNames("capitalize", {
-						"text-success-200": item.status === "active",
-						"text-neutral-500": item.status !== "active",
+						"text-yellow-500": item.status === "pending",
+						"text-success-200": item.status !== "pending",
 					});
 					return (
 						<TableRow
@@ -55,14 +58,9 @@ export default function SavingsTable(props: TableProps) {
 								})}
 							</TableCell>
 							<TableCell>
-								{props.sign} {amountSeparator(item.amount_raised)}
+								{props.sign} {amountSeparator(item.amount)}
 							</TableCell>
-							<TableCell>
-								{props.sign} {amountSeparator(item.target_amount)}
-							</TableCell>
-							<TableCell>{item.roi}</TableCell>
-
-							<TableCell>{amountSeparator(item.total_contributors)}</TableCell>
+							<TableCell>{item.user.name}</TableCell>
 
 							<TableCell className={statusClx}>{item.status}</TableCell>
 							<TableCell>

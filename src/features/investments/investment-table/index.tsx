@@ -76,7 +76,7 @@ export default function InvestmentTable(props: TableProps) {
 
 							<TableCell className={statusClx}>{item.status}</TableCell>
 							<TableCell>
-								<TableActions id={item.id.toString()} />
+								<TableActions id={item.id.toString()} showDisbursement={item.category.id !== 2} />
 							</TableCell>
 						</TableRow>
 					);

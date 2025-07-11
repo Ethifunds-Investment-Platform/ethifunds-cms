@@ -4,28 +4,23 @@ import useAppSelectors from "@/store/use-app-selectors";
 import * as React from "react";
 import { toast } from "sonner";
 import { z } from "zod";
-import createSavings from "@/services/savings/create-savings";
+import getSavingsQuarters from "@/services/savings/get-savings-quarters";
+import { useQuery } from "@tanstack/react-query";
+import processSavingsDisbursement from "@/services/savings/process-savings-disbursement";
 
 const validation = z.object({
-	start_date: z.string().min(1, "Start date is required"),
-	created_by: z.number().positive("Created by must be a positive number"),
-	roi: z.string().min(1, "ROI is required"),
-	min_amount: z.string().min(1, "Minimum amount is required"),
-	max_amount: z.string().min(1, "Maximum amount is required"),
+	quarter_id: z.number().positive("Quarter is required"),
+	roi_percent: z.number().positive("ROI must be a positive number"),
 });
 
 type FormData = z.infer<typeof validation>;
 
 const init: FormData = {
-	start_date: "",
-	created_by: 0,
-	roi: "",
-	min_amount: "",
-	max_amount: "",
+	quarter_id: "" as any,
+	roi_percent: 0,
 };
 
-export default function useCreate() {
-	const { account } = useAppSelectors("account");
+export default function useDisbursement() {
 	const { dialog } = useAppSelectors("ui");
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [formData, setFormData] = React.useState(init);
@@ -33,9 +28,18 @@ export default function useCreate() {
 	const { ui } = useActions();
 
 	const open = React.useMemo(
-		() => dialog.show && dialog.type === "create_savings",
+		() => dialog.show && dialog.type === "process_savings_disbursement",
 		[dialog.show, dialog.type]
 	);
+
+	const {
+		isFetching,
+		isError,
+		error,
+		data: quarters,
+	} = useQuery(["quarters"], () => getSavingsQuarters(), {
+		enabled: open,
+	});
 
 	const toggleDrawer = (value: boolean) => {
 		if (isLoading) return;
@@ -68,9 +72,10 @@ export default function useCreate() {
 		try {
 			const formValues = validation.parse({
 				...formData,
-				created_by: account.id,
+				quarter_id: Number(formData.quarter_id),
+				roi_percent: Number(formData.roi_percent),
 			});
-			await createSavings(formValues);
+			await processSavingsDisbursement(formValues);
 			showSuccessDialog();
 		} catch (error) {
 			const errMsg = ensureError(error).message;
@@ -82,8 +87,9 @@ export default function useCreate() {
 
 	const showSuccessDialog = () => {
 		const data = {
-			title: "Savings Created!",
-			subtitle: "Savings has been created successfully",
+			title: "Savings Disbursed!",
+			subtitle:
+				"Savings has been disbursed successfully, all contributors will be notified shortly",
 		};
 
 		const dismiss = () => {
@@ -101,6 +107,10 @@ export default function useCreate() {
 
 	return {
 		open,
+		quarters,
+		isFetching,
+		isError,
+		error,
 		isLoading,
 		formData,
 		updateForm,

@@ -42,6 +42,7 @@ export default React.memo(function AuthGate({ children }: { children: React.Reac
 	}, []);
 
 	const autoLogout = React.useCallback(() => {
+		if (variables.NODE_ENV === "development") return;
 		logout(true);
 	}, [logout]);
 
