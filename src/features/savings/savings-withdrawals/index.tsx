@@ -13,7 +13,7 @@ export default React.memo(function SavingsWithdrawals() {
 		<div className="space-y-5">
 			<div className="flex justify-between items-center">
 				<h1 className="hero-accent">Savings Withdrawals</h1>
-				{!isFetching && data?.docs?.length && data?.docs?.length > 1 && (
+				{!isFetching && data?.docs?.length && data?.docs?.length > 1 ? (
 					<AppButton
 						variant="mute"
 						isLoading={isApproving}
@@ -22,7 +22,7 @@ export default React.memo(function SavingsWithdrawals() {
 					>
 						Approve All
 					</AppButton>
-				)}
+				):null}
 			</div>
 
 			<div className="flex flex-col h-screen">
