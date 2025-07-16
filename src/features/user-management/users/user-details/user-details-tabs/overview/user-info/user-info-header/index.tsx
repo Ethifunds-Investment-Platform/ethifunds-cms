@@ -13,6 +13,7 @@ type UserInfoHeaderProps = {
 	profile: User["profile_picture"];
 };
 export default function UserInfoHeader(props: UserInfoHeaderProps) {
+	console.log(props.userName)
 	const initials = props.userName.split(" ");
 	const statusClx = classNames("capitalize text-md px-4", {
 		"bg-success-100 text-success-300 border-success-300": props.accountStatus === "active",
@@ -30,7 +31,7 @@ export default function UserInfoHeader(props: UserInfoHeaderProps) {
 					{props.profile ? (
 						<img src={props.profile} alt={initials[0][0]} className="object-cover size-full" />
 					) : (
-						props.userName !=="" &&<span className="heading-3">{initials[0][0] + initials[1][0]}</span>
+						props.userName !== "" &&<span className="heading-3">{initials[0][0] + initials[1][0]}</span>
 					)}
 
 					{props.isVerified && (

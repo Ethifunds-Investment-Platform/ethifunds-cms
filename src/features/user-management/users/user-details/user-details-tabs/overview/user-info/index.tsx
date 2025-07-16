@@ -8,6 +8,7 @@ type UserInfoProps = User & {};
 export default function UserInfo(props: UserInfoProps) {
 	const userName = `${props.user_profile?.first_name??""} ${props.user_profile?.last_name??""}`;
 
+	console.log(userName ,"user name")
 	const getStatus = (value: boolean) => {
 		return value ? "Verified" : "Not Verified";
 	};
@@ -39,7 +40,7 @@ export default function UserInfo(props: UserInfoProps) {
 		<div className="p-4 space-y-4 rounded-lg border">
 			<UserInfoHeader
 				signedUpAt={props.created_at}
-				userName={userName??""}
+				userName={userName.trim().length> 0? userName :"N A"}
 				isVerified={isVerified}
 				id={props.id}
 				accountStatus={props.status}

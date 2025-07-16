@@ -9,7 +9,7 @@ import { SavingsQuarter } from "@/types/savings.types";
 type Response =  PaginatedResponse<SavingsQuarter>;
 
 export async function production(): Promise<Response> {
-	const response = await axios.get(`/ethicoop/quarters`);
+	const response = await axios.get(`/ethicoop/quarters?limit=100`);
 	return paginate(response.data.data);
 }
 
