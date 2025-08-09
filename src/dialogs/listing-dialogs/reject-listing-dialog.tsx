@@ -53,7 +53,7 @@ export default React.memo(function RejectListingDialog() {
 		asking_price_per_unit: `${currency.sign} ${Number(
 			data?.asking_price_per_unit ?? ""
 		).toLocaleString()}`,
-		interest_rate: `${data?.product.expected_roi}%`,
+		RIO: `${data?.product.expected_roi}%`,
 	};
 
 	const toggleChecked = (val: boolean) => {
@@ -113,7 +113,7 @@ export default React.memo(function RejectListingDialog() {
 		<PopupModal
 			handleClose={close}
 			open={open}
-			className="relative w-full h-full p-8 overflow-auto lg:w-1/2"
+			className="overflow-auto relative p-8 w-full h-full lg:w-1/2"
 			showCloseBtn
 		>
 			<ErrorBoundary>
@@ -121,12 +121,12 @@ export default React.memo(function RejectListingDialog() {
 					<div className="flex flex-col gap-3">
 						<h1 className="feature-accent text-neutral-1000">Listing Details</h1>
 
-						<div className="p-3 space-y-5 border rounded-lg bg-neutral-50">
+						<div className="p-3 space-y-5 rounded-lg border bg-neutral-50">
 							{Object.entries(details).map(([key, value]) => {
 								return (
 									<div
 										key={key}
-										className="flex items-center justify-between capitalize caption-standard text-neutral-700"
+										className="flex justify-between items-center capitalize caption-standard text-neutral-700"
 									>
 										<span className="w-full">{key.split("_").join(" ")} </span>
 										<span className="w-full">{value}</span>
@@ -144,13 +144,13 @@ export default React.memo(function RejectListingDialog() {
 								disabled={isLoading}
 							/>
 
-							<div className="flex items-center gap-2">
+							<div className="flex gap-2 items-center">
 								<Checkbox checked={checked} onCheckedChange={toggleChecked} disabled={isLoading} />
 								<span className="caption-standard text-neutral-700">Flag Listing</span>
 							</div>
 						</div>
 
-						<div className="flex justify-center w-full gap-10">
+						<div className="flex gap-10 justify-center w-full">
 							<AppButton variant="outline" className="w-1/2" onClick={close} disabled={isLoading}>
 								Cancel
 							</AppButton>

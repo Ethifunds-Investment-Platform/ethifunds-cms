@@ -5,6 +5,7 @@ import useOverview from "./use-overview";
 import UserRecentTransactions from "./user-recent-transactions";
 import TabContainer from "../../tab-container";
 import UserInfo from "./user-info";
+import BankAccountList from "./account-list";
 export default React.memo(function Overview() {
 	const { isFetching, isError, error, user, recentTransaction } = useOverview();
 
@@ -18,6 +19,8 @@ export default React.memo(function Overview() {
 					loadingComponent={LoadingComponent}
 				>
 					{user && <UserInfo {...user} />}
+
+					<BankAccountList data={user?.bank_accounts ?? []} />
 					<UserRecentTransactions data={recentTransaction?.slice(0, 20) ?? []} />
 				</Render>
 			</div>

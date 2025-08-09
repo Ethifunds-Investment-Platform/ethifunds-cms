@@ -26,14 +26,14 @@ export default function TableFilters(props: FilterProps) {
 			name: "rejected",
 			path: "rejected",
 		},
-		{
-			name: "completed",
-			path: "completed",
-		},
+		// {
+		// 	name: "completed",
+		// 	path: "completed",
+		// },
 	];
 
 	return (
-		<div className="flex items-center gap-3 overflow-auto py-1">
+		<div className="flex overflow-auto gap-3 items-center py-1">
 			<TableSearchBar {...props} />
 
 			<StatusFilter {...props} statusList={statusList} />

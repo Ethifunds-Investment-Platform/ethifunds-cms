@@ -1,3 +1,5 @@
+import { BankAccount } from "./bank-account.types";
+
 export type AccountStatus = "active" | "inactive" | "suspended";
 
 export type User = {
@@ -14,6 +16,7 @@ export type User = {
 	email_verified_at: string | null;
 	user_verifications: UserVerification;
 	user_profile: UserProfile | null;
+	bank_accounts: BankAccount[];
 	two_factor: TwoFactor | null;
 	created_at: string;
 	updated_at: string;

@@ -1,3 +1,5 @@
+import { User } from "./user.types";
+
 export type SavingsByAmount = {
 	">5000": number;
 	">10000": number;
@@ -8,7 +10,6 @@ export type SavingsByAmount = {
 	">5000000": number;
 	">10000000": number;
 };
-
 
 export type SavingsQuarter = {
 	id: number;
@@ -42,7 +43,6 @@ export type SavingsWithdrawal = {
 	};
 };
 
-
 export type Savings = {
 	id: number;
 	title: string;
@@ -65,32 +65,43 @@ export type Savings = {
 	updated_at: string;
 };
 
+export type SavingsContributor = {
+	id: number;
+	user_id: number;
+	user: User;
+	amount_contributed: string;
+	last_contribution_date: string;
+	created_at: string;
+	updated_at: string;
+};
+
 export type SavingsTransaction = {
 	id: number;
-	account_id: string;
-	username: string;
+	user_id: string;
+	user: User;
 	amount: string;
 	status: "success" | "failed" | "pending";
-	target_amount: string;
-	amount_paid: string;
+	// target_amount: string;
+	// amount_paid: string;
 	transaction_reference: string;
 	transaction_date: string;
 	created_at: string;
 	updated_at: string;
 };
 
-export type SavingsContributor = {
-	id: number;
-	user_id: number;
-	username: string;
-	target_amount: string;
-	amount_raised: string;
-	savings_id: number;
-	created_at: string;
-	updated_at: string;
-};
-
-
+// export type SavingsTransaction = {
+// 	id: number;
+// 	user_id: string;
+// 	user: User;
+// 	amount: string;
+// 	status: "success" | "failed" | "pending";
+// 	target_amount: string;
+// 	amount_paid: string;
+// 	transaction_reference: string;
+// 	transaction_date: string;
+// 	created_at: string;
+// 	updated_at: string;
+// };
 
 export type CreateSavingsPayload = {
 	start_date: string;
