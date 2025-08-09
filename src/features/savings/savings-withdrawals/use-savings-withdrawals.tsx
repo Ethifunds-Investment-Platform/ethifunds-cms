@@ -6,7 +6,7 @@ import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import bulkWithdrawalApproval from "@/services/savings/bulk-withdrawal-approval";
-import getSavingsWithdrawals from "@/services/savings/get-savings-withdrawals copy";
+import getSavingsWithdrawals from "@/services/savings/get-savings-withdrawals";
 import { toast } from "sonner";
 
 export default function useSavingsWithdrawals() {
