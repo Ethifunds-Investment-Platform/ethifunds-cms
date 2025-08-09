@@ -2,7 +2,7 @@ import Render from "@/components/render";
 
 import * as React from "react";
 import useSavingsWithdrawals from "./use-savings-withdrawals";
-import SavingsWithdrawalTable from "../savings-table";
+import SavingsWithdrawalTable from "../savings-withdrawals-table";
 import AppButton from "@/components/app-button";
 
 export default React.memo(function SavingsWithdrawals() {

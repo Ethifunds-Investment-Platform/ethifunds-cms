@@ -52,29 +52,29 @@ export default React.memo(function ListingDetailsDialog() {
 		units: ` ${amountSeparator(data?.units ?? "")}`,
 		sale_price: `${currency.sign} ${amountSeparator(data?.final_price_per_unit ?? "")}`,
 		asking_price_per_unit: `${currency.sign} ${amountSeparator(data?.asking_price_per_unit ?? "")}`,
-		interest_rate: `${data?.product.expected_roi}%`,
+		RIO: `${data?.product.expected_roi}%`,
 		status: <Badge className="bg-primary-500"> {data?.status} </Badge>,
 	};
 
 	return (
-		<PopupModal handleClose={close} open={open} className="relative w-full p-8 overflow-auto lg:w-1/2 h-96" showCloseBtn>
+		<PopupModal handleClose={close} open={open} className="overflow-auto relative p-8 w-full h-96 lg:w-1/2" showCloseBtn>
 			<ErrorBoundary>
 				<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
 					<button
 						onClick={close}
-						className="absolute top-0 right-0 flex items-center justify-center p-2 bg-white rounded-full lg:-top-8 lg:-right-8 size-8"
+						className="flex absolute top-0 right-0 justify-center items-center p-2 bg-white rounded-full lg:-top-8 lg:-right-8 size-8"
 					>
 						<X color="#908b8b" />
 					</button>
 					<div className="flex flex-col gap-5">
 						<h1 className="highlight-standard text-neutral-1000">Listing Details</h1>
 
-						<div className="p-3 space-y-3 border rounded-lg bg-neutral-50">
+						<div className="p-3 space-y-3 rounded-lg border bg-neutral-50">
 							{Object.entries(details).map(([key, value]) => {
 								return (
 									<div
 										key={key}
-										className="flex items-center justify-between capitalize caption-standard text-neutral-700"
+										className="flex justify-between items-center capitalize caption-standard text-neutral-700"
 									>
 										<span className="w-full">{key.split("_").join(" ")} </span>
 										<span className="w-full">{value}</span>

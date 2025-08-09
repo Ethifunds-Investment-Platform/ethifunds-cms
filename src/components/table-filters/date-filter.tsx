@@ -9,8 +9,12 @@ export function DateFilter(props: DateFilterProps) {
   const { queryParams } = useCustomNavigation();
 
   const onSelect = (range: string) => {
-    queryParams.delete("page");
-    queryParams.set("range", range);
+    if (!range) {
+			queryParams.delete("range");
+		} else {
+			queryParams.delete("page");
+			queryParams.set("range", range);
+		}
   };
 
   return (

@@ -59,7 +59,7 @@ export default function useCounterOffer() {
 		units: ` ${amountSeparator(data?.units ?? "")}`,
 		sale_price: `${currency.sign} ${amountSeparator(data?.final_price_per_unit ?? "")}`,
 		asking_price_per_unit: `${currency.sign} ${amountSeparator(data?.asking_price_per_unit ?? "")}`,
-		interest_rate: `${data?.product.expected_roi}%`,
+		RIO: `${data?.product.expected_roi}%`,
 	};
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

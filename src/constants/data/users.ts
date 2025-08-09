@@ -54,6 +54,7 @@ export const users: User[] = [
 			created_at: "2025-01-24T01:00:24.000000Z",
 			updated_at: "2025-01-24T01:00:24.000000Z",
 		},
+		bank_accounts: [],
 	},
 	{
 		id: 2,
@@ -116,5 +117,6 @@ export const users: User[] = [
 			created_at: "2025-01-24T01:00:24.000000Z",
 			updated_at: "2025-01-24T01:00:24.000000Z",
 		},
+		bank_accounts: [],
 	},
 ];

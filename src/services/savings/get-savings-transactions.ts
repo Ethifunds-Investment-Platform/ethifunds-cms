@@ -5,12 +5,12 @@ import paginate from "@/lib/paginate";
 import { SavingsTransaction } from "@/types/savings.types";
 import { savingsTransactions } from "@/constants/data/savings/savings-transactions";
 
-type Parameters = Partial<PaginationQuery> & { savings_id: string };
+type Parameters = Partial<PaginationQuery> & {};
 
 type Response = PaginatedResponse<SavingsTransaction>;
 
-export async function production({ savings_id, ...data }: Parameters): Promise<Response> {
-	const response = await axios.get(`/savings/${savings_id}/transactions${data.query_string}`);
+export async function production(data: Parameters): Promise<Response> {
+	const response = await axios.get(`/savings/transactions${data.query_string}`);
 	return paginate(response.data.data);
 }
 

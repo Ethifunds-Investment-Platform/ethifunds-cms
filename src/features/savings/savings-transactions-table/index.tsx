@@ -33,15 +33,17 @@ export default function SavingsTransactionTable(props: TableProps) {
 					<TableHead>Date & Time </TableHead>
 					<TableHead>Username</TableHead>
 					<TableHead>Amount</TableHead>
-					<TableHead>Target Amount</TableHead>
-					<TableHead>Amount Paid</TableHead>
+					{/* <TableHead>Target Amount</TableHead> */}
+					<TableHead>Transaction Date</TableHead>
 					<TableHead>Status</TableHead>
 					<TableHead>Action</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>
 				{props.data.map((item) => {
-					const date = new Date(item.transaction_date);
+					const date = new Date(item.created_at);
+
+					const transactionDate = new Date(item.transaction_date);
 					const statusClx = classNames("capitalize", {
 						"text-success-200": item.status === "success",
 						"text-primary-500": item.status === "pending",
@@ -60,15 +62,20 @@ export default function SavingsTransactionTable(props: TableProps) {
 									timeStyle: "short",
 								})}
 							</TableCell>
-							<TableCell className="capitalize">{item.username}</TableCell>
+							<TableCell className="capitalize">{item.user.username}</TableCell>
 							<TableCell>
 								{props.sign} {amountSeparator(item.amount)}
 							</TableCell>
-							<TableCell>
+							{/* <TableCell>
 								{props.sign} {amountSeparator(item.target_amount)}
-							</TableCell>
+							</TableCell> */}
 							<TableCell>
-								{props.sign} {amountSeparator(item.amount_paid)}
+								{transactionDate.toLocaleDateString("en-us", {
+									dateStyle: "medium",
+								})}{" "}
+								{transactionDate.toLocaleTimeString("en-us", {
+									timeStyle: "short",
+								})}
 							</TableCell>
 
 							<TableCell className={statusClx}>{item.status}</TableCell>

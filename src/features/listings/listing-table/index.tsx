@@ -84,6 +84,7 @@ export default function ListingTable(props: TableProps) {
 									sale_option={item.sale_option}
 									hide_actions={
 										item.status === "completed" ||
+										item.status === "approved" ||
 										(item.sale_option === "marketplace" && item.status !== "pending")
 									}
 								/>

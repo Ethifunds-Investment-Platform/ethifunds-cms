@@ -8,16 +8,16 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function useSavingsTransactions() {
 	const { currency } = useAppSelector((state) => state.account);
-	const { location, params } = useCustomNavigation();
+	const { location } = useCustomNavigation();
 
-	const savings_id = params.savings_id ?? "";
+	// const savings_id = params.savings_id ?? "";
 	const query_string = React.useMemo(
 		() => formatSearchString(location.search, {}),
 		[location.search]
 	);
 
 	const query = useQuery(["savings-transactions", query_string], () =>
-		getSavingsTransactions({ query_string, savings_id })
+		getSavingsTransactions({ query_string })
 	);
 	return {
 		...query,

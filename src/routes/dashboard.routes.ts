@@ -40,7 +40,8 @@ const dashboardRoutes: CustomRouteProps[] = [
 
 	{ path: "/savings", Component: SavingsPage },
 	{ path: "/savings/:savings_id", Component: SavingsDetailsPage },
-	{ path: "/savings/:savings_id/transactions", Component: SavingsTransactionsPage },
+	{ path: "/savings/transactions", Component: SavingsTransactionsPage },
+	// { path: "/savings/:savings_id/transactions", Component: SavingsTransactionsPage },
 
 	{ path: "/notifications", Component: NotificationsPage },
 	{ path: "/notifications/all-notifications", Component: AllNotificationsPage },
