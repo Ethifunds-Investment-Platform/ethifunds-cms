@@ -38,6 +38,10 @@ export default React.memo(function PreviewInvestmentDialog() {
 			RIO: data.expected_roi,
 			tenor: `${data.tenor_value} ${data.tenor_unit}`,
 			label: data.product_label,
+			minimum_investment: `${currency.sign} ${amountSeparator(data?.minimum_investment)}`,
+			maximum_investment: data?.maximum_investment
+				? `${currency.sign} ${amountSeparator(data?.maximum_investment)}`
+				: "N/A",
 			section: data.product_section,
 			status: <Badge className={statusClx}>{data.status}</Badge>,
 			funding_goal: `${currency.sign} ${amountSeparator(data.funding_goal)}`,
@@ -97,7 +101,7 @@ export default React.memo(function PreviewInvestmentDialog() {
 			}
 			className="overflow-y-auto hideScrollbar"
 		>
-			<div className="flex flex-col h-full px-5 mt-5 space-y-5 overflow-auto">
+			<div className="flex overflow-auto flex-col px-5 mt-5 space-y-5 h-full">
 				<div className="space-y-3">
 					<div className="w-full h-28">
 						<img
@@ -110,12 +114,12 @@ export default React.memo(function PreviewInvestmentDialog() {
 					<span className="caption-standard text-neutral-500">{data?.description}</span>
 				</div>
 
-				<div className="p-3 space-y-5 border rounded-lg bg-neutral-50">
+				<div className="p-3 space-y-5 rounded-lg border bg-neutral-50">
 					{Object.entries(info).map(([key, value]) => {
 						return (
 							<div
 								key={key}
-								className="flex items-center justify-between capitalize caption-standard text-neutral-700"
+								className="flex justify-between items-center capitalize caption-standard text-neutral-700"
 							>
 								<span className="w-full">{key.split("_").join(" ")} </span>
 								<span className="w-full">{value}</span>

@@ -27,8 +27,8 @@ export type InvestmentProduct = {
 	account_id: number;
 	type: string;
 	description: string;
-	minimum_investment: string;
-	maximum_investment: string;
+	minimum_investment: number;
+	maximum_investment: number | null;
 	expected_roi: number;
 	tenor_unit: string;
 	tenor_value: number;
@@ -108,6 +108,8 @@ export type NewInvestmentPayload = {
 	unit_price: string;
 	status: InvestmentStatus;
 	product_memo: File | null;
+	minimum_investment: number;
+	maximum_investment: number | null;
 };
 
 export type UpdateInvestmentPayload = {
@@ -126,4 +128,6 @@ export type UpdateInvestmentPayload = {
 	unit_price: string;
 	status: InvestmentStatus;
 	product_memo: string | null;
+	minimum_investment: number;
+	maximum_investment: number | null;
 };

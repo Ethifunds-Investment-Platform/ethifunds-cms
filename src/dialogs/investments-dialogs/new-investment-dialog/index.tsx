@@ -68,7 +68,8 @@ export default React.memo(function NewInvestmentDialog() {
 
 				<form className="pb-3 space-y-3">
 					{items.map((item) => {
-						const defaultValue = formData[item.name as keyof typeof formData];
+						const key = item.name as keyof typeof formData;
+						const defaultValue = formData[key];
 						const currencyFields = ["funding_goal", "unit_price"];
 						const isCurrencyField = currencyFields.includes(item.name);
 						if (item.type === "select") {
@@ -78,7 +79,7 @@ export default React.memo(function NewInvestmentDialog() {
 										{...item}
 										key={item.name}
 										value={defaultValue?.toString()}
-										onchange={(e) => updateForm(item.name as any, e)}
+										onchange={(e) => updateForm(key, e)}
 										options={categoryOptions}
 										disabled={isLoading}
 									/>
@@ -90,7 +91,7 @@ export default React.memo(function NewInvestmentDialog() {
 									{...item}
 									key={item.name}
 									value={defaultValue?.toString()}
-									onchange={(e) => updateForm(item.name as any, e)}
+									onchange={(e) => updateForm(key, e)}
 									disabled={isLoading}
 								/>
 							);
@@ -102,7 +103,7 @@ export default React.memo(function NewInvestmentDialog() {
 									triggerStyle="w-full"
 									key={item.name}
 									value={defaultValue ? new Date(defaultValue as string) : undefined}
-									onChange={(e) => updateForm(item.name as any, e.toISOString())}
+									onChange={(e) => updateForm(key, e.toISOString())}
 								/>
 							);
 						}
@@ -114,7 +115,7 @@ export default React.memo(function NewInvestmentDialog() {
 									key={item.name}
 									rows={5}
 									value={defaultValue?.toString()}
-									onChange={(e) => updateForm(item.name as any, e)}
+									onChange={(e) => updateForm(key, e)}
 									disabled={isLoading}
 								/>
 							);
@@ -126,7 +127,7 @@ export default React.memo(function NewInvestmentDialog() {
 									key={item.name}
 									{...item}
 									placeholder={(formData[item.name] as File)?.name ?? item.placeholder}
-									onChange={(e) => updateFile(item.name as any, e)}
+									onChange={(e) => updateFile(key, e)}
 									disabled={isLoading}
 								/>
 							);
@@ -138,7 +139,7 @@ export default React.memo(function NewInvestmentDialog() {
 								key={item.name}
 								label={isCurrencyField ? `${item.label} (${currency?.sign}) ` : item.label}
 								value={defaultValue?.toLocaleString()}
-								onChange={(e) => updateForm(item.name as any, e)}
+								onChange={(e) => updateForm(key, e)}
 								disabled={isLoading || item.readOnly}
 							/>
 						);

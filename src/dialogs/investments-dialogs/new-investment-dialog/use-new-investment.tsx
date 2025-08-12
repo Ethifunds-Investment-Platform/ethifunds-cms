@@ -31,6 +31,11 @@ const validation = z.object({
 	funding_goal: z.string().min(1, "Funding goal is required"),
 	unit_price: z.string().min(1, "Unit price is required"),
 	status: z.enum(InvestmentsStatus),
+	minimum_investment: z.number().positive("Minimum investment must be at positive value"),
+	maximum_investment: z
+		.number()
+		.positive("Maximum investment must be at positive value")
+		.nullable(),
 	display_image: z.instanceof(File, { message: "Display image is required" }),
 	product_memo: z.instanceof(File, { message: "Product Memo is required" }).nullable(),
 });
@@ -52,6 +57,8 @@ const init: FormData = {
 	funding_deadline: "",
 	funding_goal: "",
 	unit_price: "",
+	minimum_investment: 1,
+	maximum_investment: null,
 	product_memo: null,
 	product_custodian_id: 0,
 	account_id: 0,
@@ -185,6 +192,10 @@ export default function useNewInvestment() {
 				...formData,
 				tenor_value: Number(formData.tenor_value),
 				total_units: Number(formData.total_units),
+				minimum_investment: Number(formData.minimum_investment),
+				maximum_investment: formData.maximum_investment
+					? Number(formData.maximum_investment)
+					: null,
 				expected_roi: formData.expected_roi,
 				product_custodian_id: account.id,
 				product_label: formData.product_label ?? "",
@@ -206,6 +217,10 @@ export default function useNewInvestment() {
 			const formDataToSend = await prepareFormData({
 				...validatedData,
 				product_category_id: Number(validatedData.product_category_id),
+				minimum_investment: Number(validatedData.minimum_investment),
+				maximum_investment: validatedData.maximum_investment
+					? Number(validatedData.maximum_investment)
+					: null,
 			});
 
 			const goBack = () => {
