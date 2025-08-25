@@ -12,8 +12,8 @@ export const investmentProducts: InvestmentProduct[] = [
 		type: "unitized",
 		description:
 			"Diversify your portfolio with Ethifund’s Real Estate Investment Trust (REIT) opportunities. Invest in a carefully curated pool of real estate assets that generate income through rental collections and property sales with transparent returns, flexible buy-and-sell options, and potential for capital growth.",
-		minimum_investment: "1000.00",
-		maximum_investment: "100000.00",
+		minimum_investment: 1000,
+		maximum_investment: 100000,
 		expected_roi: 8.5,
 
 		tenor_unit: "months",
@@ -89,8 +89,8 @@ export const investmentProducts: InvestmentProduct[] = [
 		account_id: 2,
 		type: "unitized",
 		description: "Description for REIT Product 2",
-		minimum_investment: "1000.00",
-		maximum_investment: "100000.00",
+		minimum_investment: 1000,
+		maximum_investment: 100000,
 		expected_roi: 8.5,
 
 		tenor_unit: "months",
@@ -167,8 +167,8 @@ export const investmentProducts: InvestmentProduct[] = [
 		account_id: 7,
 		type: "unitized",
 		description: "Description for REIT Product 2",
-		minimum_investment: "1000.00",
-		maximum_investment: "100000.00",
+		minimum_investment: 1000,
+		maximum_investment: 100000,
 		expected_roi: 8.5,
 
 		tenor_unit: "months",
