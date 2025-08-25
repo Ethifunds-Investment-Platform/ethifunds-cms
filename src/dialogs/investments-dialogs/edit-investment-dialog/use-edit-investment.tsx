@@ -31,6 +31,8 @@ const validation = z.object({
 	unit_price: z.string().min(1, "Unit price is required"),
 	status: z.enum(InvestmentsStatus),
 	product_memo: z.string().nullable(),
+	minimum_investment: z.number().positive("Minimum investment must be at positive value"),
+	maximum_investment: z.number().positive("Maximum investment must be at positive value").nullable(),
 });
 
 type FormData = z.infer<typeof validation>;
@@ -51,6 +53,8 @@ const init: FormData = {
 	funding_goal: "",
 	unit_price: "",
 	product_memo: null,
+	minimum_investment: 1,
+	maximum_investment: null,
 };
 
 export default function useEditInvestment() {
@@ -102,6 +106,8 @@ export default function useEditInvestment() {
 				funding_goal: data.funding_goal,
 				unit_price: data.unit_price,
 				product_memo: data.product_memo,
+				minimum_investment: data.minimum_investment,
+				maximum_investment: data.maximum_investment,
 			});
 		}
 	}, [data]);
@@ -215,6 +221,10 @@ export default function useEditInvestment() {
 				tenor_value: Number(formData.tenor_value),
 				total_units: Number(formData.total_units),
 				expected_roi: formData.expected_roi,
+				minimum_investment: Number(formData.minimum_investment),
+				maximum_investment: formData.maximum_investment
+					? Number(formData.maximum_investment)
+					: null,
 			});
 
 			const display_image = validatedData.display_image;
@@ -232,6 +242,10 @@ export default function useEditInvestment() {
 			const formDataToSend = prepareFormData({
 				...validatedData,
 				product_category_id: Number(validatedData.product_category_id),
+				minimum_investment: Number(validatedData.minimum_investment),
+				maximum_investment: validatedData.maximum_investment
+					? Number(validatedData.maximum_investment)
+					: null,
 			});
 
 			const goBack = () => {

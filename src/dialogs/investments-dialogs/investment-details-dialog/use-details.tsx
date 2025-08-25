@@ -53,6 +53,10 @@ export default function useDetails() {
 			status: <Badge className={statusClx}>{data.status}</Badge>,
 			funding_goal: `${currency.sign} ${amountSeparator(data.funding_goal)}`,
 			amount_raised: `${currency.sign} ${amountSeparator(data.amount_raised)}`,
+			minimum_investment: `${currency.sign} ${amountSeparator(data.minimum_investment)}`,
+			maximum_investment: data.maximum_investment
+				? `${currency.sign} ${amountSeparator(data.maximum_investment)}`
+				: "N/A",
 		};
 		return Object.fromEntries(
 			Object.entries(infoData).filter((entries) => entries[1] !== undefined)

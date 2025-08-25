@@ -102,6 +102,20 @@ export const formFields: FORM_FIELDS[] = [
 		readOnly: true,
 	},
 	{
+		name: "minimum_investment",
+		type: "number",
+		label: "Minimum Investment",
+		placeholder: "Enter minimum investment",
+		required: false,
+	},
+	{
+		name: "maximum_investment",
+		type: "number",
+		label: "Maximum Investment",
+		placeholder: "Enter maximum investment",
+		required: false,
+	},
+	{
 		name: "status",
 		type: "select",
 		label: "Status",

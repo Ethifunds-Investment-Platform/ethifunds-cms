@@ -20,6 +20,7 @@ type DialogType =
 	| "update_savings"
 	| "savings_transaction_details"
 	| "new_notification"
+	| "initiate_transaction"
 	| "logout";
 
 export type DialogPayload = {
