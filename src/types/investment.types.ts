@@ -14,7 +14,7 @@ export type InvestmentByUnits = {
 	">1000": number;
 };
 
-export const InvestmentsStatus = ["active", "inactive", "draft"] as const;
+export const InvestmentsStatus = ["active", "inactive", "draft","closed"] as const;
 
 export type InvestmentStatus = (typeof InvestmentsStatus)[number];
 
