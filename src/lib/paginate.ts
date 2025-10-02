@@ -15,7 +15,31 @@ type PaginatePayload<T> = {
 	total: number;
 };
 
-export default function paginate<T>(params: PaginatePayload<T>): PaginatedResponse<T> {
+// Type guard to check if params is already a PaginatedResponse
+function isPaginatedResponse<T>(params: any): params is PaginatedResponse<T> {
+	return (
+		params &&
+		typeof params === "object" &&
+		"docs" in params &&
+		"totalDocs" in params &&
+		"limit" in params &&
+		"page" in params &&
+		"totalPages" in params &&
+		"hasNextPage" in params &&
+		"nextPage" in params &&
+		"hasPrevPage" in params &&
+		"prevPage" in params &&
+		"pagingCounter" in params
+	);
+}
+
+export default function paginate<T>(params: PaginatePayload<T> | PaginatedResponse<T>): PaginatedResponse<T> {
+	// If params is already in PaginatedResponse format, return it as-is
+	if (isPaginatedResponse<T>(params)) {
+		return params;
+	}
+
+	// Otherwise, transform from PaginatePayload format
 	const page = params.current_page;
 	const limit = Math.max(1, params.per_page);
 	const offset = (Math.max(1, page) - 1) * limit;
