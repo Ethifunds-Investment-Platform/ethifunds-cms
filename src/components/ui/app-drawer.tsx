@@ -32,7 +32,7 @@ export default function AppDrawer(props: DrawerProps) {
     },
   );
   const cn = classNames(
-    "h-full lg:h-[90%] outline-none !overflow-x-hidden",
+    "h-full  outline-none !overflow-x-hidden",
     props.className,
     {
       "lg:ml-[68%]": props.direction === "right",

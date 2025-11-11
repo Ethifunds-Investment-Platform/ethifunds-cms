@@ -34,6 +34,7 @@ export default React.memo(function SelectBox(props: SelectBoxProps) {
 	const selectContainer = classnames("shadow-none capitalize", props.className);
 
 	const change = (val: string) => {
+		if (val === undefined) return;
 		if (props.onchange) {
 			props.onchange(val);
 		}
