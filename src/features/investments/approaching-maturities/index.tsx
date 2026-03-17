@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/table";
 import { amountSeparator } from "@/lib/amount-separator";
 import getApproachingMaturities from "@/services/investments/get-approaching-maturities";
-import EmptyData from "@/components/empty-data";
 import Render from "@/components/render";
 
 const urgencyStyles = {
