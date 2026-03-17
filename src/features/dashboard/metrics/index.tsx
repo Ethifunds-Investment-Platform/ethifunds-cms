@@ -2,6 +2,7 @@ import { InvestmentAllocation } from "@/features/investments/metrics/investment-
 import Counters from "./counters";
 import TopInvestments from "@/features/investments/metrics/top-investments";
 import RecentTransactions from "@/features/transactions/recent-transactions";
+import FinancialOverview from "./financial-overview";
 
 export default function Metrics() {
 	return (
@@ -17,6 +18,8 @@ export default function Metrics() {
 			</div>
 
 			<RecentTransactions />
+
+			<FinancialOverview />
 		</div>
 	);
 }

@@ -5,6 +5,8 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { userDetailsTabs } from "./data";
 import useCustomNavigation from "@/hooks/use-navigation";
 import Overview from "./user-details-tabs/overview";
+import UserInvestmentsTab from "./user-details-tabs/investments";
+import UserSavingsTab from "./user-details-tabs/savings";
 import ActivityLog from "./user-details-tabs/activity-log";
 
 export default function UserDetails() {
@@ -47,6 +49,8 @@ export default function UserDetails() {
 				</TabsList>
 
 				<Overview />
+				<UserInvestmentsTab />
+				<UserSavingsTab />
 				<ActivityLog />
 			</Tabs>
 		</AppContainer>

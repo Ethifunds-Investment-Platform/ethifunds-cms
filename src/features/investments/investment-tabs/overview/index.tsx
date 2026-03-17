@@ -2,6 +2,7 @@ import * as React from "react";
 import TabContainer from "../tab-container";
 import Metrics from "../../metrics";
 import { InvestmentAllocation } from "../../metrics/investment-allocation";
+import ApproachingMaturities from "../../approaching-maturities";
 import RecentInvestments from "../../recent-investments";
 
 export default React.memo(function Overview() {
@@ -12,6 +13,7 @@ export default React.memo(function Overview() {
 				<div className="lg:w-3/5 w-full">
 					<InvestmentAllocation />
 				</div>
+				<ApproachingMaturities />
 				<RecentInvestments />
 			</div>
 		</TabContainer>

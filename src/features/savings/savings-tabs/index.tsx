@@ -3,6 +3,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import Overview from "./overview";
 import ErrorBoundary from "@/components/error-boundary";
 import { savingsTabs } from "./data";
+import SavingHistory from "./saving-history";
 import SavingsContributors from "./savings-contributors";
 
 export default function SavingsTabs() {
@@ -32,7 +33,7 @@ export default function SavingsTabs() {
 				</TabsList>
 
 				<Overview />
-				{/* <SavingHistory /> */}
+				<SavingHistory />
 				<SavingsContributors />
 			</Tabs>
 		</ErrorBoundary>

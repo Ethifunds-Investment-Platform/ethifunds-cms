@@ -37,6 +37,7 @@ export default function InvestmentTable(props: TableProps) {
 					<TableHead>Available Units</TableHead>
 					<TableHead>Units Sold</TableHead>
 					<TableHead>Unit Price</TableHead>
+					<TableHead>Subscribers</TableHead>
 					<TableHead>Status</TableHead>
 					<TableHead>Action</TableHead>
 				</TableRow>
@@ -73,7 +74,7 @@ export default function InvestmentTable(props: TableProps) {
 							<TableCell>
 								{props.sign} {amountSeparator(item.unit_price)}
 							</TableCell>
-
+							<TableCell>{amountSeparator(item.subscribers_count ?? 0)}</TableCell>
 							<TableCell className={statusClx}>{item.status}</TableCell>
 							<TableCell>
 								<TableActions id={item.id.toString()} showDisbursement={true} />
