@@ -6,14 +6,14 @@ export default React.memo(function TableSearchBar(props: FilterProps) {
 	const [text, setText] = React.useState("");
 	const { navigate, queryParams } = useCustomNavigation();
 
-	const hasQuery = React.useMemo(() => queryParams.has("user_name"), [queryParams]);
+	const hasQuery = React.useMemo(() => queryParams.has("search"), [queryParams]);
 
 	const search = () => {
-		navigate(`?user_name=${text}`);
+		navigate(`?search=${text}`);
 	};
 
 	React.useMemo(() => {
-		if (text === "" && hasQuery) queryParams.delete("user_name");
+		if (text === "" && hasQuery) queryParams.delete("search");
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [text]);
 

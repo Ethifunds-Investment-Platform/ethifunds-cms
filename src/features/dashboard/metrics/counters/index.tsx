@@ -37,7 +37,7 @@ export default function Counters() {
 			trend: trends?.investors,
 		},
 		{
-			title: "total investments",
+			title: "total products",
 			count: data?.total_investments ?? 0,
 			trend: trends?.total_investments,
 		},

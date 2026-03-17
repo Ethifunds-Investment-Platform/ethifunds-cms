@@ -146,6 +146,7 @@ export type InvestmentSubscriber = {
 	status: string;
 	start_at: string | null;
 	end_at: string | null;
+	next_payout_date: string | null;
 	withdrawable_balance: string;
 	created_at: string;
 };

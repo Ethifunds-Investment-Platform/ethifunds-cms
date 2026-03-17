@@ -23,9 +23,9 @@ export async function development(): Promise<Response> {
 					wallet_balance: generateDigits(9999),
 					vault_balance: generateDigits(9999),
 					investment_balance: generateDigits(9999),
-					// ethivest_balance: generateDigits(9999),
-					// ethicoop_balance: generateDigits(9999),
-					// reits_balance: generateDigits(99999),
+					ethivest_balance: generateDigits(9999),
+					ethicoop_balance: generateDigits(9999),
+					reits_balance: generateDigits(99999),
 				}),
 			2000
 		);

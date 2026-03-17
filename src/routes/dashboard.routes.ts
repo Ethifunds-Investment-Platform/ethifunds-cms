@@ -4,6 +4,7 @@ import DividendsPage from "@/pages/dividends";
 import ProductDividendsPage from "@/pages/dividends/product-dividends";
 import InvestmentsPage from "@/pages/investments";
 import AllInvestmentsPage from "@/pages/investments/all-investments";
+import InvestmentSubscribersPage from "@/pages/investments/investment-subscribers";
 import ListingPage from "@/pages/listings";
 import AllListingPage from "@/pages/listings/all-listings";
 import NotificationsPage from "@/pages/notifications";
@@ -39,6 +40,7 @@ const dashboardRoutes: CustomRouteProps[] = [
 
 	{ path: "/investments", Component: InvestmentsPage },
 	{ path: "/investments/all-investments", Component: AllInvestmentsPage },
+	{ path: "/investments/:investment_id/subscribers", Component: InvestmentSubscribersPage },
 
 	{ path: "/dividends", Component: DividendsPage },
 	{ path: "/dividends/product/:product_id", Component: ProductDividendsPage },

@@ -1,24 +1,20 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import useActions from "@/store/actions";
+import useCustomNavigation from "@/hooks/use-navigation";
 import { Users } from "lucide-react";
 
 type ViewSubscribersProps = {
 	id: string;
 };
 export default function ViewSubscribers(props: ViewSubscribersProps) {
-	const { ui } = useActions();
+	const { navigate } = useCustomNavigation();
 
-	const toggleShow = () => {
-		ui.changeDialog({
-			show: true,
-			type: "view_investment_subscribers",
-			id: props.id,
-		});
+	const handleClick = () => {
+		navigate(`/investments/${props.id}/subscribers`);
 	};
 
 	return (
 		<DropdownMenuItem>
-			<button onClick={toggleShow} className="flex items-center gap-2">
+			<button onClick={handleClick} className="flex items-center gap-2">
 				<Users /> View Subscribers
 			</button>
 		</DropdownMenuItem>
