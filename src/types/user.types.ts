@@ -76,9 +76,9 @@ export type UserAccountBalances = {
 	wallet_balance: number;
 	vault_balance: number;
 	investment_balance: number;
-	// ethivest_balance: number;
-	// ethicoop_balance: number;
-	// reits_balance: number;
+	ethivest_balance: number;
+	ethicoop_balance: number;
+	reits_balance: number;
 };
 
 export type ActivityLog = {

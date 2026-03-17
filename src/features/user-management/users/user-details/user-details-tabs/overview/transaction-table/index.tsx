@@ -27,7 +27,8 @@ export default function TransactionTable(props: TableProps) {
 					<TableHead>Date & Time </TableHead>
 					<TableHead>Amount</TableHead>
 					<TableHead>Transaction Type</TableHead>
-					{/* <TableHead>Category</TableHead> */}
+					<TableHead>Category</TableHead>
+					<TableHead>Description</TableHead>
 					<TableHead>Status</TableHead>
 					<TableHead>Action</TableHead>
 				</TableRow>
@@ -57,15 +58,8 @@ export default function TransactionTable(props: TableProps) {
 								{props.sign} {amountSeparator(item.amount)}
 							</TableCell>
 							<TableCell className="capitalize">{item.transaction_type}</TableCell>
-							{/* <TableCell className="capitalize">{item.category}</TableCell> */}
-
-							{/* <TableCell className="text-error-200">
-                {props.sign} {amountSeparator(item.fee)}
-              </TableCell>
-
-              <TableCell className="text-error-200">
-                {props.sign} {amountSeparator(item.fee)}
-              </TableCell> */}
+							<TableCell className="capitalize">{item.category}</TableCell>
+							<TableCell>{item.remark ?? item.description}</TableCell>
 							<TableCell className={statusClx}>{item.status}</TableCell>
 							<TableCell>
 								<TableActions id={item.id.toString()} />

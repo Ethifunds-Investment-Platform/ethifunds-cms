@@ -11,9 +11,9 @@ export default function useAccountBalances() {
 		wallet_balance: 0,
 		vault_balance: 0,
 		investment_balance: 0,
-		// ethivest_balance: 0,
-		// ethicoop_balance: 0,
-		// reits_balance: 0,
+		ethivest_balance: 0,
+		ethicoop_balance: 0,
+		reits_balance: 0,
 	});
 	const { params } = useCustomNavigation();
 	const user_id = params.user_id ?? "";
