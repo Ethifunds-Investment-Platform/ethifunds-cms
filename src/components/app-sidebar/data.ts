@@ -50,6 +50,13 @@ export const sidebarLinks: SidebarLink[] = [
 		activeIcon: icons.savings_icon_active,
 		relativePaths: [],
 	},
+	{
+		name: "Dividends",
+		path: "dividends",
+		icon: icons.reports_icon,
+		activeIcon: icons.reports_icon_active,
+		relativePaths: [],
+	},
 
 	{
 		name: "notifications",

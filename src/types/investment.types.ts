@@ -46,6 +46,7 @@ export type InvestmentProduct = {
 	bond_interest_rate: null;
 	hybrid_components: [];
 	status: InvestmentStatus;
+	subscribers_count?: number;
 	created_at: string;
 	updated_at: string;
 	custodian: InvestmentProductCustodian;
@@ -130,4 +131,32 @@ export type UpdateInvestmentPayload = {
 	product_memo: string | null;
 	minimum_investment: number;
 	maximum_investment: number | null;
+};
+
+export type InvestmentSubscriber = {
+	id: number;
+	user_id: number;
+	username: string;
+	email: string;
+	total_invested: string;
+	units_purchased: number;
+	units_sold: number;
+	interest_accrued: string;
+	total_roi: string;
+	status: string;
+	start_at: string | null;
+	end_at: string | null;
+	withdrawable_balance: string;
+	created_at: string;
+};
+
+export type ApproachingMaturity = {
+	product_id: number;
+	product_name: string;
+	category_name: string;
+	earliest_maturity_date: string;
+	days_remaining: number;
+	total_subscribers: number;
+	total_value: string;
+	urgency: "critical" | "warning" | "info";
 };

@@ -10,10 +10,10 @@ export const savingsTabs: SavingsTab[] = [
 		title: "Overview",
 		value: "overview",
 	},
-	// {
-	// 	title: "Savings History",
-	// 	value: "savings_history",
-	// },
+	{
+		title: "Savings History",
+		value: "savings_history",
+	},
 	{
 		title: "Savings Contributors",
 		value: "savings_contributors",

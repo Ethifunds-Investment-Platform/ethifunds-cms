@@ -1,4 +1,4 @@
-export type TabsValues = "overview" | "activity_log";
+export type TabsValues = "overview" | "investments" | "savings" | "activity_log";
 
 export type UserDetailsTab = {
 	title: string;
@@ -9,6 +9,14 @@ export const userDetailsTabs: UserDetailsTab[] = [
 	{
 		title: "Overview",
 		value: "overview",
+	},
+	{
+		title: "Investments",
+		value: "investments",
+	},
+	{
+		title: "Savings",
+		value: "savings",
 	},
 	{
 		title: "Activity Log",

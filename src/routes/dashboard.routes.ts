@@ -1,5 +1,7 @@
 import NotFound from "@/components/prompts/not-found";
 import DashboardPage from "@/pages/dashboard";
+import DividendsPage from "@/pages/dividends";
+import ProductDividendsPage from "@/pages/dividends/product-dividends";
 import InvestmentsPage from "@/pages/investments";
 import AllInvestmentsPage from "@/pages/investments/all-investments";
 import ListingPage from "@/pages/listings";
@@ -37,6 +39,9 @@ const dashboardRoutes: CustomRouteProps[] = [
 
 	{ path: "/investments", Component: InvestmentsPage },
 	{ path: "/investments/all-investments", Component: AllInvestmentsPage },
+
+	{ path: "/dividends", Component: DividendsPage },
+	{ path: "/dividends/product/:product_id", Component: ProductDividendsPage },
 
 	{ path: "/savings", Component: SavingsPage },
 	{ path: "/savings/:savings_id", Component: SavingsDetailsPage },
